@@ -9,21 +9,41 @@
 /* Begin PBXBuildFile section */
 		CE86109E26034B3A000154FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86109D26034B3A000154FF /* AppDelegate.swift */; };
 		CE8610A026034B3A000154FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86109F26034B3A000154FF /* SceneDelegate.swift */; };
-		CE8610A226034B3A000154FF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610A126034B3A000154FF /* ViewController.swift */; };
 		CE8610A526034B3A000154FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8610A326034B3A000154FF /* Main.storyboard */; };
 		CE8610A726034B3D000154FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE8610A626034B3D000154FF /* Assets.xcassets */; };
 		CE8610AA26034B3D000154FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8610A826034B3D000154FF /* LaunchScreen.storyboard */; };
+		CE8610B326046B10000154FF /* CallBookTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610B226046B10000154FF /* CallBookTableViewController.swift */; };
+		CE8610B72604C74C000154FF /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610B62604C74C000154FF /* ContactCell.swift */; };
+		CE8610C22604C81D000154FF /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610C12604C81D000154FF /* Contact.swift */; };
+		CE8610CB2604EF83000154FF /* FaceContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610CA2604EF83000154FF /* FaceContact.swift */; };
+		CE8610CE2604EF9B000154FF /* RecentCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610CD2604EF9B000154FF /* RecentCalls.swift */; };
+		CE8610D22604F186000154FF /* ContactNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610D12604F186000154FF /* ContactNode.swift */; };
+		CE8610DD26061281000154FF /* MessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610DC26061281000154FF /* MessageButton.swift */; };
+		CE8610E026061A6A000154FF /* MessageContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610DF26061A6A000154FF /* MessageContact.swift */; };
+		CE8610E4260789EE000154FF /* MessageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610E3260789ED000154FF /* MessageStorage.swift */; };
+		CE8610EB2607BBE2000154FF /* Call.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610EA2607BBE2000154FF /* Call.swift */; };
+		CE8610EE2607BCF1000154FF /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610ED2607BCF1000154FF /* Manager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CE86109A26034B3A000154FF /* callBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = callBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE86109D26034B3A000154FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE86109F26034B3A000154FF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CE8610A126034B3A000154FF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CE8610A426034B3A000154FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CE8610A626034B3D000154FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE8610A926034B3D000154FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE8610AB26034B3D000154FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE8610B226046B10000154FF /* CallBookTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallBookTableViewController.swift; sourceTree = "<group>"; };
+		CE8610B62604C74C000154FF /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
+		CE8610C12604C81D000154FF /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		CE8610CA2604EF83000154FF /* FaceContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceContact.swift; sourceTree = "<group>"; };
+		CE8610CD2604EF9B000154FF /* RecentCalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentCalls.swift; sourceTree = "<group>"; };
+		CE8610D12604F186000154FF /* ContactNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactNode.swift; sourceTree = "<group>"; };
+		CE8610DC26061281000154FF /* MessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageButton.swift; sourceTree = "<group>"; };
+		CE8610DF26061A6A000154FF /* MessageContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContact.swift; sourceTree = "<group>"; };
+		CE8610E3260789ED000154FF /* MessageStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStorage.swift; sourceTree = "<group>"; };
+		CE8610EA2607BBE2000154FF /* Call.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Call.swift; sourceTree = "<group>"; };
+		CE8610ED2607BCF1000154FF /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,13 +76,23 @@
 		CE86109C26034B3A000154FF /* callBook */ = {
 			isa = PBXGroup;
 			children = (
+				CE8610ED2607BCF1000154FF /* Manager.swift */,
 				CE86109D26034B3A000154FF /* AppDelegate.swift */,
 				CE86109F26034B3A000154FF /* SceneDelegate.swift */,
-				CE8610A126034B3A000154FF /* ViewController.swift */,
 				CE8610A326034B3A000154FF /* Main.storyboard */,
+				CE8610D12604F186000154FF /* ContactNode.swift */,
 				CE8610A626034B3D000154FF /* Assets.xcassets */,
 				CE8610A826034B3D000154FF /* LaunchScreen.storyboard */,
 				CE8610AB26034B3D000154FF /* Info.plist */,
+				CE8610B226046B10000154FF /* CallBookTableViewController.swift */,
+				CE8610DC26061281000154FF /* MessageButton.swift */,
+				CE8610C12604C81D000154FF /* Contact.swift */,
+				CE8610E3260789ED000154FF /* MessageStorage.swift */,
+				CE8610EA2607BBE2000154FF /* Call.swift */,
+				CE8610B62604C74C000154FF /* ContactCell.swift */,
+				CE8610CA2604EF83000154FF /* FaceContact.swift */,
+				CE8610DF26061A6A000154FF /* MessageContact.swift */,
+				CE8610CD2604EF9B000154FF /* RecentCalls.swift */,
 			);
 			path = callBook;
 			sourceTree = "<group>";
@@ -137,9 +167,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE8610A226034B3A000154FF /* ViewController.swift in Sources */,
+				CE8610B72604C74C000154FF /* ContactCell.swift in Sources */,
+				CE8610EB2607BBE2000154FF /* Call.swift in Sources */,
 				CE86109E26034B3A000154FF /* AppDelegate.swift in Sources */,
+				CE8610C22604C81D000154FF /* Contact.swift in Sources */,
+				CE8610E4260789EE000154FF /* MessageStorage.swift in Sources */,
+				CE8610B326046B10000154FF /* CallBookTableViewController.swift in Sources */,
+				CE8610CE2604EF9B000154FF /* RecentCalls.swift in Sources */,
+				CE8610EE2607BCF1000154FF /* Manager.swift in Sources */,
 				CE8610A026034B3A000154FF /* SceneDelegate.swift in Sources */,
+				CE8610D22604F186000154FF /* ContactNode.swift in Sources */,
+				CE8610CB2604EF83000154FF /* FaceContact.swift in Sources */,
+				CE8610E026061A6A000154FF /* MessageContact.swift in Sources */,
+				CE8610DD26061281000154FF /* MessageButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
