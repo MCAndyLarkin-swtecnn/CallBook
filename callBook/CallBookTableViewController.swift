@@ -20,6 +20,17 @@ import UIKit
 class CallBookTableViewController: UITableViewController {
     
     
+    public static let avatarDefault = "avatar"
+    let rowHeigth: CGFloat = 70.0
+    let headerHight: CGFloat = 40.0
+    
+    lazy var dataManager: Manager = {
+        let manager = Manager()
+        manager.loadData()
+        manager.checkDataToLog()
+        return manager
+    }()
+    
     @IBAction func addView(_ sender: Any) {
         let alert = UIAlertController(title: "Add new contact", message: "", preferredStyle: .alert)
 
@@ -37,7 +48,6 @@ class CallBookTableViewController: UITableViewController {
             if let name = alert?.textFields?[0].text, let number = alert?.textFields?[2].text?.onlyDigits(){
                 var surname = alert?.textFields?[1].text
                 if surname == "" {
-                    print("null surname")
                     surname = nil}
                 self.dataManager.addNew(contactToBook: Contact(name: name, surname: surname, number: number, photo: nil, message: nil))
             }
@@ -50,6 +60,7 @@ class CallBookTableViewController: UITableViewController {
 
         self.present(alert, animated: true, completion: nil)
     }
+    
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
             let action = UIContextualAction(style: .normal, title: "delete"){
                 [weak self] (action, view, completionHandler) in
@@ -78,32 +89,6 @@ class CallBookTableViewController: UITableViewController {
         configuration.performsFirstActionWithFullSwipe = false
         return configuration
     }
-    
-    func deleteView(index: IndexPath){
-        dataManager.delete(index: index)
-        if let tableView = self.view as? UITableView{
-            tableView.reloadData()
-        }
-    }
-    lazy var dataManager: Manager = {
-        let manager = Manager()
-        manager.loadData()
-        manager.checkDataToLog()
-        return manager
-    }()
-    
-    
-    public static let avatarDefault = "avatar"
-    let rowHeigth: CGFloat = 70.0
-    let headerHight: CGFloat = 40.0
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        print("didLoad")
-    }
-
-    // MARK: - Table view data source
-    
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return dataManager.contactBook.count
@@ -113,7 +98,6 @@ class CallBookTableViewController: UITableViewController {
         return dataManager.contactBook[section].count
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath) as! ContactCell
@@ -211,5 +195,11 @@ class CallBookTableViewController: UITableViewController {
         }
     }
     
+    func deleteView(index: IndexPath){
+        dataManager.delete(index: index)
+        if let tableView = self.view as? UITableView{
+            tableView.reloadData()
+        }
+    }
 
 }

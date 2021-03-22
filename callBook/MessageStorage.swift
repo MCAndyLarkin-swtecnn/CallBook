@@ -8,8 +8,8 @@
 import UIKit
 
 struct MessageStorage {
-    let history: [(sender: Sender, text: String)]?
-    let draft: String
+    var history: [(sender: Sender, text: String)]?
+    var draft: String
 }
 enum Sender {
     case me

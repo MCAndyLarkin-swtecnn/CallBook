@@ -10,8 +10,15 @@ import UIKit
 class FaceContact: UIViewController {
 
     @IBOutlet var avatar: UIImageView!
-    
     @IBOutlet var number: UIButton!
+    
+    @IBAction func pressNumber(){
+        guard let tabBar = self.tabBarController as? ContactNode,
+              let contact = tabBar.shortData?.contact,
+              let url = URL(string: "tel://\(contact.number.onlyDigits())")
+        else { return }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
     @IBAction func changeContact(_ sender: UILongPressGestureRecognizer) {
         print("ChangeContact")
         
@@ -81,18 +88,9 @@ class FaceContact: UIViewController {
         }
     }
 
-    @IBAction func pressNumber(){
-        guard let tabBar = self.tabBarController as? ContactNode,
-              let contact = tabBar.shortData?.contact,
-              let url = URL(string: "tel://\(contact.number.onlyDigits())")
-        else { return }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-    }
-    
 
 }
 extension String {
-
     func onlyDigits() -> String {
         let filtredUnicodeScalars = unicodeScalars.filter { CharacterSet.decimalDigits.contains($0) }
         return String(String.UnicodeScalarView(filtredUnicodeScalars))

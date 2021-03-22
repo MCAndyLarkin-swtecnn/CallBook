@@ -1,9 +1,3 @@
-//
-//  Manager.swift
-//  callBook
-//
-//  Created by user on 21.03.2021.
-//
 
 import UIKit
 

@@ -8,11 +8,8 @@
 import UIKit
 
 class RecentCalls: UITableViewController {
-    
-    
     lazy var tabBar = tabBarController as? ContactNode
 
-    
     override func viewWillAppear(_ animated: Bool) {
         tabBar?.view.tintColor = UIColor.green
     }
@@ -50,9 +47,6 @@ class RecentCalls: UITableViewController {
         
         return cell
     }
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        rowHeigth
-//    }
 
 }
 

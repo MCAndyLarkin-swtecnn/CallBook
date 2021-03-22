@@ -1,5 +1,3 @@
-
-
 struct Call{
     let abonent: String
     let io: IO

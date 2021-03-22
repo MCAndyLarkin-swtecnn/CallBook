@@ -11,6 +11,6 @@ struct Contact {
     var name: String
     var surname: String?
     var number: String
-    let photo: String?
-    let message: MessageStorage?
+    var photo: String?
+    var message: MessageStorage?
 }
