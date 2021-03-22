@@ -12,11 +12,17 @@ class ContactNode: UITabBarController {
     public static let recentPage = 1
     public static let messagePage = 2
     
+    var changeData: ((_ contact: Contact, _ name: String?, _ surname: String?, _ number: String?)->())? = nil
+    var updateData: (()->())? = nil
+    
     var shortData: (contact: Contact, calls: [Call])? = nil
     override func viewDidLoad() {
         view.backgroundColor = UIColor.orange
     }
     override func viewWillAppear(_ animated: Bool){
+        updateTitle()
+    }
+    func updateTitle(){
         if let data = shortData{
             let surname: String
             if let sur = data.contact.surname{

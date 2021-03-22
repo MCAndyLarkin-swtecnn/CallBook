@@ -8,14 +8,7 @@
 import UIKit
 
 class FaceContact: UIViewController {
-    lazy var tabBar = tabBarController as? ContactNode
-    lazy var contact: Contact? = {
-        if tabBar == nil{
-            tabBar = tabBarController as? ContactNode
-        }
-        return tabBar?.shortData?.contact
-    }()
-    
+
     @IBOutlet var avatar: UIImageView!
     
     @IBOutlet var number: UIButton!
@@ -26,13 +19,13 @@ class FaceContact: UIViewController {
 
         alert.addTextField { (textField) in
             textField.placeholder = "Name"
-            if let name = self.contact?.name{
+            if  let tabBar = self.tabBarController as? ContactNode, let name = tabBar.shortData?.contact.name{
                 textField.text = name
             }
         }
         alert.addTextField { (textField) in
             textField.placeholder = "Surname"
-            if let surname = self.contact?.surname{
+            if  let tabBar = self.tabBarController as? ContactNode, let surname = tabBar.shortData?.contact.surname{
                 textField.text = surname
             }else{
                 textField.text = ""
@@ -40,12 +33,30 @@ class FaceContact: UIViewController {
         }
         alert.addTextField { (textField) in
             textField.placeholder = "Number"
-            if let number = self.contact?.number{
+            if  let tabBar = self.tabBarController as? ContactNode, let number = tabBar.shortData?.contact.number{
                 textField.text = number
             }
         }
 
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _  in  }))
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+            if let name = alert?.textFields?[0].text, let number = alert?.textFields?[2].text?.onlyDigits(){
+                var surname = alert?.textFields?[1].text
+                if surname == ""{
+                    surname = nil}
+                if let tabBar = self.tabBarController as? ContactNode, let contact = tabBar.shortData?.contact{
+                    tabBar.changeData?(contact, name, surname, number)
+                    tabBar.updateData?()
+                }
+                if  let tabBar = self.tabBarController as? ContactNode{
+                    self.number.setTitle(number, for: UIControl.State.normal)
+                    tabBar.updateTitle()
+                }
+
+            }
+            if let tableView = self.view as? UITableView{
+                tableView.reloadData()
+            }
+        }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { _ in  }))
 
         self.present(alert, animated: true, completion: nil)
@@ -54,8 +65,7 @@ class FaceContact: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        guard let theContact = contact else {
+        guard  let tabBar = self.tabBarController as? ContactNode, let theContact = tabBar.shortData?.contact else {
             return
         }
         number.setTitle(theContact.number, for: UIControl.State.normal)
@@ -66,12 +76,14 @@ class FaceContact: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        tabBar?.view.backgroundColor = view.backgroundColor
-        tabBar?.view.tintColor = UIColor.blue
+        if  let tabBar = self.tabBarController as? ContactNode{
+            tabBar.view.tintColor = UIColor.blue
+        }
     }
+
     @IBAction func pressNumber(){
-        guard let tabbar = tabBar,
-              let contact = tabbar.shortData?.contact,
+        guard let tabBar = self.tabBarController as? ContactNode,
+              let contact = tabBar.shortData?.contact,
               let url = URL(string: "tel://\(contact.number.onlyDigits())")
         else { return }
         UIApplication.shared.open(url, options: [:], completionHandler: nil)

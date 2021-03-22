@@ -36,9 +36,7 @@ class CallBookTableViewController: UITableViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
             if let name = alert?.textFields?[0].text, let number = alert?.textFields?[2].text?.onlyDigits(){
                 var surname = alert?.textFields?[1].text
-                if surname != "" {
-                    surname = alert?.textFields?[1].text
-                }else{
+                if surname == "" {
                     print("null surname")
                     surname = nil}
                 self.dataManager.addNew(contactToBook: Contact(name: name, surname: surname, number: number, photo: nil, message: nil))
@@ -52,7 +50,41 @@ class CallBookTableViewController: UITableViewController {
 
         self.present(alert, animated: true, completion: nil)
     }
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+            let action = UIContextualAction(style: .normal, title: "delete"){
+                [weak self] (action, view, completionHandler) in
+                self?.deleteView(index: indexPath)
+                completionHandler(true)
+            }
+        action.backgroundColor = .purple
+            let configuration = UISwipeActionsConfiguration(actions: [action])
+            configuration.performsFirstActionWithFullSwipe = false
+            return configuration
+        }
     
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .normal, title: "Call"){
+            [weak self] (action, view, completionHandler) in
+            
+            guard let number = self?.dataManager.contactBook[indexPath.section][indexPath.row].number,
+                  let url = URL(string: "tel://\(number.onlyDigits())")
+            else { return }
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            
+            completionHandler(true)
+        }
+        action.backgroundColor = .cyan
+        let configuration = UISwipeActionsConfiguration(actions: [action])
+        configuration.performsFirstActionWithFullSwipe = false
+        return configuration
+    }
+    
+    func deleteView(index: IndexPath){
+        dataManager.delete(index: index)
+        if let tableView = self.view as? UITableView{
+            tableView.reloadData()
+        }
+    }
     lazy var dataManager: Manager = {
         let manager = Manager()
         manager.loadData()
@@ -67,6 +99,7 @@ class CallBookTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("didLoad")
     }
 
     // MARK: - Table view data source
@@ -146,15 +179,35 @@ class CallBookTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? ContactNode{
             
+            destination.changeData = { [weak manager = dataManager]
+                (contact: Contact, name: String?, surname: String?, number: String?) in
+                manager?.change(contact: contact, name: name, surname: surname, number: number)
+                if let tableView = self.view as? UITableView{
+                    tableView.reloadData()
+                }
+            }
             if let indexPath = tableView.indexPathForSelectedRow {
                 let contact = dataManager.contactBook[indexPath.section][indexPath.row]
-                destination.shortData = (contact, dataManager.findAllCallsByNumber(numberForSearching: contact.number))
+                destination.updateData = { [weak manager = dataManager] in
+                    if let manager = manager{
+                    destination.shortData = (contact, manager.findAllCallsByNumber(numberForSearching: contact.number))
+                    }
+                }
+                destination.updateData?()
             }else if segue.identifier == "openMessage", let but = sender as? MessageButton, let index = but.index{
                 destination.selectedIndex = ContactNode.messagePage
                 let contact = dataManager.contactBook[index.section][index.row]
-                destination.shortData = (contact, dataManager.findAllCallsByNumber(numberForSearching: contact.number))
+                destination.updateData = { [weak manager = dataManager] in
+                    if let manager = manager{
+                    destination.shortData = (contact, manager.findAllCallsByNumber(numberForSearching: contact.number))
+                    }
+                }
+                destination.updateData?()
                 destination.view.tintColor = UIColor.orange
             }
+        }else if segue.identifier == "ShareRecent", let destination = segue.destination as? ShareRecentTableViewController{
+            destination.callList = dataManager.callLog
+                
         }
     }
     

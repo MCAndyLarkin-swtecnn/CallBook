@@ -23,6 +23,7 @@
 		CE8610E4260789EE000154FF /* MessageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610E3260789ED000154FF /* MessageStorage.swift */; };
 		CE8610EB2607BBE2000154FF /* Call.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610EA2607BBE2000154FF /* Call.swift */; };
 		CE8610EE2607BCF1000154FF /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610ED2607BCF1000154FF /* Manager.swift */; };
+		CE8610F626089C5A000154FF /* ShareRecentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610F526089C5A000154FF /* ShareRecentTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		CE8610E3260789ED000154FF /* MessageStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStorage.swift; sourceTree = "<group>"; };
 		CE8610EA2607BBE2000154FF /* Call.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Call.swift; sourceTree = "<group>"; };
 		CE8610ED2607BCF1000154FF /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
+		CE8610F526089C5A000154FF /* ShareRecentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareRecentTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				CE86109D26034B3A000154FF /* AppDelegate.swift */,
 				CE86109F26034B3A000154FF /* SceneDelegate.swift */,
 				CE8610A326034B3A000154FF /* Main.storyboard */,
+				CE8610F526089C5A000154FF /* ShareRecentTableViewController.swift */,
 				CE8610D12604F186000154FF /* ContactNode.swift */,
 				CE8610A626034B3D000154FF /* Assets.xcassets */,
 				CE8610A826034B3D000154FF /* LaunchScreen.storyboard */,
@@ -177,6 +180,7 @@
 				CE8610EE2607BCF1000154FF /* Manager.swift in Sources */,
 				CE8610A026034B3A000154FF /* SceneDelegate.swift in Sources */,
 				CE8610D22604F186000154FF /* ContactNode.swift in Sources */,
+				CE8610F626089C5A000154FF /* ShareRecentTableViewController.swift in Sources */,
 				CE8610CB2604EF83000154FF /* FaceContact.swift in Sources */,
 				CE8610E026061A6A000154FF /* MessageContact.swift in Sources */,
 				CE8610DD26061281000154FF /* MessageButton.swift in Sources */,

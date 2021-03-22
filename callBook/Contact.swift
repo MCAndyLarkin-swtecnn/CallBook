@@ -8,9 +8,9 @@
 import UIKit
 
 struct Contact {
-    let name: String
-    let surname: String?
-    let number: String
+    var name: String
+    var surname: String?
+    var number: String
     let photo: String?
     let message: MessageStorage?
 }

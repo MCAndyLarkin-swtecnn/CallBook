@@ -77,9 +77,55 @@ class Manager{
         }
         return target
     }
+    func findIndexOf(contactInCoontactBook contact: Contact) -> (section: Int, row: Int)?{
+        var targetSectionName: String
+
+        if let sur = contact.surname{
+            targetSectionName = String(sur.prefix(1)).uppercased()
+        }else{
+            targetSectionName = String(contact.name.prefix(1)).uppercased()
+        }
+        
+        for section in 0..<contactBook.count{
+            var sectionName: String
+            if let sur = contactBook [section][0].surname?.prefix(1).uppercased(){
+                sectionName = sur
+            }else{
+                sectionName = contactBook [section][0].name.prefix(1).uppercased()
+            }
+            if sectionName == targetSectionName{
+                for row in 0..<contactBook[section].count{
+                    if
+                        contactBook[section][row].name == contact.name,
+                        contactBook[section][row].surname == contact.surname,
+                        contactBook[section][row].number == contact.number{
+                        return (section, row)
+                    }
+                }
+            }
+        }
+        return nil
+    }
+    func change(contact: Contact, name: String? = nil, surname: String? = nil, number: String? = nil){
+        if let indexof = findIndexOf(contactInCoontactBook: contact){
+            if let newName = name{
+                contactBook[indexof.section][indexof.row].name = newName
+            }
+            if let newNumber = number{
+                contactBook[indexof.section][indexof.row].number = newNumber
+            }
+            contactBook[indexof.section][indexof.row].surname = surname
+        }
+    }
     func addNew(callToLog call:Call){
         let newCall = Call(abonent: call.abonent.onlyDigits(), io: call.io, time: call.time)
         callLog.append(newCall)
+    }
+    func delete(index: IndexPath){
+        contactBook[index.section].remove(at: index.row)
+        if contactBook[index.section].count == 0{
+            contactBook.remove(at: index.section)
+        }
     }
     func addNew(contactToBook contact: Contact){
         var sectionName: String
@@ -91,7 +137,6 @@ class Manager{
         }
         
         for i in 0..<contactBook.count{
-            print("\(sectionName) ~ \(contactBook [i][0].name.prefix(1).uppercased())")
             let section: String
             if let sur = contactBook [i][0].surname?.prefix(1).uppercased(){
                 section = sur
