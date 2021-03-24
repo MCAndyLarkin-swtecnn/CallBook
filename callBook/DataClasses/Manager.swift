@@ -1,7 +1,5 @@
 
-import UIKit
-
-class Manager{  
+class Manager{
     public var contactBook : [[Contact]] = []
     public var callLog: [Call] = []
     
@@ -12,8 +10,7 @@ class Manager{
             }
         }
     }
-    
-    public func loadData(){
+    public func andLoadDefaultData() -> Self{
         contactBook = [
             [Contact(name: "Anya", surname: nil, number: "89235416217", photo: nil , message: MessageStorage(
                 history: [
@@ -25,14 +22,13 @@ class Manager{
             )
             )
             ],
-            [Contact(name: "Manya", surname: "Chehova", number: "8 (923) 544-56-45", photo: "sova", message: nil )],
+            [Contact(name: "Manya", surname: "Chekhova", number: "89235445645", photo: "sova", message: nil )],
             [
-             Contact(name: "Sanya", surname: "Solzhenitsin", number: "8 (934) 634-66-57", photo: "puh", message: nil  ),
-             Contact(name: "Maxim", surname: "Sokolov", number: "8 (905) 664-80-00", photo: "krolik", message: nil  )
+             Contact(name: "Sanya", surname: "Solzhenitsin", number: "89346346657", photo: "puh", message: nil  ),
+             Contact(name: "Maxim", surname: "Sokolov", number: "89056648000", photo: "krolik", message: nil  )
             ],
-            [Contact(name: "Danya", surname: "Esenin", number: "8 (925) 734-57-23", photo: "svin", message: nil  )]
+            [Contact(name: "Danya", surname: "Esenin", number: "89257345723", photo: "svin", message: nil  )]
         ]
-        
         callLog = [
             Call(abonent: "89235416217", io: IO.inputSuccess(length: 2541), time: 143 ),
             Call(abonent: "89235445645", io: IO.inputSuccess(length: 1941), time: 143 ),
@@ -41,9 +37,15 @@ class Manager{
             Call(abonent: "89056648000", io: IO.outputSucces(length:1288), time: 452),
             Call(abonent: "89257345723", io: IO.outputFail, time: 145)
         ]
+        return self
+    }
+    public func andLoadData() -> Self{
+        //MARK: TODO
+        
+        return self
     }
     
-    func findAllCallsByNumber(numberForSearching number: String) -> [Call] {
+    func findAllCallsBy(numberForSearching number: String) -> [Call] {
         let clearNumber = number.onlyDigits()
         var listToReturn: [Call] = []
         
@@ -55,16 +57,16 @@ class Manager{
         return listToReturn
     }
     ///callLog is not sorted yet so it just return nearest in list
-    func findLastCallByNumber(numberForSearching number: String) -> Call?{
+    func findLastCallBy(numberForSearching number: String) -> Call?{
         return self.callLog.findLast(byNumber: number)
     }
-    func findNameByNumber(numberForSearching number: String) -> String?{
-        var target: String? = nil
-        
+    func findContactBy(numberForSearching number: String) -> Contact?{
+        var target: Contact? = nil
+        let number = number.onlyDigits()
         for section in contactBook{
             for contact in section{
-                if contact.number == number{
-                    target = contact.name
+                if contact.number.onlyDigits() == number{
+                    target = contact
                     break
                 }
             }
@@ -72,63 +74,46 @@ class Manager{
         return target
     }
     func findIndexOf(contactInCoontactBook contact: Contact) -> (section: Int, row: Int)?{
-        var targetSectionName: String
-
-        if let sur = contact.surname{
-            targetSectionName = String(sur.prefix(1)).uppercased()
-        }else{
-            targetSectionName = String(contact.name.prefix(1)).uppercased()
-        }
+        var targetSectionName = contact.getSectionName()
+        var target: (Int, Int)? = nil
         
         for section in 0..<contactBook.count{
-            var sectionName: String
-            if let sur = contactBook [section][0].surname?.prefix(1).uppercased(){
-                sectionName = sur
-            }else{
-                sectionName = contactBook [section][0].name.prefix(1).uppercased()
-            }
+            let sectionName = contactBook [section][0].getSectionName()
             if sectionName == targetSectionName{
                 for row in 0..<contactBook[section].count{
-                    if
-                        contactBook[section][row].name == contact.name,
+                    if  contactBook[section][row].name == contact.name,
                         contactBook[section][row].surname == contact.surname,
                         contactBook[section][row].number == contact.number{
-                        return (section, row)
+                        target = (section, row)
                     }
                 }
             }
         }
-        return nil
+        return target
     }
     func change(contact: Contact, name: String? = nil, surname: String? = nil, number: String? = nil){
         if let indexof = findIndexOf(contactInCoontactBook: contact){
+            let contact = contactBook[indexof.section][indexof.row]
             if let newName = name{
-                contactBook[indexof.section][indexof.row].name = newName
+                contact.name = newName
             }
             if let newNumber = number{
-                contactBook[indexof.section][indexof.row].number = newNumber
+                contact.number = newNumber
             }
-            contactBook[indexof.section][indexof.row].surname = surname
+            contact.surname = surname
         }
     }
     func addNew(callToLog call:Call){
-        let newCall = Call(abonent: call.abonent.onlyDigits(), io: call.io, time: call.time)
-        callLog.append(newCall)
+        callLog.insert(call, at: 0)
     }
-    func delete(index: IndexPath){
+    func delete(index: (section: Int, row: Int)){
         contactBook[index.section].remove(at: index.row)
         if contactBook[index.section].count == 0{
             contactBook.remove(at: index.section)
         }
     }
     func addNew(contactToBook contact: Contact){
-        var sectionName: String
-
-        if let sur = contact.surname{
-            sectionName = String(sur.prefix(1)).uppercased()
-        }else{
-            sectionName = String(contact.name.prefix(1)).uppercased()
-        }
+        let sectionName = contact.getSectionName()
         
         for i in 0..<contactBook.count{
             let section: String
@@ -145,22 +130,4 @@ class Manager{
         contactBook.append([contact])
     }
     
-}
-
-extension Array where Element == Call{
-    func findLast(byNumber number: String?) -> Call?{
-        guard let number = number else {
-            return nil
-        }
-        let clearNumber = number.onlyDigits()
-        var target: Call? = nil
-        
-        for call in self{
-            if call.abonent == clearNumber{
-                target = call
-                break
-            }
-        }
-        return target
-    }
 }

@@ -24,6 +24,9 @@
 		CE8610EB2607BBE2000154FF /* Call.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610EA2607BBE2000154FF /* Call.swift */; };
 		CE8610EE2607BCF1000154FF /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610ED2607BCF1000154FF /* Manager.swift */; };
 		CE8610F626089C5A000154FF /* ShareRecentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610F526089C5A000154FF /* ShareRecentTableViewController.swift */; };
+		CE86111D260A5D1F000154FF /* TabBarPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86111C260A5D1F000154FF /* TabBarPageViewController.swift */; };
+		CE861120260A6B3E000154FF /* UsefulExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86111F260A6B3E000154FF /* UsefulExtensions.swift */; };
+		CE861123260A75B8000154FF /* TODO in Resources */ = {isa = PBXBuildFile; fileRef = CE861122260A75B8000154FF /* TODO */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +49,9 @@
 		CE8610EA2607BBE2000154FF /* Call.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Call.swift; sourceTree = "<group>"; };
 		CE8610ED2607BCF1000154FF /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		CE8610F526089C5A000154FF /* ShareRecentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareRecentTableViewController.swift; sourceTree = "<group>"; };
+		CE86111C260A5D1F000154FF /* TabBarPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPageViewController.swift; sourceTree = "<group>"; };
+		CE86111F260A6B3E000154FF /* UsefulExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsefulExtensions.swift; sourceTree = "<group>"; };
+		CE861122260A75B8000154FF /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,26 +84,45 @@
 		CE86109C26034B3A000154FF /* callBook */ = {
 			isa = PBXGroup;
 			children = (
-				CE8610ED2607BCF1000154FF /* Manager.swift */,
-				CE86109D26034B3A000154FF /* AppDelegate.swift */,
-				CE86109F26034B3A000154FF /* SceneDelegate.swift */,
+				CE861125260A834B000154FF /* DataClasses */,
+				CE861126260A83D7000154FF /* UIElements */,
 				CE8610A326034B3A000154FF /* Main.storyboard */,
-				CE8610F526089C5A000154FF /* ShareRecentTableViewController.swift */,
-				CE8610D12604F186000154FF /* ContactNode.swift */,
-				CE8610A626034B3D000154FF /* Assets.xcassets */,
 				CE8610A826034B3D000154FF /* LaunchScreen.storyboard */,
+				CE8610A626034B3D000154FF /* Assets.xcassets */,
+				CE86111F260A6B3E000154FF /* UsefulExtensions.swift */,
 				CE8610AB26034B3D000154FF /* Info.plist */,
-				CE8610B226046B10000154FF /* CallBookTableViewController.swift */,
-				CE8610DC26061281000154FF /* MessageButton.swift */,
+				CE861122260A75B8000154FF /* TODO */,
+			);
+			path = callBook;
+			sourceTree = "<group>";
+		};
+		CE861125260A834B000154FF /* DataClasses */ = {
+			isa = PBXGroup;
+			children = (
+				CE8610ED2607BCF1000154FF /* Manager.swift */,
+				CE8610EA2607BBE2000154FF /* Call.swift */,
 				CE8610C12604C81D000154FF /* Contact.swift */,
 				CE8610E3260789ED000154FF /* MessageStorage.swift */,
-				CE8610EA2607BBE2000154FF /* Call.swift */,
+			);
+			path = DataClasses;
+			sourceTree = "<group>";
+		};
+		CE861126260A83D7000154FF /* UIElements */ = {
+			isa = PBXGroup;
+			children = (
+				CE86109D26034B3A000154FF /* AppDelegate.swift */,
+				CE86109F26034B3A000154FF /* SceneDelegate.swift */,
+				CE8610F526089C5A000154FF /* ShareRecentTableViewController.swift */,
+				CE8610D12604F186000154FF /* ContactNode.swift */,
+				CE8610B226046B10000154FF /* CallBookTableViewController.swift */,
+				CE8610DC26061281000154FF /* MessageButton.swift */,
 				CE8610B62604C74C000154FF /* ContactCell.swift */,
 				CE8610CA2604EF83000154FF /* FaceContact.swift */,
+				CE86111C260A5D1F000154FF /* TabBarPageViewController.swift */,
 				CE8610DF26061A6A000154FF /* MessageContact.swift */,
 				CE8610CD2604EF9B000154FF /* RecentCalls.swift */,
 			);
-			path = callBook;
+			path = UIElements;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,6 +184,7 @@
 			files = (
 				CE8610AA26034B3D000154FF /* LaunchScreen.storyboard in Resources */,
 				CE8610A726034B3D000154FF /* Assets.xcassets in Resources */,
+				CE861123260A75B8000154FF /* TODO in Resources */,
 				CE8610A526034B3A000154FF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -173,7 +199,9 @@
 				CE8610B72604C74C000154FF /* ContactCell.swift in Sources */,
 				CE8610EB2607BBE2000154FF /* Call.swift in Sources */,
 				CE86109E26034B3A000154FF /* AppDelegate.swift in Sources */,
+				CE86111D260A5D1F000154FF /* TabBarPageViewController.swift in Sources */,
 				CE8610C22604C81D000154FF /* Contact.swift in Sources */,
+				CE861120260A6B3E000154FF /* UsefulExtensions.swift in Sources */,
 				CE8610E4260789EE000154FF /* MessageStorage.swift in Sources */,
 				CE8610B326046B10000154FF /* CallBookTableViewController.swift in Sources */,
 				CE8610CE2604EF9B000154FF /* RecentCalls.swift in Sources */,

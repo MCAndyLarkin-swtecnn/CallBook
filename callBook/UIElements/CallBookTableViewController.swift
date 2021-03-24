@@ -1,35 +1,22 @@
-//
-//  CallBookTableViewController.swift
-//  callBook
-//
-//  Created by user on 19.03.2021.
-//
 
 import UIKit
 
 //Questions
 /*
  1. Tab bar Color
- 2. Глюк с отображением сообщений
+ 2. Глюк с отображением сообщений (prepare(), seque, willApear, DidLoad)
  3. Scrollable
  4. Выравнивание stack view по низу
  5. перенос строки в textField
- 6. переход не на первыю страницу в тачбаре
+ 6. переход не на первую страницу в тачбаре
  */
 
 class CallBookTableViewController: UITableViewController {
-    
-    
     public static let avatarDefault = "avatar"
     let rowHeigth: CGFloat = 70.0
     let headerHight: CGFloat = 40.0
     
-    lazy var dataManager: Manager = {
-        let manager = Manager()
-        manager.loadData()
-        manager.checkDataToLog()
-        return manager
-    }()
+    lazy var dataManager: Manager = Manager().andLoadDefaultData()
     
     @IBAction func addView(_ sender: Any) {
         let alert = UIAlertController(title: "Add new contact", message: "", preferredStyle: .alert)
@@ -45,13 +32,12 @@ class CallBookTableViewController: UITableViewController {
         }
 
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
-            if let name = alert?.textFields?[0].text, let number = alert?.textFields?[2].text?.onlyDigits(){
+            if let name = alert?.textFields?[0].text, let number = alert?.textFields?[2].text?.onlyDigits(),
+               name != "", number != ""{
                 var surname = alert?.textFields?[1].text
-                if surname == "" {
-                    surname = nil}
+                if surname == "" { surname = nil }
                 self.dataManager.addNew(contactToBook: Contact(name: name, surname: surname, number: number, photo: nil, message: nil))
             }
-            self.dataManager.checkDataToLog()
             if let tableView = self.view as? UITableView{
                 tableView.reloadData()
             }
@@ -62,9 +48,11 @@ class CallBookTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-            let action = UIContextualAction(style: .normal, title: "delete"){
+            let action = UIContextualAction(style: .normal, title: "Delete"){
                 [weak self] (action, view, completionHandler) in
+                
                 self?.deleteView(index: indexPath)
+                
                 completionHandler(true)
             }
         action.backgroundColor = .purple
@@ -77,10 +65,18 @@ class CallBookTableViewController: UITableViewController {
         let action = UIContextualAction(style: .normal, title: "Call"){
             [weak self] (action, view, completionHandler) in
             
-            guard let number = self?.dataManager.contactBook[indexPath.section][indexPath.row].number,
-                  let url = URL(string: "tel://\(number.onlyDigits())")
+            guard let number = self?.dataManager.contactBook[indexPath.section][indexPath.row].number
             else { return }
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            
+            if let url = URL(string: "tel://\(number.onlyDigits())"){
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+            
+            //Write to callLog
+            //Default (No responce, time - random)
+            self?.dataManager.addNew(callToLog: Call(abonent: number,
+                                          io: .outputFail,
+                                          time: Int.random(in: 100..<500)))
             
             completionHandler(true)
         }
@@ -93,39 +89,27 @@ class CallBookTableViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return dataManager.contactBook.count
     }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataManager.contactBook[section].count
     }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath) as! ContactCell
-        
-            let contact = dataManager.contactBook[indexPath.section][indexPath.row]
-            
-            let surname: String
-            if let sur = contact.surname{
-                surname = "\(sur) "
-            }else{
-                surname = ""
-            }
-    //        print(standardizeNumber(number: contact.number))
-            //Try use guard let
-            //Try use if let cond, cond
-            
-            cell.signature?.text = surname + contact.name
-            cell.number?.text = contact.number
-            cell.photo?.image = UIImage(named: contact.photo ?? CallBookTableViewController.avatarDefault)
-        
-        
-
-        cell.messageButton?.index = (indexPath.section, indexPath.row)
-        
-        return cell
-    }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         rowHeigth
+    }
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        headerHight
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath) as! ContactCell
+        
+        let contact = dataManager.contactBook[indexPath.section][indexPath.row]
+        
+        cell.signature?.text = contact.getTitle()
+        cell.number?.text = contact.number
+        cell.photo?.image = UIImage(named: contact.photo ?? CallBookTableViewController.avatarDefault)
+        cell.messageButton?.index = indexPath
+        
+        return cell
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -139,16 +123,8 @@ class CallBookTableViewController: UITableViewController {
         
         let label = UILabel()
         
-
-            let contact = dataManager.contactBook[section][0]
-
-            if let sur = contact.surname{
-                label.text = String(sur.prefix(1)).uppercased()
-            }else{
-                label.text = String(contact.name.prefix(1)).uppercased()
-            }
-        
-        
+        let contact = dataManager.contactBook[section][0]
+        label.text = contact.getSectionName()
         
         label.frame = CGRect(x: 35, y: 8, width: 100, height: 25)
         label.textColor = UIColor.systemPink.withAlphaComponent(0.5)
@@ -157,49 +133,66 @@ class CallBookTableViewController: UITableViewController {
         
         return headerView
     }
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        headerHight
-    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? ContactNode{
+            var openMessageViewLink: MessageContact? = nil
             
-            destination.changeData = { [weak manager = dataManager]
-                (contact: Contact, name: String?, surname: String?, number: String?) in
-                manager?.change(contact: contact, name: name, surname: surname, number: number)
-                if let tableView = self.view as? UITableView{
-                    tableView.reloadData()
-                }
+            var index: IndexPath
+            if let indexPath = tableView.indexPathForSelectedRow{
+                index = indexPath
+                //default page = .face
+            } else if segue.identifier == "openMessage", let but = sender as? MessageButton, let index_ = but.index{
+                index = index_
+                destination.choose(page: .message)
+                openMessageViewLink = destination.viewControllers?[ContactNode.Page.message.rawValue] as? MessageContact
+            }else{
+                return
             }
-            if let indexPath = tableView.indexPathForSelectedRow {
-                let contact = dataManager.contactBook[indexPath.section][indexPath.row]
-                destination.updateData = { [weak manager = dataManager] in
-                    if let manager = manager{
-                    destination.shortData = (contact, manager.findAllCallsByNumber(numberForSearching: contact.number))
+            
+            let contact: Contact = dataManager.contactBook[index.section][index.row]
+            let shortData = (contact, dataManager.findAllCallsBy(numberForSearching: contact.number))
+            if let pages = destination.viewControllers{
+                for _page in pages{
+                    if let page = _page as? TabBarPageViewController{
+                        page.shortData = shortData
+                    }else
+                    if let page = _page as? RecentCalls{
+                        page.shortData = shortData
                     }
                 }
-                destination.updateData?()
-            }else if segue.identifier == "openMessage", let but = sender as? MessageButton, let index = but.index{
-                destination.selectedIndex = ContactNode.messagePage
-                let contact = dataManager.contactBook[index.section][index.row]
-                destination.updateData = { [weak manager = dataManager] in
-                    if let manager = manager{
-                    destination.shortData = (contact, manager.findAllCallsByNumber(numberForSearching: contact.number))
-                    }
-                }
-                destination.updateData?()
-                destination.view.tintColor = UIColor.orange
-            }
-        }else if segue.identifier == "ShareRecent", let destination = segue.destination as? ShareRecentTableViewController{
-            destination.callList = dataManager.callLog
                 
+                if let faceContact = pages[ContactNode.Page.face.rawValue] as? FaceContact,
+                   let recentContact = pages[ContactNode.Page.recent.rawValue] as? RecentCalls,
+                   let recentView = recentContact.view as? UITableView{
+                    faceContact.inserter = { [weak manager = dataManager] (call) in
+                        manager?.addNew(callToLog: call)
+                        recentContact.shortData?.calls.insert(call, at: 0)
+                        recentView.reloadData()
+                    }
+                }
+            }
+            
+            if let messageView = openMessageViewLink{
+                messageView.loadMessages()
+            }
+        }else if let destination = segue.destination as? ShareRecentTableViewController, segue.identifier == "ShareRecent" {
+            destination.callList = dataManager.callLog
+            destination.nameFinder = { [weak manager = dataManager] (number) in
+                manager?.findContactBy(numberForSearching: number)?.getShortTitle()
+            }
         }
     }
     
     func deleteView(index: IndexPath){
-        dataManager.delete(index: index)
+        dataManager.delete(index: (index.section, index.row))
         if let tableView = self.view as? UITableView{
             tableView.reloadData()
         }
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        if let tableView = self.view as? UITableView{
+            tableView.reloadData()
+        }
+    }
 }
