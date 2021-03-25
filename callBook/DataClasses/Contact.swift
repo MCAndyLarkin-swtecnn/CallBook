@@ -3,15 +3,30 @@ class Contact {
     var name: String
     var surname: String?
     var number: String
+    var email: String?
     var photo: String?
     var message: MessageStorage?
     
-    init(name: String, surname: String?, number: String, photo: String?, message: MessageStorage?) {
+    init(name: String, surname: String?, number: String, email: String?, photo: String?, message: MessageStorage?) {
         self.name = name
         self.surname = surname
         self.photo = photo
         self.number = number
         self.message = message
+    }
+    convenience init(name: String, surname: String?, number: String, email: String?){
+        self.init(name: name, surname: surname, number: number, email: nil, photo: nil, message: nil)
+    }
+    convenience init(name: String, number: String){
+        self.init(name: name, surname: nil, number: number, email: nil)
+    }
+    func with(photoByPath: String) -> Self{
+        self.photo = photoByPath
+        return self
+    }
+    func with(email: String) -> Self{
+        self.email = email
+        return self
     }
     
     func getTitle() -> String{

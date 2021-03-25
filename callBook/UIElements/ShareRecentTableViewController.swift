@@ -2,8 +2,8 @@
 import UIKit
 
 class ShareRecentTableViewController: UITableViewController {
-    var callList: [Call]? = nil
-    var nameFinder: ((String) -> String?)? = nil
+    var callList: [Call]?
+    var nameFinder: ((String) -> String?)?
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return callList?.count ?? 0

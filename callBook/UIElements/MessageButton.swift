@@ -2,5 +2,5 @@
 import UIKit
 
 class MessageButton: UIButton {
-    var index: IndexPath? = nil
+    var index: IndexPath?
 }

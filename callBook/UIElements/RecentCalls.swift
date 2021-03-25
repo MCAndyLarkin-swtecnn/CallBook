@@ -2,7 +2,7 @@
 import UIKit
 
 class RecentCalls: UITableViewController {
-    var shortData: (contact: Contact, calls: [Call])? = nil
+    var shortData: (contact: Contact, calls: [Call])?
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return shortData?.calls.count ?? 0
@@ -28,6 +28,10 @@ class RecentCalls: UITableViewController {
         if let tabBar = tabBarController as? ContactNode{
             tabBar.view.tintColor = UIColor.green
         }
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
     }
 
 }

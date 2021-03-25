@@ -7,13 +7,13 @@ class ContactNode: UITabBarController {
         case recent = 1
         case message = 2
     }
-    func choose(page: Page){
-        selectedIndex = page.rawValue
-    }
+    var selectedPage: Page = Page.face
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         if let view = viewControllers?[0] as? TabBarPageViewController, let contact = view.shortData?.contact {
             title = contact.getTitle()
         }
+        selectedIndex = selectedPage.rawValue
     }
     
 }

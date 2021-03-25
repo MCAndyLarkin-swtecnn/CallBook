@@ -4,19 +4,27 @@ import UIKit
 //Questions
 /*
  1. Tab bar Color
- 2. Глюк с отображением сообщений (prepare(), seque, willApear, DidLoad)
+ 2. Глюк с отображением сообщений (prepare(), seque, willApear, DidLoad) //May use singleton access to dataManager (interfaceFactory)
+ 6. переход не на первую страницу в тачбаре
  3. Scrollable
  4. Выравнивание stack view по низу
  5. перенос строки в textField
- 6. переход не на первую страницу в тачбаре
+ 7. Сворачивать секции в TableView
  */
 
+
+//Use reload  section
 class CallBookTableViewController: UITableViewController {
     public static let avatarDefault = "avatar"
     let rowHeigth: CGFloat = 70.0
     let headerHight: CGFloat = 40.0
     
-    lazy var dataManager: Manager = Manager().andLoadDefaultData()
+    lazy var dataManager: Manager = Manager().andLoadData().withUpload{
+        if let tableView = self.view as? UITableView{
+            print("Upload")
+            tableView.reloadData()
+        }
+    }
     
     @IBAction func addView(_ sender: Any) {
         let alert = UIAlertController(title: "Add new contact", message: "", preferredStyle: .alert)
@@ -36,7 +44,7 @@ class CallBookTableViewController: UITableViewController {
                name != "", number != ""{
                 var surname = alert?.textFields?[1].text
                 if surname == "" { surname = nil }
-                self.dataManager.addNew(contactToBook: Contact(name: name, surname: surname, number: number, photo: nil, message: nil))
+                self.dataManager.addNew(contactToBook: Contact(name: name, surname: surname, number: number,email: nil))
             }
             if let tableView = self.view as? UITableView{
                 tableView.reloadData()
@@ -123,7 +131,10 @@ class CallBookTableViewController: UITableViewController {
         
         let label = UILabel()
         
-        let contact = dataManager.contactBook[section][0]
+        
+        guard dataManager.contactBook.count >= section+1, let contact = try? dataManager.contactBook[section][0] else{
+            return nil
+        }
         label.text = contact.getSectionName()
         
         label.frame = CGRect(x: 35, y: 8, width: 100, height: 25)
@@ -136,16 +147,14 @@ class CallBookTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? ContactNode{
-            var openMessageViewLink: MessageContact? = nil
-            
+            var page: ContactNode.Page
             var index: IndexPath
             if let indexPath = tableView.indexPathForSelectedRow{
                 index = indexPath
-                //default page = .face
+                page = .face
             } else if segue.identifier == "openMessage", let but = sender as? MessageButton, let index_ = but.index{
                 index = index_
-                destination.choose(page: .message)
-                openMessageViewLink = destination.viewControllers?[ContactNode.Page.message.rawValue] as? MessageContact
+                page = .message
             }else{
                 return
             }
@@ -173,9 +182,7 @@ class CallBookTableViewController: UITableViewController {
                 }
             }
             
-            if let messageView = openMessageViewLink{
-                messageView.loadMessages()
-            }
+            destination.selectedPage = .recent
         }else if let destination = segue.destination as? ShareRecentTableViewController, segue.identifier == "ShareRecent" {
             destination.callList = dataManager.callLog
             destination.nameFinder = { [weak manager = dataManager] (number) in

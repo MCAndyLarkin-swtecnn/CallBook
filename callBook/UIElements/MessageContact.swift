@@ -9,10 +9,14 @@ class MessageContact: TabBarPageViewController {
     @IBOutlet var templateMessage3: UILabel!
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         loadMessages()
         if let tabBar = tabBarController as? ContactNode{
             tabBar.view.tintColor = UIColor.orange
         }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     public func loadMessages(){
         if let message = shortData?.contact.message, let history = message.history{
@@ -24,4 +28,5 @@ class MessageContact: TabBarPageViewController {
             messageField.text = message.draft
         }
     }
+    ////Кагда вызывать loadMessages?
 }

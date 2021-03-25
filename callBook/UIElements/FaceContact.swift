@@ -5,7 +5,7 @@ class FaceContact: TabBarPageViewController{
     @IBOutlet var avatar: UIImageView!
     @IBOutlet var number: UIButton!
     
-    var inserter: ((Call) -> ())? = nil
+    var inserter: ((Call) -> ())?
     
     @IBAction func pressNumber(){
         guard let number = shortData?.contact.number
@@ -68,14 +68,17 @@ class FaceContact: TabBarPageViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        if let tabBar = tabBarController as? ContactNode{
+            tabBar.view.tintColor = UIColor.blue
+        }
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
         guard let theContact = shortData?.contact else {
             return
         }
         number.setTitle(theContact.number, for: UIControl.State.normal)
         avatar.image = UIImage(named: theContact.photo ?? CallBookTableViewController.avatarDefault)
-
-        if let tabBar = tabBarController as? ContactNode{
-            tabBar.view.tintColor = UIColor.blue
-        }
+        
     }
 }
