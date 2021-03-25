@@ -4,14 +4,15 @@ import UIKit
 class FaceContact: TabBarPageViewController{
     @IBOutlet var avatar: UIImageView!
     @IBOutlet var number: UIButton!
+    @IBOutlet var email: UIButton!
     
     var inserter: ((Call) -> ())?
     
     @IBAction func pressNumber(){
-        guard let number = shortData?.contact.number
+        guard let number = shortData?.contact.number.onlyDigits()
         else { return }
         
-        if let url = URL(string: "tel://\(number.onlyDigits())"){
+        if let url = URL(string: "tel://\(number)"){
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
         
@@ -79,6 +80,6 @@ class FaceContact: TabBarPageViewController{
         }
         number.setTitle(theContact.number, for: UIControl.State.normal)
         avatar.image = UIImage(named: theContact.photo ?? CallBookTableViewController.avatarDefault)
-        
+        email.setTitle(theContact.email ?? "Email", for: UIControl.State.normal)
     }
 }

@@ -27,7 +27,6 @@
 		CE86111D260A5D1F000154FF /* TabBarPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86111C260A5D1F000154FF /* TabBarPageViewController.swift */; };
 		CE861120260A6B3E000154FF /* UsefulExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86111F260A6B3E000154FF /* UsefulExtensions.swift */; };
 		CE861123260A75B8000154FF /* TODO in Resources */ = {isa = PBXBuildFile; fileRef = CE861122260A75B8000154FF /* TODO */; };
-		CEF5BA24260B4BA20074D15E /* GistContactsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF5BA23260B4BA20074D15E /* GistContactsRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,7 +52,6 @@
 		CE86111C260A5D1F000154FF /* TabBarPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPageViewController.swift; sourceTree = "<group>"; };
 		CE86111F260A6B3E000154FF /* UsefulExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsefulExtensions.swift; sourceTree = "<group>"; };
 		CE861122260A75B8000154FF /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
-		CEF5BA23260B4BA20074D15E /* GistContactsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GistContactsRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +100,6 @@
 			isa = PBXGroup;
 			children = (
 				CE8610ED2607BCF1000154FF /* Manager.swift */,
-				CEF5BA23260B4BA20074D15E /* GistContactsRepository.swift */,
 				CE8610EA2607BBE2000154FF /* Call.swift */,
 				CE8610C12604C81D000154FF /* Contact.swift */,
 				CE8610E3260789ED000154FF /* MessageStorage.swift */,
@@ -215,7 +212,6 @@
 				CE8610CB2604EF83000154FF /* FaceContact.swift in Sources */,
 				CE8610E026061A6A000154FF /* MessageContact.swift in Sources */,
 				CE8610DD26061281000154FF /* MessageButton.swift in Sources */,
-				CEF5BA24260B4BA20074D15E /* GistContactsRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

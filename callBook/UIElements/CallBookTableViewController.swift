@@ -19,12 +19,8 @@ class CallBookTableViewController: UITableViewController {
     let rowHeigth: CGFloat = 70.0
     let headerHight: CGFloat = 40.0
     
-    lazy var dataManager: Manager = Manager().andLoadData().withUpload{
-        if let tableView = self.view as? UITableView{
-            print("Upload")
-            tableView.reloadData()
-        }
-    }
+    lazy var dataManager: Manager = Manager()
+        .withUpload{ [weak view = view as? UITableView] in view?.reloadData() }.andLoadData()
     
     @IBAction func addView(_ sender: Any) {
         let alert = UIAlertController(title: "Add new contact", message: "", preferredStyle: .alert)
@@ -73,10 +69,10 @@ class CallBookTableViewController: UITableViewController {
         let action = UIContextualAction(style: .normal, title: "Call"){
             [weak self] (action, view, completionHandler) in
             
-            guard let number = self?.dataManager.contactBook[indexPath.section][indexPath.row].number
+            guard let number = self?.dataManager.contactBook[indexPath.section][indexPath.row].number.onlyDigits()
             else { return }
             
-            if let url = URL(string: "tel://\(number.onlyDigits())"){
+            if let url = URL(string: "tel://\(number)"){
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
             
@@ -131,17 +127,16 @@ class CallBookTableViewController: UITableViewController {
         
         let label = UILabel()
         
-        
-        guard dataManager.contactBook.count >= section+1, let contact = try? dataManager.contactBook[section][0] else{
-            return nil
-        }
-        label.text = contact.getSectionName()
-        
         label.frame = CGRect(x: 35, y: 8, width: 100, height: 25)
         label.textColor = UIColor.systemPink.withAlphaComponent(0.5)
         label.font = UIFont.boldSystemFont(ofSize: label.font.pointSize)
-        headerView.addSubview(label)
         
+        if dataManager.contactBook.count >= section+1{
+            let contact = dataManager.contactBook[section][0]
+            label.text = contact.getSectionName()
+        }
+        
+        headerView.addSubview(label)
         return headerView
     }
     
@@ -182,7 +177,7 @@ class CallBookTableViewController: UITableViewController {
                 }
             }
             
-            destination.selectedPage = .recent
+            destination.selectedPage = page
         }else if let destination = segue.destination as? ShareRecentTableViewController, segue.identifier == "ShareRecent" {
             destination.callList = dataManager.callLog
             destination.nameFinder = { [weak manager = dataManager] (number) in

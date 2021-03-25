@@ -13,9 +13,10 @@ class Contact {
         self.photo = photo
         self.number = number
         self.message = message
+        self.email = email
     }
     convenience init(name: String, surname: String?, number: String, email: String?){
-        self.init(name: name, surname: surname, number: number, email: nil, photo: nil, message: nil)
+        self.init(name: name, surname: surname, number: number, email: email, photo: nil, message: nil)
     }
     convenience init(name: String, number: String){
         self.init(name: name, surname: nil, number: number, email: nil)

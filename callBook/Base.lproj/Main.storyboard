@@ -337,13 +337,13 @@
                                 <rect key="frame" x="0.0" y="140" width="428" height="428"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqT-oz-NBi">
-                                <rect key="frame" x="219" y="793" width="120" height="46"/>
+                                <rect key="frame" x="246" y="793" width="66" height="46"/>
                                 <color key="backgroundColor" red="1" green="0.80305084559999995" blue="0.79970218540000004" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="XRe-U5-O41"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <state key="normal" title="Instagram">
+                                <state key="normal" title="Email">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -422,6 +422,7 @@
                     <navigationItem key="navigationItem" title="Title" id="rIX-tT-A2D"/>
                     <connections>
                         <outlet property="avatar" destination="ohe-QZ-pde" id="fXt-3Z-uOd"/>
+                        <outlet property="email" destination="yqT-oz-NBi" id="LZC-OM-BgC"/>
                         <outlet property="number" destination="7nQ-oe-Mqj" id="4A6-cw-ppM"/>
                     </connections>
                 </viewController>

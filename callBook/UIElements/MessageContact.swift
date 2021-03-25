@@ -28,5 +28,4 @@ class MessageContact: TabBarPageViewController {
             messageField.text = message.draft
         }
     }
-    ////Кагда вызывать loadMessages?
 }

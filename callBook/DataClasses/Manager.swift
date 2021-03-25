@@ -41,63 +41,63 @@ class Manager{
             Call(abonent: "89056648000", io: IO.outputSucces(length:1288), time: 452),
             Call(abonent: "89257345723", io: IO.outputFail, time: 145)
         ]
-
-        //MARK: DELETE IT
-//        andLoadData()
-        
         return self
     }
     public func andLoadData() -> Self{
-        let timeout: UInt64 = 1000000000
-        //MARK: TODO
         let sem = DispatchSemaphore(value: 0)
         var encodedContacts: [Contact] = []
         let method: Raspil = .gcd
         switch method {
         case .gcd:
+            guard let url = URL( string: "https://gist.githubusercontent.com/artgoncharov/d257658423edd46a9ead5f721b837b8c/raw/c38ace33a7c871e4ad3b347fc4cd970bb45561a3/contacts_data.json")else {
+                return self
+            }
             DispatchQueue.global(qos: .background).async {
-                let task = URLSession.shared.dataTask(with: URLRequest(url: URL(string: "https://gist.githubusercontent.com/artgoncharov/d257658423edd46a9ead5f721b837b8c/raw/c38ace33a7c871e4ad3b347fc4cd970bb45561a3/contacts_data.json")!) ) { (data, response, error) in
+                URLSession.shared.dataTask(
+                    with: URLRequest( url: url ) ) { (data, response, error) in
                     defer {
                         sem.signal()
                     }
-                    //  MARK: TODO: handle error
                     guard let data = data else {
-                        print("Error")
                         return
                     }
-                
-                    // MARK: TODO:  parse data
                     let decoder = JSONDecoder()
                     decoder.keyDecodingStrategy = .convertFromSnakeCase
                     
                     if let decoded = try? decoder.decode([Contact.CodingData].self, from: data){
                         encodedContacts = decoded.map({(it) in it.contact})
-                        print("Successeful translation: \(encodedContacts.count)")
                     }
-                    
-                }
-                task.resume()
-                sem.wait(timeout: DispatchTime(uptimeNanoseconds: timeout))
-                self.contactBook = self.createCallBookBy(contacts: encodedContacts)
-                DispatchQueue.main.async {
-                    self.upload?()
-                }
+
+                    self.createCallBookBy(contacts: encodedContacts)
+
+                    if let upload = self.upload{
+                        DispatchQueue.main.async(execute: upload)
+                    }
+                }.resume()
             }
         case .operations:
             break
         }
-        
-        //TODO: call with GCD & OperationQueue
         return self
     }
     func withUpload( upload: @escaping ()->() ) -> Self{
         self.upload = upload
         return self
     }
-    func createCallBookBy(contacts: [Contact]) -> [[Contact]]{
-        //MARK: TODO
-        let a = [contacts]
-        return a
+    func createCallBookBy(contacts: [Contact]){
+        var sectionMap: Dictionary<String, Int> = [:]
+        var num = 0
+        for contact in contacts {
+            let sectionName = contact.getSectionName()
+            if let index = sectionMap[sectionName]{
+                contactBook[index].append(contact)
+            }else{
+                contactBook.append([contact])
+                sectionMap[sectionName] = num
+                num += 1
+            }
+        }
+        //contactBook change
     }
     func findAllCallsBy(numberForSearching number: String) -> [Call] {
         let clearNumber = number.onlyDigits()
@@ -184,4 +184,25 @@ class Manager{
         contactBook.append([contact])
     }
     
+}
+
+extension Contact {
+    struct CodingData: Codable {
+        var firstname: String
+        var lastname: String
+        var phone: String
+        var email: String
+        var contact: Contact {
+            return Contact(
+                name: firstname,
+                surname: lastname,
+                number: phone,
+                email: email
+            )
+        }
+    }
+}
+enum Raspil{
+    case gcd
+    case operations
 }
