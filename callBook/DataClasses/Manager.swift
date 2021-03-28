@@ -34,31 +34,26 @@ class Manager{
     
     static func loadData(by method: Raspil){
         let processing = {
-            var data: Data
             do{
-                data = try downloadContacts()
+                parseAndPutData(data: try downloadContacts() )
             }catch{
-                if let error = error as? String{
-                    print(error)
-                }
+                print(error)
                 return
             }
-            parseAndPutData(data: data)
-            
-            if let upload = self.upload{
-                switch method {
-                case .gcd:
-                    DispatchQueue.main.async(execute: upload)
-                case .operations:
-                    OperationQueue.main.addOperation(upload)
-                }
-            }
         }
-        switch method {
-        case .gcd:
-            DispatchQueue.global(qos: .utility).async(execute: processing )
-        case .operations:
-            OperationQueue().addOperation( processing )
+        if let upload = self.upload{
+            switch method {
+            case .gcd:
+                let queue = DispatchQueue.global(qos: .utility)
+                    queue.sync(execute: processing )
+                    queue.sync(execute: upload)
+            case .operations:
+                let processingOperation = BlockOperation(block: processing)
+                    processingOperation.completionBlock = {
+                        OperationQueue.main.addOperation(upload)
+                    }
+                OperationQueue().addOperation(processingOperation )
+            }
         }
     }
     static func parseAndPutData(data: Data){
@@ -183,3 +178,4 @@ enum Raspil{
     case gcd
     case operations
 }
+
