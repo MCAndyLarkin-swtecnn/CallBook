@@ -11,12 +11,12 @@ class MessageContact: TabBarPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadMessages()
-        if let tabBar = tabBarController as? ContactNode{
-            tabBar.view.tintColor = UIColor.orange
-        }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if let tabBar = tabBarController as? ContactNode{
+            tabBar.view.tintColor = UIColor.orange
+        }
     }
     public func loadMessages(){
         if let message = shortData?.contact.message, let history = message.history{
