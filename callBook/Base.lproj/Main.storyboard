@@ -64,7 +64,7 @@
                                     <outlet property="number" destination="t3H-ul-FCS" id="wRt-4f-NjQ"/>
                                     <outlet property="photo" destination="6Xz-8z-eC9" id="mEx-Qo-7B3"/>
                                     <outlet property="signature" destination="RdX-HO-gjt" id="jMY-cO-LfW"/>
-                                    <segue destination="kjh-N8-dKO" kind="show" identifier="" id="ebj-At-99I"/>
+                                    <segue destination="kjh-N8-dKO" kind="show" identifier="openFace" id="ebj-At-99I"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -459,6 +459,7 @@
         <scene sceneID="3Ie-1e-26H">
             <objects>
                 <navigationController id="Fhi-nE-hNS" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="t7I-H6-ZHB"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" largeTitles="YES" id="QSb-c9-3Xt">
                         <rect key="frame" x="0.0" y="44" width="428" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>

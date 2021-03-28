@@ -28,6 +28,27 @@ extension String {
 }
 extension Int {
     func secondsToMinutes() -> String{
-        return "\(Int(self/60)):\( { () -> String in var secs = String(self % 60); if secs.count == 1 { secs = "\(secs)0" }; return secs}())"
+        return "\(Int(self/60)):\( { () -> String in var secs = String(self % 60); if secs.count == 1 { secs = "0\(secs)" }; return secs}())"
     }
 }
+
+
+extension Contact {
+    struct CodingData: Codable {
+        var firstname: String
+        var lastname: String
+        var phone: String
+        var email: String
+        var contact: Contact {
+            return Contact(
+                name: firstname,
+                surname: lastname,
+                number: phone,
+                email: email
+            )
+        }
+    }
+}
+extension String: Error{ }
+
+typealias ShortData = ( contact: Contact, calls: [Call] )

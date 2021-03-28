@@ -8,12 +8,12 @@ class ContactNode: UITabBarController {
         case message = 2
     }
     var selectedPage: Page = Page.face
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if let view = viewControllers?[0] as? TabBarPageViewController, let contact = view.shortData?.contact {
-            title = contact.getTitle()
+    var index: IndexPath?
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if let index = self.index{
+            title = Manager.contactBook[index.section][index.row].getTitle()
         }
         selectedIndex = selectedPage.rawValue
     }
-    
 }

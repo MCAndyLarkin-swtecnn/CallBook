@@ -1,12 +1,20 @@
 
 import UIKit
 
-class FaceContact: TabBarPageViewController{
+class FaceContact: UIViewController{
     @IBOutlet var avatar: UIImageView!
     @IBOutlet var number: UIButton!
     @IBOutlet var email: UIButton!
     
-    var inserter: ((Call) -> ())?
+    lazy var index = (tabBarController as? ContactNode)?.index
+    var shortData: ShortData?{
+        var data: ShortData? = nil
+        if let index = self.index{
+            let contact: Contact = Manager.contactBook[index.section][index.row]
+            data = (contact, Manager.findAllCallsBy(numberForSearching: contact.number))
+        }
+        return data
+    }
     
     @IBAction func pressNumber(){
         guard let number = shortData?.contact.number.onlyDigits()
@@ -15,12 +23,7 @@ class FaceContact: TabBarPageViewController{
         if let url = URL(string: "tel://\(number)"){
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
-        
-        //Write to callLog
-        //Default (No responce, time - random)
-        inserter?(Call(abonent: number,
-                       io: .outputFail,
-                       time: Int.random(in: 100..<500)))
+        Manager.addNew(callToLog: Call(abonent: number, io: .outputFail))
     }
     
     @IBAction func changeContact(_ sender: UILongPressGestureRecognizer) {
@@ -48,17 +51,18 @@ class FaceContact: TabBarPageViewController{
         }
 
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
-            if let name = alert?.textFields?[0].text, let number = alert?.textFields?[2].text?.onlyDigits(),
-               name != "", number != ""{
+            if let name = alert?.textFields?[0].text,
+               let number = alert?.textFields?[2].text?.onlyDigits(),
+               name != "", number != "",
+               let contact = self.shortData?.contact {
+                
                 var surname = alert?.textFields?[1].text
                 if surname == "" { surname = nil }
-                if let contact = self.shortData?.contact{
-                    contact.name = name
-                    contact.surname = surname
-                    contact.number = number
-                    if let tabBar = self.tabBarController as? ContactNode{
-                        tabBar.title = contact.getTitle()
-                    }
+                
+                let newContact = Manager.change(contact: contact, with: name, surname: surname, number: number)
+                
+                if let tabBar = self.tabBarController as? ContactNode{
+                    tabBar.title = newContact.getTitle()
                 }
                 self.number.setTitle(number, for: UIControl.State.normal)
             }

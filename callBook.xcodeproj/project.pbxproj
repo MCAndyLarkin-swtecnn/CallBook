@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE69675F261060CC000F1BD0 /* MessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE69675E261060CC000F1BD0 /* MessageButton.swift */; };
 		CE86109E26034B3A000154FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86109D26034B3A000154FF /* AppDelegate.swift */; };
 		CE8610A026034B3A000154FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86109F26034B3A000154FF /* SceneDelegate.swift */; };
 		CE8610A526034B3A000154FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8610A326034B3A000154FF /* Main.storyboard */; };
@@ -18,17 +19,16 @@
 		CE8610CB2604EF83000154FF /* FaceContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610CA2604EF83000154FF /* FaceContact.swift */; };
 		CE8610CE2604EF9B000154FF /* RecentCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610CD2604EF9B000154FF /* RecentCalls.swift */; };
 		CE8610D22604F186000154FF /* ContactNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610D12604F186000154FF /* ContactNode.swift */; };
-		CE8610DD26061281000154FF /* MessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610DC26061281000154FF /* MessageButton.swift */; };
 		CE8610E026061A6A000154FF /* MessageContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610DF26061A6A000154FF /* MessageContact.swift */; };
 		CE8610E4260789EE000154FF /* MessageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610E3260789ED000154FF /* MessageStorage.swift */; };
 		CE8610EB2607BBE2000154FF /* Call.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610EA2607BBE2000154FF /* Call.swift */; };
 		CE8610EE2607BCF1000154FF /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610ED2607BCF1000154FF /* Manager.swift */; };
 		CE8610F626089C5A000154FF /* ShareRecentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610F526089C5A000154FF /* ShareRecentTableViewController.swift */; };
-		CE86111D260A5D1F000154FF /* TabBarPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86111C260A5D1F000154FF /* TabBarPageViewController.swift */; };
 		CE861120260A6B3E000154FF /* UsefulExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86111F260A6B3E000154FF /* UsefulExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE69675E261060CC000F1BD0 /* MessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageButton.swift; sourceTree = "<group>"; };
 		CE86109A26034B3A000154FF /* callBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = callBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE86109D26034B3A000154FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE86109F26034B3A000154FF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -42,13 +42,11 @@
 		CE8610CA2604EF83000154FF /* FaceContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceContact.swift; sourceTree = "<group>"; };
 		CE8610CD2604EF9B000154FF /* RecentCalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentCalls.swift; sourceTree = "<group>"; };
 		CE8610D12604F186000154FF /* ContactNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactNode.swift; sourceTree = "<group>"; };
-		CE8610DC26061281000154FF /* MessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageButton.swift; sourceTree = "<group>"; };
 		CE8610DF26061A6A000154FF /* MessageContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContact.swift; sourceTree = "<group>"; };
 		CE8610E3260789ED000154FF /* MessageStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStorage.swift; sourceTree = "<group>"; };
 		CE8610EA2607BBE2000154FF /* Call.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Call.swift; sourceTree = "<group>"; };
 		CE8610ED2607BCF1000154FF /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		CE8610F526089C5A000154FF /* ShareRecentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareRecentTableViewController.swift; sourceTree = "<group>"; };
-		CE86111C260A5D1F000154FF /* TabBarPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPageViewController.swift; sourceTree = "<group>"; };
 		CE86111F260A6B3E000154FF /* UsefulExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsefulExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,10 +110,9 @@
 				CE8610F526089C5A000154FF /* ShareRecentTableViewController.swift */,
 				CE8610D12604F186000154FF /* ContactNode.swift */,
 				CE8610B226046B10000154FF /* CallBookTableViewController.swift */,
-				CE8610DC26061281000154FF /* MessageButton.swift */,
 				CE8610B62604C74C000154FF /* ContactCell.swift */,
+				CE69675E261060CC000F1BD0 /* MessageButton.swift */,
 				CE8610CA2604EF83000154FF /* FaceContact.swift */,
-				CE86111C260A5D1F000154FF /* TabBarPageViewController.swift */,
 				CE8610DF26061A6A000154FF /* MessageContact.swift */,
 				CE8610CD2604EF9B000154FF /* RecentCalls.swift */,
 			);
@@ -195,7 +192,6 @@
 				CE8610B72604C74C000154FF /* ContactCell.swift in Sources */,
 				CE8610EB2607BBE2000154FF /* Call.swift in Sources */,
 				CE86109E26034B3A000154FF /* AppDelegate.swift in Sources */,
-				CE86111D260A5D1F000154FF /* TabBarPageViewController.swift in Sources */,
 				CE8610C22604C81D000154FF /* Contact.swift in Sources */,
 				CE861120260A6B3E000154FF /* UsefulExtensions.swift in Sources */,
 				CE8610E4260789EE000154FF /* MessageStorage.swift in Sources */,
@@ -207,7 +203,7 @@
 				CE8610F626089C5A000154FF /* ShareRecentTableViewController.swift in Sources */,
 				CE8610CB2604EF83000154FF /* FaceContact.swift in Sources */,
 				CE8610E026061A6A000154FF /* MessageContact.swift in Sources */,
-				CE8610DD26061281000154FF /* MessageButton.swift in Sources */,
+				CE69675F261060CC000F1BD0 /* MessageButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

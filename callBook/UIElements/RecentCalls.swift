@@ -1,8 +1,16 @@
 
 import UIKit
 
-class RecentCalls: UITableViewController {
-    var shortData: (contact: Contact, calls: [Call])?
+class RecentCalls: UITableViewController{
+    lazy var index = (tabBarController as? ContactNode)?.index
+    var shortData: ShortData?{
+        var data: ShortData? = nil
+        if let index = self.index{
+            let contact: Contact = Manager.contactBook[index.section][index.row]
+            data = (contact, Manager.findAllCallsBy(numberForSearching: contact.number))
+        }
+        return data
+    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return shortData?.calls.count ?? 0
@@ -25,14 +33,13 @@ class RecentCalls: UITableViewController {
         return cell
     }
     override func viewWillAppear(_ animated: Bool) {
-        if let tabBar = tabBarController as? ContactNode{
+        super.viewWillAppear(animated)
+        if let tabBar = tabBarController as? ContactNode,
+           let view = self.view as? UITableView{
             tabBar.view.tintColor = UIColor.green
+            view.reloadData()
         }
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
         
     }
-
 }
 

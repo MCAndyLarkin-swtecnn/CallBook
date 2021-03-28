@@ -1,9 +1,18 @@
+import Foundation
 
 struct Call{
     let abonent: String
     let io: IO
-    let time: Int
-    
+    let time: Int?
+    init(abonent: String, io: IO){
+        self.abonent = abonent
+        self.io = io
+        let time = Calendar.current.dateComponents([.minute, .hour], from: Date())
+        if let hours = time.hour, let mins = time.minute{
+            self.time = hours * 60 + mins
+        }
+        else{ self.time = nil }
+    }
     func getDescription() -> String{
         var description: String
         switch  self.io{
