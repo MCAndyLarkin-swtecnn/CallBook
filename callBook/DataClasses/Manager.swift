@@ -23,7 +23,7 @@ class Manager{
                 dataToOut = data
             }.resume()
         }
-        guard sem.wait(timeout: .now() + .seconds(3)) == .success else{
+        guard sem.wait(timeout: .now() + .seconds(4)) == .success else{
             throw "Failed waiting"
         }
         guard let data = dataToOut else {
@@ -38,15 +38,15 @@ class Manager{
                 parseAndPutData(data: try downloadContacts() )
             }catch{
                 print(error)
-                return
             }
         }
         if let upload = self.upload{
             switch method {
             case .gcd:
-                let queue = DispatchQueue.global(qos: .utility)
-                    queue.sync(execute: processing )
-                    queue.sync(execute: upload)
+                DispatchQueue.global(qos: .utility).async{
+                    processing()
+                    DispatchQueue.main.async(execute: upload)
+                }
             case .operations:
                 let processingOperation = BlockOperation(block: processing)
                     processingOperation.completionBlock = {
