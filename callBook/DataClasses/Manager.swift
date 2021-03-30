@@ -11,7 +11,7 @@ class Manager{
     
     static func downloadContacts() throws -> Data{
         let sem = DispatchSemaphore(value: 0)
-        var dataToOut: Data? = nil
+        var dataToOut: Data?
         
         if let url = self.url{
             URLSession.shared.dataTask(
@@ -23,7 +23,7 @@ class Manager{
                 dataToOut = data
             }.resume()
         }
-        guard sem.wait(timeout: .now() + .seconds(4)) == .success else{
+        guard sem.wait(timeout: .now() + .seconds(7)) == .success else{
             throw "Failed waiting"
         }
         guard let data = dataToOut else {

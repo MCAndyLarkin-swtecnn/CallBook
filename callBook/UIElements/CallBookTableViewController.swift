@@ -1,5 +1,6 @@
 
 import UIKit
+import ContactsUI
 
 //Questions
 /*
@@ -12,38 +13,18 @@ import UIKit
  7. Сворачивать секции в TableView
  */
 
-class CallBookTableViewController: UITableViewController {
+class CallBookTableViewController: UITableViewController{
     public static let avatarDefault = "avatar"
     let rowHeigth: CGFloat = 70.0
     let headerHight: CGFloat = 40.0
     
+    @IBOutlet var WaitIndicator: UIActivityIndicatorView!
     @IBAction func addView(_ sender: Any) {
-        let alert = UIAlertController(title: "Add new contact", message: "", preferredStyle: .alert)
-
-        alert.addTextField { (textField) in
-            textField.placeholder = "Name"
-        }
-        alert.addTextField { (textField) in
-            textField.placeholder = "Surname"
-        }
-        alert.addTextField { (textField) in
-            textField.placeholder = "Number"
-        }
-
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
-            if let name = alert?.textFields?[0].text, let number = alert?.textFields?[2].text?.onlyDigits(),
-               name != "", number != ""{
-                var surname = alert?.textFields?[1].text
-                if surname == "" { surname = nil }
-                Manager.addNew(contactToBook: Contact(name: name, surname: surname, number: number,email: nil))
-            }
-            if let tableView = self.view as? UITableView{
-                tableView.reloadData()
-            }
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: {_ in }))
-
-        self.present(alert, animated: true, completion: nil)
+        let controller = CNContactViewController(forNewContact: nil) //(forNewContact: contact)
+        controller.contactStore = CNContactStore()
+        controller.delegate = self
+        let navigationController = UINavigationController(rootViewController: controller)
+        self.present(navigationController, animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -158,16 +139,78 @@ class CallBookTableViewController: UITableViewController {
     }
     override func viewDidLoad(){
         super.viewDidLoad()
-        Manager.withUpload{ [weak view = view as? UITableView] in view?.reloadData() }
+        Manager.withUpload{ [weak view = view as? UITableView] in
+            view?.reloadData()
+            self.stopWaitIndicator()
+        }
         let alert = UIAlertController(title: "Choose raspil method", message: "", preferredStyle: .alert)
 
         alert.addAction(UIAlertAction(title: "GCD", style: .default, handler: {_ in
             Manager.loadData(by: .gcd)
+            self.showWaitIndicator()
         }))
         alert.addAction(UIAlertAction(title: "Operations", style: .default, handler: {_ in
             Manager.loadData(by: .operations)
+            self.showWaitIndicator()
         }))
         self.present(alert, animated: true, completion: nil)
     }
+    private func showWaitIndicator(){
+        WaitIndicator.isHidden = false
+        WaitIndicator.startAnimating()
+    }
+    private func stopWaitIndicator(){
+        WaitIndicator.stopAnimating()
+    }
 }
 
+extension CallBookTableViewController: CNContactViewControllerDelegate {
+    func contactViewController(_ viewController: CNContactViewController, didCompleteWith contact: CNContact?){
+        guard let contact = contact, let newContact = Contact(from: contact) else {
+            viewController.dismiss(animated: true, completion: nil)
+            return
+        }
+        Manager.addNew(contactToBook: newContact)
+        if let tableView = self.view as? UITableView{
+            tableView.reloadData()
+        }
+    }
+}
+extension Contact{
+    convenience init?(from contact: CNContact){
+        let name = contact.givenName
+        guard !name.isEmpty else{
+            return nil
+        }
+
+        var optnumber: String? = nil
+        for number in contact.phoneNumbers{
+            let cleanNumber = number.value.stringValue.onlyDigits()
+            if !cleanNumber.isEmpty{
+                optnumber = cleanNumber
+                break
+            }
+        }
+        guard let number = optnumber else {
+            return nil
+        }
+
+        var surname: String?
+        if contact.familyName.isEmpty {
+            surname = nil
+        }else{
+            surname = contact.familyName
+        }
+
+        var email: String? = nil
+        for email_ in contact.emailAddresses{
+            let cleanEmail = email_.value as String
+            if !cleanEmail.isEmpty{
+                email = cleanEmail
+                break
+            }
+        }
+        
+        self.init(name: name, surname: surname, number: number, email: email)
+    }
+}
