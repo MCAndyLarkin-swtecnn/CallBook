@@ -1,25 +1,31 @@
 
+import Foundation
+
 class Contact {
     var name: String
     var surname: String?
     var number: String
     var email: String?
+    var birthday: DateComponents?
+    
     var photo: String?
     var message: MessageStorage?
     
-    init(name: String, surname: String?, number: String, email: String?, photo: String?, message: MessageStorage?) {
+    init(name: String, surname: String?, number: String, email: String?, birthday: DateComponents?, photo: String?, message: MessageStorage?) {
         self.name = name
         self.surname = surname
         self.photo = photo
         self.number = number
+        self.birthday = birthday
+        
         self.message = message
         self.email = email
     }
-    convenience init(name: String, surname: String?, number: String, email: String?){
-        self.init(name: name, surname: surname, number: number, email: email, photo: nil, message: nil)
+    convenience init(name: String, surname: String?, number: String, email: String?, birthday: DateComponents?){
+        self.init(name: name, surname: surname, number: number, email: email, birthday: birthday, photo: nil, message: nil)
     }
     convenience init(name: String, number: String){
-        self.init(name: name, surname: nil, number: number, email: nil)
+        self.init(name: name, surname: nil, number: number, email: nil, birthday: nil)
     }
     func with(photoByPath: String) -> Self{
         self.photo = photoByPath
@@ -27,6 +33,10 @@ class Contact {
     }
     func with(email: String) -> Self{
         self.email = email
+        return self
+    }
+    func with(birthday: DateComponents) -> Self{
+        self.birthday = birthday
         return self
     }
     

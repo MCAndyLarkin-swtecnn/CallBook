@@ -96,8 +96,11 @@ class Manager{
         return listToReturn
     }
     
-    ///callLog is not sorted yet so it just return nearest in list
+    ///callLog is not sorted yet so it just return one nearest in list
     static func findLastCallBy(numberForSearching number: String) -> Call?{
+        //TODO: Make reusable named calls storage
+        //TODO: Make named storage after adding (in backgroung), not in loadData process
+        // O(n) is bad way
         return self.callLog.findLast(byNumber: number)
     }
     
@@ -117,7 +120,7 @@ class Manager{
     
     static func change(contact: Contact, with name: String, surname: String? = nil, number: String) -> Contact{
         delete(contact: contact)
-        let new = Contact(name: name, surname: surname, number: number, email: nil)
+        let new = Contact(name: name, surname: surname, number: number, email: nil, birthday: nil)
         addNew(contactToBook: new)
         return new
     }

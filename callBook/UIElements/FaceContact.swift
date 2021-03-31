@@ -5,6 +5,7 @@ class FaceContact: UIViewController{
     @IBOutlet var avatar: UIImageView!
     @IBOutlet var number: UIButton!
     @IBOutlet var email: UIButton!
+    @IBOutlet var birthday: UIButton!
     
     lazy var index = (tabBarController as? ContactNode)?.index
     var shortData: ShortData?{
@@ -85,5 +86,11 @@ class FaceContact: UIViewController{
         number.setTitle(theContact.number, for: UIControl.State.normal)
         avatar.image = UIImage(named: theContact.photo ?? CallBookTableViewController.avatarDefault)
         email.setTitle(theContact.email ?? "Email", for: UIControl.State.normal)
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMMM yyyy"
+        if let date = theContact.birthday?.date{
+            birthday.setTitle(formatter.string(from: date), for: UIControl.State.normal)
+        }
     }
 }

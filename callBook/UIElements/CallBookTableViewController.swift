@@ -211,6 +211,6 @@ extension Contact{
             }
         }
         
-        self.init(name: name, surname: surname, number: number, email: email)
+        self.init(name: name, surname: surname, number: number, email: email, birthday: contact.birthday)
     }
 }

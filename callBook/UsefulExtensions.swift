@@ -44,7 +44,8 @@ extension Contact {
                 name: firstname,
                 surname: lastname,
                 number: phone,
-                email: email
+                email: email,
+                birthday: nil
             )
         }
     }

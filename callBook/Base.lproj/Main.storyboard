@@ -365,7 +365,7 @@
                                     <constraint firstAttribute="height" constant="50" id="f1L-ft-miI"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <state key="normal" title="Whats App">
+                                <state key="normal" title="Birthday">
                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -430,6 +430,7 @@
                     <navigationItem key="navigationItem" title="Title" id="rIX-tT-A2D"/>
                     <connections>
                         <outlet property="avatar" destination="ohe-QZ-pde" id="fXt-3Z-uOd"/>
+                        <outlet property="birthday" destination="laK-2Y-pI2" id="i5E-7I-sgK"/>
                         <outlet property="email" destination="yqT-oz-NBi" id="LZC-OM-BgC"/>
                         <outlet property="number" destination="7nQ-oe-Mqj" id="4A6-cw-ppM"/>
                     </connections>
