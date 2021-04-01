@@ -1,7 +1,7 @@
 
 import Foundation
 
-class Contact {
+struct Contact {
     var name: String
     var surname: String?
     var number: String
@@ -21,34 +21,25 @@ class Contact {
         self.message = message
         self.email = email
     }
-    convenience init(name: String, surname: String?, number: String, email: String?, birthday: DateComponents?){
+    init(name: String, surname: String?, number: String, email: String?, birthday: DateComponents?){
         self.init(name: name, surname: surname, number: number, email: email, birthday: birthday, photo: nil, message: nil)
     }
-    convenience init(name: String, number: String){
+    init(name: String, number: String){
         self.init(name: name, surname: nil, number: number, email: nil, birthday: nil)
     }
-    func with(photoByPath: String) -> Self{
+    mutating func with(photoByPath: String) -> Self{
         self.photo = photoByPath
         return self
     }
-    func with(email: String) -> Self{
+    mutating func with(email: String) -> Self{
         self.email = email
         return self
     }
-    func with(birthday: DateComponents) -> Self{
+    mutating func with(birthday: DateComponents) -> Self{
         self.birthday = birthday
         return self
     }
     
-    func getTitle() -> String{
-        let surname: String
-        if let sur = self.surname{
-            surname = "\(sur) "
-        }else{
-            surname = ""
-        }
-        return surname + name
-    }
     func getShortTitle() -> String{
         var title: String
         if let surname = self.surname {

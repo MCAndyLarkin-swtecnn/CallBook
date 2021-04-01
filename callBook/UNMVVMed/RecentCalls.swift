@@ -5,10 +5,10 @@ class RecentCalls: UITableViewController{
     lazy var index = (tabBarController as? ContactNode)?.index
     var shortData: ShortData?{
         var data: ShortData? = nil
-        if let index = self.index{
-            let contact: Contact = Manager.contactBook[index.section][index.row]
-            data = (contact, Manager.findAllCallsBy(numberForSearching: contact.number))
-        }
+//        if let index = self.index{
+//            let contact: Contact = Manager.contactBook[index.section][index.row]
+//            data = (contact, Manager.findAllCallsBy(numberForSearching: contact.number))
+//        }
         return data
     }
     

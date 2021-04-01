@@ -11,9 +11,9 @@ class ContactNode: UITabBarController {
     var index: IndexPath?
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let index = self.index{
-            title = Manager.contactBook[index.section][index.row].getTitle()
-        }
+//        if let index = self.index{
+//            title = Manager.contactBook[index.section][index.row].getTitle()
+//        }
         selectedIndex = selectedPage.rawValue
     }
 }

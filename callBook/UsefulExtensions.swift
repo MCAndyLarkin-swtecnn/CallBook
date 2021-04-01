@@ -53,3 +53,11 @@ extension Contact {
 extension String: Error{ }
 
 typealias ShortData = ( contact: Contact, calls: [Call] )
+typealias Dimension = (sections: Int, rows: Int)
+typealias ContactBook = [[Contact]] 
+
+extension IndexPath{
+    func onlyCoords() -> Dimension{
+        (sections: self.section, rows: self.row)
+    }
+}

@@ -261,7 +261,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="96R-h4-nKm">
                                 <rect key="frame" x="0.0" y="600" width="428" height="326"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="krolik" translatesAutoresizingMaskIntoConstraints="NO" id="53S-nD-2SR">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="53S-nD-2SR">
                                         <rect key="frame" x="0.0" y="200" width="318" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="bz3-Ne-mOP"/>
@@ -280,7 +280,7 @@
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                         </state>
                                     </button>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="puh" translatesAutoresizingMaskIntoConstraints="NO" id="cLK-O4-az7">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cLK-O4-az7">
                                         <rect key="frame" x="0.0" y="0.0" width="318" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Dmf-TI-tBH"/>
@@ -493,13 +493,11 @@
         <segue reference="ebj-At-99I"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="krolik" width="500" height="500"/>
         <image name="message" catalog="system" width="128" height="113"/>
         <image name="message.fill" catalog="system" width="128" height="113"/>
         <image name="paperplane.fill" catalog="system" width="128" height="118"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="phone" catalog="system" width="128" height="115"/>
-        <image name="puh" width="1920" height="1920"/>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
