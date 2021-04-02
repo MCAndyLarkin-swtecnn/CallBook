@@ -1,67 +1,88 @@
 
-import Foundation
-
 import UIKit
 
+class ViewModelSingle {
+    static var viewModel: CallBookViewModel = CallBookViewModel()
+}
 protocol CallBookViewModelProtocol{
-    var manager: Manager {get set}
-    var view: CallBookView? {get set}
-    var uploadContactBook: (()->())? { get set}
+    var model: CallBookModel { get set }
+}
+protocol RecentsViewModelProtocol: CallBookViewModelProtocol {
+    var uploadRecentView: (() -> ())? { get set }
     
-    init(view: CallBookView, uploadContactBook: @escaping ()->())
-    func lets(_ activity: Activity,  for cell: Dimension)
+    func getViewRecents() -> RecentViewBook
+    func with(uploadRecentView: @escaping ()->()) -> Self
+    func findContactBy(number: String) -> Contact?
+}
+protocol ContactsViewModelProtocol: CallBookViewModelProtocol {
+    var uploadContactView: (() -> ())? { get set }
     
-    func notifyToChangesInModel()
-//    func notifyToChangesInView()
-    
+    func deleteContact(by index: Dimension)
+    func makeCall(forNumberby index: Dimension)
     func loadData(method: Raspil)
+    func getViewContacts() -> ContactViewsBook
+    func with(uploadContactView: @escaping ()->()) -> Self
+    func addNew(call: Recent)
 }
-
-final class CallBookViewModel: CallBookViewModelProtocol{
+class CallBookViewModel: RecentsViewModelProtocol, ContactsViewModelProtocol {
+    lazy var model: CallBookModel = CallBookModel(notifyContactsViewModel: {
+        self.uploadContactView?()
+    }, notifyRecentsViewModel: {
+        self.uploadRecentView?()
+    })
     
-    weak var view: CallBookView?
     
-    lazy var manager = Manager(viewModel: self)
-    var uploadContactBook: (() -> ())?
+    internal var uploadRecentView: (() -> ())?
+    internal var uploadContactView: (() -> ())?
     
-    init(view: CallBookView, uploadContactBook: @escaping ()->()){
-        self.uploadContactBook = uploadContactBook
-        self.view = view
-        self.insertViewContacts()
+    
+    func with(uploadRecentView: @escaping () -> ()) -> Self {
+        self.uploadRecentView = uploadRecentView
+        return self
     }
-    
-    func insertViewContacts(){
-        view?.contactBook =  manager.contactBook.map{ section in
+    func with(uploadContactView: @escaping () -> ()) -> Self {
+        self.uploadContactView = uploadContactView
+        return self
+    }
+
+    func getViewContacts() -> ContactViewsBook {
+        model.contactBook.map{ section in
             section.map{ contact in
-                contact.getCallBookContactView()
+                contact.getContactView()
             }
         }
     }
-    func notifyToChangesInModel() {
-        insertViewContacts()
-        uploadContactBook?()
+    func getViewRecents() -> RecentViewBook {
+        model.recentBook.map{
+            recent in
+            let time = recent.time?.secondsToMinutes() ?? "Sometime"
+            let abonent = findContactBy(number: recent.abonent)?.getShortTitle() ?? recent.abonent
+            let title = "\(time)   -   \(abonent)"
+            return RecentView(title: title, description: recent.getDescription())
+        }
+    }
+
+    func deleteContact(by index: Dimension) {
+        model.contactBook.delete(index: (index.section, index.row))
+        uploadContactView?()
     }
     
-    func lets(_ activity: Activity, for cell: Dimension) {
-        switch activity {
-        case .delete:
-            manager.delete(index: (cell.sections, cell.rows))
-            uploadContactBook?()
-
-        case .makeCall:
-            let number = manager.contactBook[cell.sections][cell.rows].number.onlyDigits()
-            if let url = URL(string: "tel://\(number)"){
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            }
-            manager.addNew(callToLog: Call(abonent: number, io: .outputFail))
+    //MARK:  Who must make call?
+    func makeCall(forNumberby index: Dimension) {
+        let number = model.contactBook[index.section][index.row].number.onlyDigits()
+        if let url = URL(string: "tel://\(number)"){
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
+        addNew(call: Recent(abonent: number, io: .outputFail))
     }
-    func loadData(method: Raspil){
-        manager.loadData(by: method)
+    
+    func loadData(method: Raspil) {
+        model.loadData(by: method)
     }
-}
-
-enum Activity {
-    case delete
-    case makeCall
+    func findContactBy(number: String) -> Contact? {
+        model.contactBook.findContactBy(number: number)
+    }
+    func addNew(call: Recent) {
+        model.recentBook.addNew(call: call)
+    }
 }

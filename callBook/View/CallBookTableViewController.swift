@@ -1,13 +1,12 @@
 
 import UIKit
-import ContactsUI
 
-class CallBookTableViewController: UITableViewController, CallBookView{
-    var contactBook: ContactViewsBook?
-    
+//MARK: What is state machine in this ontext?
+class CallBookTableViewController: UITableViewController, ContactBookViewProtocol{
     @IBOutlet var WaitIndicator: UIActivityIndicatorView!
     
-    var viewModel: CallBookViewModelProtocol?
+    var viewModel: ContactsViewModelProtocol = ViewModelSingle.viewModel
+    lazy var contactBook: ContactViewsBook? = viewModel.getViewContacts()
     
     let rowHeigth: CGFloat = 70.0
     let headerHight: CGFloat = 40.0
@@ -16,8 +15,7 @@ class CallBookTableViewController: UITableViewController, CallBookView{
         let action = UIContextualAction(style: .normal, title: "Delete"){
             [weak self] (action, view, completionHandler) in
             
-            self?.viewModel?.lets(.delete, for: indexPath.onlyCoords())
-            
+            self?.viewModel.deleteContact(by: indexPath.onlyCoords())
             completionHandler(true)
         }
         action.backgroundColor = .purple
@@ -29,8 +27,7 @@ class CallBookTableViewController: UITableViewController, CallBookView{
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .normal, title: "Call"){ [weak self] (action, view, completionHandler) in
             
-            self?.viewModel?.lets(.makeCall, for: indexPath.onlyCoords())
-            
+            self?.viewModel.makeCall(forNumberby: indexPath.onlyCoords())
             completionHandler(true)
         }
         action.backgroundColor = .cyan
@@ -81,11 +78,9 @@ class CallBookTableViewController: UITableViewController, CallBookView{
         label.textColor = UIColor.systemPink.withAlphaComponent(0.5)
         label.font = UIFont.boldSystemFont(ofSize: label.font.pointSize)
         
-//        if viewModel.getDimension() >= section+1{
         if let sectionName = contactBook?[section][0].getSectionName(){
             label.text = sectionName
         }
-//        }
         
         headerView.addSubview(label)
         return headerView
@@ -115,8 +110,9 @@ class CallBookTableViewController: UITableViewController, CallBookView{
     }
     override func viewDidLoad(){
         super.viewDidLoad()
-        viewModel = CallBookViewModel(view: self){ [weak self] in
+        let viewModel = self.viewModel.with{ [weak self] in
             if let tableView = self?.view as? UITableView{
+                self?.contactBook = self?.viewModel.getViewContacts()
                 tableView.reloadData()
                 self?.stopWaitIndicator()
             }
@@ -125,11 +121,11 @@ class CallBookTableViewController: UITableViewController, CallBookView{
 
         alert.addAction(UIAlertAction(title: "GCD", style: .default, handler: {_ in
             self.showWaitIndicator()
-            self.viewModel?.loadData(method: .gcd)
+            viewModel.loadData(method: .gcd)
         }))
         alert.addAction(UIAlertAction(title: "Operations", style: .default, handler: {_ in
             self.showWaitIndicator()
-            self.viewModel?.loadData(method: .operations)
+            viewModel.loadData(method: .operations)
         }))
         self.present(alert, animated: true, completion: nil)
     }

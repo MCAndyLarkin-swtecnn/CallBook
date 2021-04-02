@@ -1,22 +1,5 @@
 import UIKit
 
-extension Array where Element == Call{
-    func findLast(byNumber number: String?) -> Call?{
-        guard let number = number else {
-            return nil
-        }
-        let clearNumber = number.onlyDigits()
-        var target: Call? = nil
-        
-        for call in self{
-            if call.abonent.onlyDigits() == clearNumber{
-                target = call
-                break
-            }
-        }
-        return target
-    }
-}
 extension String {
     func onlyDigits() -> String {
         let filtredUnicodeScalars = unicodeScalars.filter { CharacterSet.decimalDigits.contains($0) }
@@ -31,7 +14,6 @@ extension Int {
         return "\(Int(self/60)):\( { () -> String in var secs = String(self % 60); if secs.count == 1 { secs = "0\(secs)" }; return secs}())"
     }
 }
-
 
 extension Contact {
     struct CodingData: Codable {
@@ -52,12 +34,11 @@ extension Contact {
 }
 extension String: Error{ }
 
-typealias ShortData = ( contact: Contact, calls: [Call] )
-typealias Dimension = (sections: Int, rows: Int)
-typealias ContactBook = [[Contact]] 
+typealias ShortData = ( contact: Contact, calls: [Recent] )
+typealias Dimension = (section: Int, row: Int)
 
 extension IndexPath{
     func onlyCoords() -> Dimension{
-        (sections: self.section, rows: self.row)
+        (section: self.section, row: self.row)
     }
 }

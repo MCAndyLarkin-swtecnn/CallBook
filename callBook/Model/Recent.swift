@@ -1,6 +1,6 @@
 import Foundation
 
-struct Call{
+struct Recent{
     let abonent: String
     let io: IO
     let time: Int?

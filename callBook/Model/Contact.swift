@@ -7,7 +7,6 @@ struct Contact {
     var number: String
     var email: String?
     var birthday: DateComponents?
-    
     var photo: String?
     var message: MessageStorage?
     
