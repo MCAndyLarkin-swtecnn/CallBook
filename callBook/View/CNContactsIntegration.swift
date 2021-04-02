@@ -26,6 +26,11 @@ extension CallBookTableViewController: CNContactViewControllerDelegate {
 }
 typealias ContactDataSet = (name: String, surname: String?, number: String, email: String?, birthday: DateComponents?, photo: String?)
 
+extension Contact{
+    func getDataSet() -> ContactDataSet{
+        return (name: name, surname: surname, number: number, email: email, birthday: birthday, photo: photo)
+    }
+}
 extension CNContact{
     func getDataSet() -> ContactDataSet?{
         let name = self.givenName

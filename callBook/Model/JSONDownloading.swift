@@ -51,7 +51,7 @@ extension CallBookModel{
         guard let decoded = try? decoder.decode([Contact.CodingData].self, from: data)
         else { return }
         
-        contactBook = ContactBook( contacts: decoded.map({(it) in it.contact}) )
+        with(contactBook: ContactBook( contacts: decoded.map({(it) in it.contact}) ) )
         contactBook.abcSort()
     }
     

@@ -5,14 +5,13 @@ class ViewModelSingle {
     static var viewModel: CallBookViewModel = CallBookViewModel()
 }
 protocol CallBookViewModelProtocol{
-    var model: CallBookModel { get set }
+    var model: CallBookModelProtocol { get set }
 }
 protocol RecentsViewModelProtocol: CallBookViewModelProtocol {
     var uploadRecentView: (() -> ())? { get set }
     
     func getViewRecents() -> RecentViewBook
     func with(uploadRecentView: @escaping ()->()) -> Self
-    func findContactBy(number: String) -> Contact?
 }
 protocol ContactsViewModelProtocol: CallBookViewModelProtocol {
     var uploadContactView: (() -> ())? { get set }
@@ -25,17 +24,35 @@ protocol ContactsViewModelProtocol: CallBookViewModelProtocol {
     func addNew(call: Recent)
     func addNewContactBy(_ dataSet: ContactDataSet?)
 }
-class CallBookViewModel: RecentsViewModelProtocol, ContactsViewModelProtocol {
-    lazy var model: CallBookModel = CallBookModel().with(notifyContactsViewModel: { [weak self] in
+
+protocol ContactNodeViewModel: CallBookViewModelProtocol {
+    var uploadContactNodeData: (() -> ())? { get set }
+    func with(uploadContactNodeData: @escaping ()->()) -> Self
+    
+    func change(contactIn: Dimension, with name: String, surname: String?, number: String) -> ContactDataSet
+    func getLocalContact(by index: Dimension) -> ContactDataSet?
+    func initial(by index: Dimension)
+}
+
+class CallBookViewModel: RecentsViewModelProtocol, ContactsViewModelProtocol, ContactNodeViewModel {
+    
+    internal lazy var model: CallBookModelProtocol = CallBookModel().with(notifyContactsViewModel: { [weak self] in
         self?.uploadContactView?()
     }).with(notifyRecentsViewModel: { [weak self] in
         self?.uploadRecentView?()
+    }).with(notifyContactNodeViewModel: { [weak self] in
+        self?.uploadContactNodeData?()
     })
     
     internal var uploadRecentView: (() -> ())?
     internal var uploadContactView: (() -> ())?
+    internal var uploadContactNodeData: (() -> ())?
     
     
+    func with(uploadContactNodeData: @escaping ()->()) -> Self{
+        self.uploadContactNodeData = uploadContactNodeData
+        return self
+    }
     func with(uploadRecentView: @escaping () -> ()) -> Self {
         self.uploadRecentView = uploadRecentView
         return self
@@ -46,14 +63,14 @@ class CallBookViewModel: RecentsViewModelProtocol, ContactsViewModelProtocol {
     }
 
     func getViewContacts() -> ContactViewsBook {
-        model.contactBook.map{ section in
+        model.getContactBook().map{ section in
             section.map{ contact in
                 contact.getContactView()
             }
         }
     }
     func getViewRecents() -> RecentViewBook {
-        model.recentBook.map{
+        model.getRecentBook().map{
             recent in
             let time = recent.time?.secondsToMinutes() ?? "Sometime"
             let abonent = findContactBy(number: recent.abonent)?.getShortTitle() ?? recent.abonent
@@ -63,41 +80,52 @@ class CallBookViewModel: RecentsViewModelProtocol, ContactsViewModelProtocol {
     }
 
     func deleteContact(by index: Dimension) {
-        model.contactBook.delete(index: (index.section, index.row))
-        uploadContactView?()
+        model.deleteContact(in: index)
     }
     
     //MARK:  Who must make call?
     func makeCall(forNumberby index: Dimension) {
-        let number = model.contactBook[index.section][index.row].number.onlyDigits()
-        if let url = URL(string: "tel://\(number)"){
+        
+        if let number = model.getContact(by: index)?.number.onlyDigits(),
+           let url = URL(string: "tel://\(number)"){
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            addNew(call: Recent(abonent: number, io: .outputFail))
         }
-        addNew(call: Recent(abonent: number, io: .outputFail))
     }
     
     func loadData(method: Raspil) {
         model.loadData(by: method)
     }
     func findContactBy(number: String) -> Contact? {
-        model.contactBook.findContactBy(number: number)
+        model.getContact(by: number)
     }
     internal func addNew(call: Recent) {
-        model.recentBook.addNew(call: call)
+        model.addNew(call: call)
     }
     
     func addNewContactBy(_ dataSet: ContactDataSet?) {
         //MARK: IT IS NECESSARY??
         if let dataSet = dataSet{
-            model.contactBook.addNew(contactToBook:
-                                        Contact(name: dataSet.name,
-                                                surname: dataSet.surname,
-                                                number: dataSet.number,
-                                                email: dataSet.email,
-                                                birthday: dataSet.birthday,
-                                                photo: dataSet.photo)
-                                            )
+            model.addNew(contact:
+                                    Contact(name: dataSet.name,
+                                            surname: dataSet.surname,
+                                            number: dataSet.number,
+                                            email: dataSet.email,
+                                            birthday: dataSet.birthday,
+                                            photo: dataSet.photo)
+                                        )
         }
         
+    }
+    func change(contactIn index: Dimension, with name: String, surname: String?, number: String) -> ContactDataSet{
+        model.changeContact(in: index, with: name, surname: surname, number: number).getDataSet()
+    }
+    
+    func initial(by index: Dimension) {
+        model.initLocal(by: index)
+    }
+    
+    func getLocalContact(by index: Dimension) -> ContactDataSet? {
+        model.getLocalContact()?.getDataSet()
     }
 }

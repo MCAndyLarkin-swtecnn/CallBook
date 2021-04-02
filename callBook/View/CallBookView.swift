@@ -3,10 +3,13 @@ protocol ContactBookViewProtocol: class {
     var contactBook: ContactViewsBook? {get set}
     var viewModel: ContactsViewModelProtocol  {get set}
 }
-
 protocol RecentBookViewProtocol: class {
     var recentBook: RecentViewBook? {get set}
-    var viewModel: RecentsViewModelProtocol  {get set}
+    var viewModel: RecentsViewModelProtocol {get set}
+}
+protocol LocalContactViewProtocol: class {
+    var localContact: ContactDataSet? {get set}
+    var viewModel: ContactNodeViewModel {get set}
 }
 
 struct ContactView{
@@ -20,19 +23,10 @@ struct ContactView{
 struct RecentView{
     var title: String
     var description: String
-//    var time: Int?
 }
 typealias ContactViewsBook = [[ContactView]]
 typealias RecentViewBook = [RecentView]
 
-//extension Recent{
-//    func getRecentView() -> RecentView{
-//        let time = self.time?.secondsToMinutes() ?? "Ever"
-//        let abonent = findContactBy(number: self.abonent)?.getShortTitle() ?? self.abonent
-//        let title = "\(time)   -   \(abonent)"
-//        return RecentView(title: title, description: self.getDescription(), time: self.time)
-//    }
-//}
 extension Contact{
     private static let avatarDefault = "avatar"
     func getContactView() -> ContactView{
@@ -46,5 +40,22 @@ extension Contact{
             surname = ""
         }
         return surname + name
+    }
+}
+struct FullName{
+    var name: String
+    var surname: String?
+    func getTitle() -> String{
+        let surname: String
+        if let sur = self.surname{
+            surname = "\(sur) "
+        }else{
+            surname = ""
+        }
+        return surname + name
+    }
+    init(dataSet: ContactDataSet) {
+        name = dataSet.name
+        surname = dataSet.surname
     }
 }

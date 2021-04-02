@@ -146,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				CEEF702B2615C82D00F86739 /* CallBookView.swift */,
+				CE8610D12604F186000154FF /* ContactNode.swift */,
 				CEEF703726164CFD00F86739 /* CNContactsIntegration.swift */,
 				CE8610B226046B10000154FF /* CallBookTableViewController.swift */,
 				CE8610F526089C5A000154FF /* ShareRecentTableViewController.swift */,
@@ -164,7 +165,6 @@
 		CEEF703B2616574000F86739 /* UNMVVMed */ = {
 			isa = PBXGroup;
 			children = (
-				CE8610D12604F186000154FF /* ContactNode.swift */,
 				CE8610CA2604EF83000154FF /* FaceContact.swift */,
 				CE8610DF26061A6A000154FF /* MessageContact.swift */,
 				CE8610CD2604EF9B000154FF /* RecentCalls.swift */,

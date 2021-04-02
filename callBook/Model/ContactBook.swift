@@ -2,6 +2,9 @@
 typealias ContactBook = [[Contact]]
 
 extension ContactBook{
+    mutating func change(contactIn index: Dimension, with name: String, surname: String? = nil, number: String) -> Contact{
+        return change(contact: self[index.section][index.row], with: name, surname: surname, number: number)
+    }
     mutating func change(contact: Contact, with name: String, surname: String? = nil, number: String) -> Contact{
         let new = Contact(name: name, surname: surname, number: number, email: nil, birthday: nil)
         if new.getSectionName() == contact.getSectionName(){
