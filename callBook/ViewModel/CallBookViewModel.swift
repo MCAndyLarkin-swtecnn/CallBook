@@ -23,14 +23,14 @@ protocol ContactsViewModelProtocol: CallBookViewModelProtocol {
     func getViewContacts() -> ContactViewsBook
     func with(uploadContactView: @escaping ()->()) -> Self
     func addNew(call: Recent)
+    func addNewContactBy(_ dataSet: ContactDataSet?)
 }
 class CallBookViewModel: RecentsViewModelProtocol, ContactsViewModelProtocol {
-    lazy var model: CallBookModel = CallBookModel(notifyContactsViewModel: {
-        self.uploadContactView?()
-    }, notifyRecentsViewModel: {
-        self.uploadRecentView?()
+    lazy var model: CallBookModel = CallBookModel().with(notifyContactsViewModel: { [weak self] in
+        self?.uploadContactView?()
+    }).with(notifyRecentsViewModel: { [weak self] in
+        self?.uploadRecentView?()
     })
-    
     
     internal var uploadRecentView: (() -> ())?
     internal var uploadContactView: (() -> ())?
@@ -82,7 +82,22 @@ class CallBookViewModel: RecentsViewModelProtocol, ContactsViewModelProtocol {
     func findContactBy(number: String) -> Contact? {
         model.contactBook.findContactBy(number: number)
     }
-    func addNew(call: Recent) {
+    internal func addNew(call: Recent) {
         model.recentBook.addNew(call: call)
+    }
+    
+    func addNewContactBy(_ dataSet: ContactDataSet?) {
+        //MARK: IT IS NECESSARY??
+        if let dataSet = dataSet{
+            model.contactBook.addNew(contactToBook:
+                                        Contact(name: dataSet.name,
+                                                surname: dataSet.surname,
+                                                number: dataSet.number,
+                                                email: dataSet.email,
+                                                birthday: dataSet.birthday,
+                                                photo: dataSet.photo)
+                                            )
+        }
+        
     }
 }

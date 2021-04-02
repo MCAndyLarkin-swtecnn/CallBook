@@ -3,7 +3,6 @@ import Foundation
 var link = "https://gist.githubusercontent.com/artgoncharov/d257658423edd46a9ead5f721b837b8c/raw/c38ace33a7c871e4ad3b347fc4cd970bb45561a3/contacts_data.json"
 
 extension CallBookModel{
-
     //MARK: JSON Maining
     
     func downloadContacts() throws -> Data{

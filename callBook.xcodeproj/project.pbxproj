@@ -101,10 +101,12 @@
 				CEEF701E2615ADE200F86739 /* View */,
 				CEEF701D2615ADD700F86739 /* Model */,
 				CE861126260A83D7000154FF /* UIElements */,
+				CE86111F260A6B3E000154FF /* UsefulExtensions.swift */,
+				CE86109D26034B3A000154FF /* AppDelegate.swift */,
+				CE86109F26034B3A000154FF /* SceneDelegate.swift */,
 				CE8610A326034B3A000154FF /* Main.storyboard */,
 				CE8610A826034B3D000154FF /* LaunchScreen.storyboard */,
 				CE8610A626034B3D000154FF /* Assets.xcassets */,
-				CE86111F260A6B3E000154FF /* UsefulExtensions.swift */,
 				CE8610AB26034B3D000154FF /* Info.plist */,
 			);
 			path = callBook;
@@ -113,8 +115,6 @@
 		CE861126260A83D7000154FF /* UIElements */ = {
 			isa = PBXGroup;
 			children = (
-				CE86109D26034B3A000154FF /* AppDelegate.swift */,
-				CE86109F26034B3A000154FF /* SceneDelegate.swift */,
 				CE8610B62604C74C000154FF /* ContactCell.swift */,
 				CE69675E261060CC000F1BD0 /* MessageButton.swift */,
 			);
@@ -145,8 +145,9 @@
 		CEEF701E2615ADE200F86739 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CE8610B226046B10000154FF /* CallBookTableViewController.swift */,
 				CEEF702B2615C82D00F86739 /* CallBookView.swift */,
+				CEEF703726164CFD00F86739 /* CNContactsIntegration.swift */,
+				CE8610B226046B10000154FF /* CallBookTableViewController.swift */,
 				CE8610F526089C5A000154FF /* ShareRecentTableViewController.swift */,
 			);
 			path = View;
@@ -167,7 +168,6 @@
 				CE8610CA2604EF83000154FF /* FaceContact.swift */,
 				CE8610DF26061A6A000154FF /* MessageContact.swift */,
 				CE8610CD2604EF9B000154FF /* RecentCalls.swift */,
-				CEEF703726164CFD00F86739 /* CNContactsIntegration.swift */,
 				CE8610E3260789ED000154FF /* MessageStorage.swift */,
 			);
 			path = UNMVVMed;

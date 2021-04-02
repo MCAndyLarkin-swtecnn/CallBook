@@ -23,13 +23,13 @@ class CallBookModel/*: ContactsModelProtocol, RecentsModelProtocol*/ {
         didSet{
             print()
             OperationQueue.main.addOperation{ [weak self] in
-                self?.notifyContactsViewModel()
+                self?.notifyContactsViewModel?()
             }
         }
     }
     var recentBook: RecentBook = [] {
         didSet{
-            notifyRecentsViewModel()
+            notifyRecentsViewModel?()
         }
     }
     
@@ -40,11 +40,15 @@ class CallBookModel/*: ContactsModelProtocol, RecentsModelProtocol*/ {
         self.recentBook = recentBook
     }
     
-    var notifyContactsViewModel: () -> ()
-    var notifyRecentsViewModel: () -> ()
+    var notifyContactsViewModel: (() -> ())?
+    var notifyRecentsViewModel: (() -> ())?
     
-    required init(notifyContactsViewModel: @escaping () -> (), notifyRecentsViewModel: @escaping () -> ()) {
+    func with(notifyContactsViewModel: @escaping () -> ()) -> Self{
         self.notifyContactsViewModel = notifyContactsViewModel
+        return self
+    }
+    func with(notifyRecentsViewModel: @escaping () -> ()) -> Self{
         self.notifyRecentsViewModel = notifyRecentsViewModel
+        return self
     }
 }

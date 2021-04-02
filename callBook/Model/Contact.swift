@@ -10,18 +10,17 @@ struct Contact {
     var photo: String?
     var message: MessageStorage?
     
-    init(name: String, surname: String?, number: String, email: String?, birthday: DateComponents?, photo: String?, message: MessageStorage?) {
+    init(name: String, surname: String?, number: String, email: String?, birthday: DateComponents?, photo: String?) {
         self.name = name
         self.surname = surname
         self.photo = photo
         self.number = number
         self.birthday = birthday
         
-        self.message = message
         self.email = email
     }
     init(name: String, surname: String?, number: String, email: String?, birthday: DateComponents?){
-        self.init(name: name, surname: surname, number: number, email: email, birthday: birthday, photo: nil, message: nil)
+        self.init(name: name, surname: surname, number: number, email: email, birthday: birthday, photo: nil)
     }
     init(name: String, number: String){
         self.init(name: name, surname: nil, number: number, email: nil, birthday: nil)
