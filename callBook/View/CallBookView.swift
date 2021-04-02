@@ -1,16 +1,16 @@
-
-protocol ContactBookViewProtocol: class {
-    var contactBook: ContactViewsBook? {get set}
-    var viewModel: ContactsViewModelProtocol  {get set}
-}
-protocol RecentBookViewProtocol: class {
-    var recentBook: RecentViewBook? {get set}
-    var viewModel: RecentsViewModelProtocol {get set}
-}
-protocol LocalContactViewProtocol: class {
-    var localContact: ContactDataSet? {get set}
-    var viewModel: ContactNodeViewModel {get set}
-}
+//
+//protocol ContactBookViewProtocol: class {
+//    var contactBook: ContactViewsBook? {get set}
+//    var viewModel: ContactsViewModelProtocol  {get set}
+//}
+//protocol RecentBookViewProtocol: class {
+//    var recentBook: RecentViewBook? {get set}
+//    var viewModel: RecentsViewModelProtocol {get set}
+//}
+//protocol LocalContactViewProtocol: class {
+//    var localContact: ContactDataSet? {get set}
+//    var viewModel: LocalContactViewModel {get set}
+//}
 
 struct ContactView{
     var signature: String
@@ -21,12 +21,20 @@ struct ContactView{
     }
 }
 struct RecentView{
-    var title: String
+    var time: String
+    var abonent: String
     var description: String
+    func getTitle() -> String {
+        "\(time)   -   \(abonent)"
+    }
 }
 typealias ContactViewsBook = [[ContactView]]
 typealias RecentViewBook = [RecentView]
-
+extension RecentView{
+    init(recent: Recent) {
+        self.init(time: recent.time?.secondsToMinutes() ?? "Sometime", abonent: recent.abonent, description: recent.getDescription())
+    }
+}
 extension Contact{
     private static let avatarDefault = "avatar"
     func getContactView() -> ContactView{

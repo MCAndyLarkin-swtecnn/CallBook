@@ -25,16 +25,17 @@ protocol ContactsViewModelProtocol: CallBookViewModelProtocol {
     func addNewContactBy(_ dataSet: ContactDataSet?)
 }
 
-protocol ContactNodeViewModel: CallBookViewModelProtocol {
+protocol LocalContactViewModel: CallBookViewModelProtocol {
     var uploadContactNodeData: (() -> ())? { get set }
     func with(uploadContactNodeData: @escaping ()->()) -> Self
+    func getViewRecents(for number: String) -> RecentViewBook
     
     func change(contactIn: Dimension, with name: String, surname: String?, number: String) -> ContactDataSet
     func getLocalContact(by index: Dimension) -> ContactDataSet?
     func initial(by index: Dimension)
 }
 
-class CallBookViewModel: RecentsViewModelProtocol, ContactsViewModelProtocol, ContactNodeViewModel {
+class CallBookViewModel: RecentsViewModelProtocol, ContactsViewModelProtocol, LocalContactViewModel {
     
     internal lazy var model: CallBookModelProtocol = CallBookModel().with(notifyContactsViewModel: { [weak self] in
         self?.uploadContactView?()
@@ -69,13 +70,18 @@ class CallBookViewModel: RecentsViewModelProtocol, ContactsViewModelProtocol, Co
             }
         }
     }
+    func getViewRecents(for number: String) -> RecentViewBook {
+        model.getRecents(by: number).map{
+            call in RecentView(recent: call)
+        }
+    }
+    
     func getViewRecents() -> RecentViewBook {
         model.getRecentBook().map{
             recent in
             let time = recent.time?.secondsToMinutes() ?? "Sometime"
             let abonent = findContactBy(number: recent.abonent)?.getShortTitle() ?? recent.abonent
-            let title = "\(time)   -   \(abonent)"
-            return RecentView(title: title, description: recent.getDescription())
+            return RecentView(time: time, abonent: abonent, description: recent.getDescription())
         }
     }
 

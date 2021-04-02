@@ -1,7 +1,7 @@
 
 import UIKit
 
-class ShareRecentTableViewController: UITableViewController, RecentBookViewProtocol {
+class ShareRecentTableViewController: UITableViewController {
     var viewModel: RecentsViewModelProtocol = ViewModelSingle.viewModel
     lazy var recentBook: RecentViewBook? = viewModel.getViewRecents()
     
@@ -13,7 +13,7 @@ class ShareRecentTableViewController: UITableViewController, RecentBookViewProto
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecentCal", for: indexPath)
 
         let call = recentBook?[indexPath.row]
-        cell.textLabel?.text = call?.title
+        cell.textLabel?.text = call?.getTitle()
         cell.detailTextLabel?.text = call?.description
         return cell
     }

@@ -24,6 +24,7 @@ protocol CallBookModelProtocol{
     func deleteContact(in index: Dimension)
     func getContact(by index: Dimension) -> Contact?
     func getContact(by number: String) -> Contact?
+    func getRecents(by number: String) -> RecentBook
     func addNew(call: Recent)
     func addNew(contact: Contact)
     func changeContact(in index: Dimension, with name: String, surname: String?, number: String) -> Contact
@@ -32,7 +33,6 @@ protocol CallBookModelProtocol{
 }
 
 class CallBookModel: CallBookModelProtocol {
-    
     //MARK: TODO: Should use sorted array type for 'contact book'
     var contactBook: ContactBook = []{
         didSet{
@@ -107,4 +107,9 @@ class CallBookModel: CallBookModelProtocol {
     func getContactBook() -> ContactBook {
         contactBook
     }
+    func getRecents(by number: String) -> RecentBook {
+        recentBook.findAllBy(number: number)
+    }
+    
+    
 }

@@ -2,7 +2,7 @@
 import UIKit
 
 //MARK: What is state machine in this ontext?
-class CallBookTableViewController: UITableViewController, ContactBookViewProtocol{
+class CallBookTableViewController: UITableViewController{
     @IBOutlet var WaitIndicator: UIActivityIndicatorView!
     
     var viewModel: ContactsViewModelProtocol = ViewModelSingle.viewModel

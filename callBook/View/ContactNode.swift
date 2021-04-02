@@ -1,9 +1,9 @@
 
 import UIKit
 
-class ContactNode: UITabBarController, LocalContactViewProtocol{
+class ContactNode: UITabBarController{
     
-    var viewModel: ContactNodeViewModel = ViewModelSingle.viewModel
+    var viewModel: LocalContactViewModel = ViewModelSingle.viewModel
     var localContact: ContactDataSet?
     
     enum Page : Int{
@@ -24,12 +24,10 @@ class ContactNode: UITabBarController, LocalContactViewProtocol{
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("viewDidLoad")
         viewModel.with{ [weak self] in
             if let index = self?.index{
                 self?.localContact = self?.viewModel.getLocalContact(by: index.onlyCoords())
             }
-            print("Was in")
             if let local = self?.localContact{
                 self?.title = FullName( dataSet: local).getTitle()
             }

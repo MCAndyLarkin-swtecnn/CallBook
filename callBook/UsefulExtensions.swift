@@ -34,7 +34,7 @@ extension Contact {
 }
 extension String: Error{ }
 
-typealias ShortData = ( contact: Contact, calls: [Recent] )
+//typealias ShortData = ( contact: Contact, calls: [Recent] )
 typealias Dimension = (section: Int, row: Int)
 
 extension IndexPath{

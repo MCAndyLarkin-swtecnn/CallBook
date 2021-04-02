@@ -138,6 +138,7 @@
 				CEEF703D261685A900F86739 /* ContactBook.swift */,
 				CE8610EA2607BBE2000154FF /* Recent.swift */,
 				CEEF704026168CC200F86739 /* RecentBook.swift */,
+				CE8610E3260789ED000154FF /* MessageStorage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -168,7 +169,6 @@
 				CE8610CA2604EF83000154FF /* FaceContact.swift */,
 				CE8610DF26061A6A000154FF /* MessageContact.swift */,
 				CE8610CD2604EF9B000154FF /* RecentCalls.swift */,
-				CE8610E3260789ED000154FF /* MessageStorage.swift */,
 			);
 			path = UNMVVMed;
 			sourceTree = "<group>";
