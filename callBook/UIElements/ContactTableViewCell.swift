@@ -1,7 +1,7 @@
 
 import UIKit
 
-class ContactCell: UITableViewCell {
+class ContactTableViewCell: UITableViewCell {
     @IBOutlet var messageButton: MessageButton!
     @IBOutlet var signature: UILabel!
     @IBOutlet var number: UILabel!

@@ -14,19 +14,18 @@
 		CE8610A726034B3D000154FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE8610A626034B3D000154FF /* Assets.xcassets */; };
 		CE8610AA26034B3D000154FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8610A826034B3D000154FF /* LaunchScreen.storyboard */; };
 		CE8610B326046B10000154FF /* CallBookTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610B226046B10000154FF /* CallBookTableViewController.swift */; };
-		CE8610B72604C74C000154FF /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610B62604C74C000154FF /* ContactCell.swift */; };
+		CE8610B72604C74C000154FF /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610B62604C74C000154FF /* ContactTableViewCell.swift */; };
 		CE8610C22604C81D000154FF /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610C12604C81D000154FF /* Contact.swift */; };
-		CE8610CB2604EF83000154FF /* FaceContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610CA2604EF83000154FF /* FaceContact.swift */; };
-		CE8610CE2604EF9B000154FF /* RecentCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610CD2604EF9B000154FF /* RecentCalls.swift */; };
-		CE8610D22604F186000154FF /* ContactNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610D12604F186000154FF /* ContactNode.swift */; };
-		CE8610E026061A6A000154FF /* MessageContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610DF26061A6A000154FF /* MessageContact.swift */; };
+		CE8610CB2604EF83000154FF /* FaceContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610CA2604EF83000154FF /* FaceContactViewController.swift */; };
+		CE8610CE2604EF9B000154FF /* RecentCallsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610CD2604EF9B000154FF /* RecentCallsTableViewController.swift */; };
+		CE8610D22604F186000154FF /* ContactNodeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610D12604F186000154FF /* ContactNodeTabBarController.swift */; };
+		CE8610E026061A6A000154FF /* MessageContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610DF26061A6A000154FF /* MessageContactViewController.swift */; };
 		CE8610E4260789EE000154FF /* MessageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610E3260789ED000154FF /* MessageStorage.swift */; };
 		CE8610EB2607BBE2000154FF /* Recent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610EA2607BBE2000154FF /* Recent.swift */; };
 		CE8610F626089C5A000154FF /* ShareRecentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8610F526089C5A000154FF /* ShareRecentTableViewController.swift */; };
 		CE861120260A6B3E000154FF /* UsefulExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86111F260A6B3E000154FF /* UsefulExtensions.swift */; };
 		CEEF700C261371E200F86739 /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEF700B261371E200F86739 /* ContactsUI.framework */; };
 		CEEF70262615AED300F86739 /* CallBookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF70252615AED300F86739 /* CallBookViewModel.swift */; };
-		CEEF702C2615C82D00F86739 /* CallBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF702B2615C82D00F86739 /* CallBookView.swift */; };
 		CEEF703826164CFD00F86739 /* CNContactsIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF703726164CFD00F86739 /* CNContactsIntegration.swift */; };
 		CEEF703E261685A900F86739 /* ContactBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF703D261685A900F86739 /* ContactBook.swift */; };
 		CEEF704126168CC200F86739 /* RecentBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF704026168CC200F86739 /* RecentBook.swift */; };
@@ -44,19 +43,18 @@
 		CE8610A926034B3D000154FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE8610AB26034B3D000154FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE8610B226046B10000154FF /* CallBookTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallBookTableViewController.swift; sourceTree = "<group>"; };
-		CE8610B62604C74C000154FF /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
+		CE8610B62604C74C000154FF /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		CE8610C12604C81D000154FF /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
-		CE8610CA2604EF83000154FF /* FaceContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceContact.swift; sourceTree = "<group>"; };
-		CE8610CD2604EF9B000154FF /* RecentCalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentCalls.swift; sourceTree = "<group>"; };
-		CE8610D12604F186000154FF /* ContactNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactNode.swift; sourceTree = "<group>"; };
-		CE8610DF26061A6A000154FF /* MessageContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContact.swift; sourceTree = "<group>"; };
+		CE8610CA2604EF83000154FF /* FaceContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceContactViewController.swift; sourceTree = "<group>"; };
+		CE8610CD2604EF9B000154FF /* RecentCallsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentCallsTableViewController.swift; sourceTree = "<group>"; };
+		CE8610D12604F186000154FF /* ContactNodeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactNodeTabBarController.swift; sourceTree = "<group>"; };
+		CE8610DF26061A6A000154FF /* MessageContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContactViewController.swift; sourceTree = "<group>"; };
 		CE8610E3260789ED000154FF /* MessageStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStorage.swift; sourceTree = "<group>"; };
 		CE8610EA2607BBE2000154FF /* Recent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recent.swift; sourceTree = "<group>"; };
 		CE8610F526089C5A000154FF /* ShareRecentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareRecentTableViewController.swift; sourceTree = "<group>"; };
 		CE86111F260A6B3E000154FF /* UsefulExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsefulExtensions.swift; sourceTree = "<group>"; };
 		CEEF700B261371E200F86739 /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
 		CEEF70252615AED300F86739 /* CallBookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallBookViewModel.swift; sourceTree = "<group>"; };
-		CEEF702B2615C82D00F86739 /* CallBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallBookView.swift; sourceTree = "<group>"; };
 		CEEF703726164CFD00F86739 /* CNContactsIntegration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CNContactsIntegration.swift; sourceTree = "<group>"; };
 		CEEF703D261685A900F86739 /* ContactBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactBook.swift; sourceTree = "<group>"; };
 		CEEF704026168CC200F86739 /* RecentBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentBook.swift; sourceTree = "<group>"; };
@@ -96,12 +94,10 @@
 		CE86109C26034B3A000154FF /* callBook */ = {
 			isa = PBXGroup;
 			children = (
-				CEEF703B2616574000F86739 /* UNMVVMed */,
+				CEEF701D2615ADD700F86739 /* Model */,
 				CEEF701F2615ADEC00F86739 /* ViewModel */,
 				CEEF701E2615ADE200F86739 /* View */,
-				CEEF701D2615ADD700F86739 /* Model */,
 				CE861126260A83D7000154FF /* UIElements */,
-				CE86111F260A6B3E000154FF /* UsefulExtensions.swift */,
 				CE86109D26034B3A000154FF /* AppDelegate.swift */,
 				CE86109F26034B3A000154FF /* SceneDelegate.swift */,
 				CE8610A326034B3A000154FF /* Main.storyboard */,
@@ -115,7 +111,7 @@
 		CE861126260A83D7000154FF /* UIElements */ = {
 			isa = PBXGroup;
 			children = (
-				CE8610B62604C74C000154FF /* ContactCell.swift */,
+				CE8610B62604C74C000154FF /* ContactTableViewCell.swift */,
 				CE69675E261060CC000F1BD0 /* MessageButton.swift */,
 			);
 			path = UIElements;
@@ -146,11 +142,13 @@
 		CEEF701E2615ADE200F86739 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CEEF702B2615C82D00F86739 /* CallBookView.swift */,
-				CE8610D12604F186000154FF /* ContactNode.swift */,
+				CE8610D12604F186000154FF /* ContactNodeTabBarController.swift */,
 				CEEF703726164CFD00F86739 /* CNContactsIntegration.swift */,
 				CE8610B226046B10000154FF /* CallBookTableViewController.swift */,
 				CE8610F526089C5A000154FF /* ShareRecentTableViewController.swift */,
+				CE8610CD2604EF9B000154FF /* RecentCallsTableViewController.swift */,
+				CE8610DF26061A6A000154FF /* MessageContactViewController.swift */,
+				CE8610CA2604EF83000154FF /* FaceContactViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -159,18 +157,9 @@
 			isa = PBXGroup;
 			children = (
 				CEEF70252615AED300F86739 /* CallBookViewModel.swift */,
+				CE86111F260A6B3E000154FF /* UsefulExtensions.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		CEEF703B2616574000F86739 /* UNMVVMed */ = {
-			isa = PBXGroup;
-			children = (
-				CE8610CA2604EF83000154FF /* FaceContact.swift */,
-				CE8610DF26061A6A000154FF /* MessageContact.swift */,
-				CE8610CD2604EF9B000154FF /* RecentCalls.swift */,
-			);
-			path = UNMVVMed;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,7 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE8610B72604C74C000154FF /* ContactCell.swift in Sources */,
+				CE8610B72604C74C000154FF /* ContactTableViewCell.swift in Sources */,
 				CE8610EB2607BBE2000154FF /* Recent.swift in Sources */,
 				CEEF70512616B98000F86739 /* CallBookModel.swift in Sources */,
 				CE86109E26034B3A000154FF /* AppDelegate.swift in Sources */,
@@ -253,17 +242,16 @@
 				CE8610E4260789EE000154FF /* MessageStorage.swift in Sources */,
 				CE8610B326046B10000154FF /* CallBookTableViewController.swift in Sources */,
 				CEEF704126168CC200F86739 /* RecentBook.swift in Sources */,
-				CE8610CE2604EF9B000154FF /* RecentCalls.swift in Sources */,
+				CE8610CE2604EF9B000154FF /* RecentCallsTableViewController.swift in Sources */,
 				CE8610A026034B3A000154FF /* SceneDelegate.swift in Sources */,
-				CE8610D22604F186000154FF /* ContactNode.swift in Sources */,
+				CE8610D22604F186000154FF /* ContactNodeTabBarController.swift in Sources */,
 				CE8610F626089C5A000154FF /* ShareRecentTableViewController.swift in Sources */,
 				CEEF704E2616AEC200F86739 /* JSONDownloading.swift in Sources */,
-				CE8610CB2604EF83000154FF /* FaceContact.swift in Sources */,
+				CE8610CB2604EF83000154FF /* FaceContactViewController.swift in Sources */,
 				CEEF703E261685A900F86739 /* ContactBook.swift in Sources */,
 				CEEF703826164CFD00F86739 /* CNContactsIntegration.swift in Sources */,
-				CE8610E026061A6A000154FF /* MessageContact.swift in Sources */,
+				CE8610E026061A6A000154FF /* MessageContactViewController.swift in Sources */,
 				CE69675F261060CC000F1BD0 /* MessageButton.swift in Sources */,
-				CEEF702C2615C82D00F86739 /* CallBookView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

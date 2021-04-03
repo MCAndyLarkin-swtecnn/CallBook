@@ -2,9 +2,11 @@ import Foundation
 
 var link = "https://gist.githubusercontent.com/artgoncharov/d257658423edd46a9ead5f721b837b8c/raw/c38ace33a7c871e4ad3b347fc4cd970bb45561a3/contacts_data.json"
 
-extension CallBookModel{
+class FileManagedModel: CallBookModel {
     //MARK: JSON Maining
-    
+    override func saveData() {
+        
+    }
     func downloadContacts() throws -> Data{
         let sem = DispatchSemaphore(value: 0)
         var dataToOut: Data?
@@ -28,7 +30,7 @@ extension CallBookModel{
         return data
     }
     
-    func loadData(by method: Raspil){
+    override func loadData(by method: Raspil){
         let processing = {
             do{
                 self.parseAndPutData(data: try self.downloadContacts() )

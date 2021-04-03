@@ -2,8 +2,7 @@
 import UIKit
 
 class ShareRecentTableViewController: UITableViewController {
-    var viewModel: RecentsViewModelProtocol = ViewModelSingle.viewModel
-    lazy var recentBook: RecentViewBook? = viewModel.getViewRecents()
+    lazy var recentBook: RecentViewBook? = ViewModelSingle.viewModel.getViewRecents()
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recentBook?.count ?? 0
@@ -16,13 +15,5 @@ class ShareRecentTableViewController: UITableViewController {
         cell.textLabel?.text = call?.getTitle()
         cell.detailTextLabel?.text = call?.description
         return cell
-    }
-    override func viewDidLoad() {
-        viewModel.with{ [weak self] in
-            if let tableView = self?.view as? UITableView{
-                self?.recentBook = self?.viewModel.getViewRecents()
-                tableView.reloadData()
-            }
-        }
     }
 }

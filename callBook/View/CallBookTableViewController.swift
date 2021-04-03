@@ -1,7 +1,6 @@
 
 import UIKit
 
-//MARK: What is state machine in this ontext?
 class CallBookTableViewController: UITableViewController{
     @IBOutlet var WaitIndicator: UIActivityIndicatorView!
     
@@ -26,7 +25,6 @@ class CallBookTableViewController: UITableViewController{
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .normal, title: "Call"){ [weak self] (action, view, completionHandler) in
-            
             self?.viewModel.makeCall(forNumberby: indexPath.onlyCoords())
             completionHandler(true)
         }
@@ -50,7 +48,7 @@ class CallBookTableViewController: UITableViewController{
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath) as! ContactCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath) as! ContactTableViewCell
         
         if let contact = contactBook?[indexPath.section][indexPath.row]{
             
@@ -88,7 +86,7 @@ class CallBookTableViewController: UITableViewController{
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? ContactNode{
+        if let destination = segue.destination as? ContactNodeTabBarController{
             if segue.identifier == "openFace",
                let indexPath = tableView.indexPathForSelectedRow{
                 destination.index = indexPath

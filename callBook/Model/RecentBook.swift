@@ -1,11 +1,6 @@
 
-typealias RecentBook = [Recent]
 extension RecentBook{
-    ///callLog is not sorted yet so it just return one nearest in list
     func findLast(byNumber number: String) -> Recent?{
-        //TODO: Make reusable named calls storage
-        //TODO: Make named storage after adding (in backgroung), not in loadData process
-        // O(n) is bad way
         let clearNumber = number.onlyDigits()
         var target: Recent? = nil
         

@@ -1,30 +1,20 @@
 
-typealias ContactBook = [[Contact]]
-
 extension ContactBook{
     mutating func change(contactIn index: Dimension, with name: String, surname: String? = nil, number: String) -> Contact{
-        return change(contact: self[index.section][index.row], with: name, surname: surname, number: number)
-    }
-    mutating func change(contact: Contact, with name: String, surname: String? = nil, number: String) -> Contact{
-        let new = Contact(name: name, surname: surname, number: number, email: nil, birthday: nil)
+        let contact = self[index.section][index.row]
+        let new = Contact(name: name, surname: surname, number: number, email: contact.email, birthday: contact.birthday, photo: contact.photo)
+        
         if new.getSectionName() == contact.getSectionName(){
-            self.replace(old: contact, to: new)
+            self.replace(in: index, to: new)
         }else{
-            delete(contact: contact)
+            delete(index: index)
             addNew(contactToBook: new)
         }
         return new
     }
     
-    mutating func replace(old: Contact, to new: Contact){
-        if let (section, row) = findIndex(of: old){
-            self[section][row] = new
-        }
-    }
-    mutating func delete(contact: Contact){
-        if let index = findIndex(of: contact){
-            delete(index: index)
-        }
+    mutating func replace(in index: Dimension, to new: Contact){
+        self[index.section][index.row] = new
     }
     func findIndex(of contact: Contact) -> Dimension? {
         let targetSectionName = contact.getSectionName()

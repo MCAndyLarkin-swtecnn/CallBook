@@ -2,7 +2,6 @@
 import UIKit
 import ContactsUI
 
-
 extension CallBookTableViewController: CNContactViewControllerDelegate {
     @IBAction func addView(_ sender: Any) {
         let controller = CNContactViewController(forNewContact: nil)
@@ -24,11 +23,9 @@ extension CallBookTableViewController: CNContactViewControllerDelegate {
         }
     }
 }
-typealias ContactDataSet = (name: String, surname: String?, number: String, email: String?, birthday: DateComponents?, photo: String?)
-
 extension Contact{
     func getDataSet() -> ContactDataSet{
-        return (name: name, surname: surname, number: number, email: email, birthday: birthday, photo: photo)
+        return (name: name, surname: surname, number: number, email: email, birthday: birthday, photo: photo ?? ContactView.avatarDefault)
     }
 }
 extension CNContact{
@@ -65,6 +62,6 @@ extension CNContact{
                 break
             }
         }
-        return (name: name, surname: surname, number: number, email: email, birthday: birthday, photo: nil)
+        return (name: name, surname: surname, number: number, email: email, birthday: birthday, photo: ContactView.avatarDefault)
     }
 }

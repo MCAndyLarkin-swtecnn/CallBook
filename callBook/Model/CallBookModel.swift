@@ -1,25 +1,12 @@
 
 import Foundation
 
-/*Quections
- 1. Хранить жесткую ссылку на себя это утечка?
- */
-
 protocol CallBookModelProtocol{
-//    var contactBook: ContactBook {get set}
-//    var recentBook: RecentBook {get set}
-//    var localContact: Contact? {get set}
     func getContactBook() -> ContactBook
     func getRecentBook() -> RecentBook
-    func getLocalContact() -> Contact?
     
-    func initLocal(by index: Dimension)
     func with(contactBook: ContactBook)
     func with(recentBook: RecentBook)
-    
-    func with(notifyContactsViewModel: @escaping () -> ()) -> Self
-    func with(notifyRecentsViewModel: @escaping () -> ()) -> Self
-    func with(notifyContactNodeViewModel: @escaping () -> ()) -> Self
     
     func deleteContact(in index: Dimension)
     func getContact(by index: Dimension) -> Contact?
@@ -30,31 +17,45 @@ protocol CallBookModelProtocol{
     func changeContact(in index: Dimension, with name: String, surname: String?, number: String) -> Contact
     
     func loadData(by method: Raspil)
+    func saveData()
 }
-
-class CallBookModel: CallBookModelProtocol {
-    //MARK: TODO: Should use sorted array type for 'contact book'
+class ObservableModel {
+    typealias Reaction = () -> ()
+    var contactBookSubscribers: [Reaction] = []
+    var recentBookSubscribers: [Reaction] = []
+    
+    func subscribeOnContactBookChanges(reaction: @escaping Reaction) -> Self{
+        contactBookSubscribers.append(reaction)
+        return self
+    }
+    func subscribeOnRecentBookChanges(reaction: @escaping Reaction) -> Self{
+        recentBookSubscribers.append(reaction)
+        return self
+    }
+    
+    func notifyContactBookSubscribers(){
+        for subscriber in contactBookSubscribers{
+            subscriber()
+        }
+    }
+    func notifyRecentBookSubscribers(){
+        for subscriber in recentBookSubscribers{
+            subscriber()
+        }
+    }
+}
+class CallBookModel: ObservableModel, CallBookModelProtocol {
     var contactBook: ContactBook = []{
         didSet{
-            print()
             OperationQueue.main.addOperation{ [weak self] in
-                self?.notifyContactsViewModel?()
+                self?.notifyContactBookSubscribers()
             }
         }
     }
     var recentBook: RecentBook = [] {
         didSet{
-            notifyRecentsViewModel?()
+            notifyRecentBookSubscribers()
         }
-    }
-    
-    var localContact: Contact?{
-        didSet{
-            notifyContactNodeViewModel?()
-        }
-    }
-    func initLocal(by index: Dimension){
-        localContact = contactBook[index.section][index.row]
     }
     
     func with(contactBook: ContactBook) {
@@ -62,23 +63,6 @@ class CallBookModel: CallBookModelProtocol {
     }
     func with(recentBook: RecentBook) {
         self.recentBook = recentBook
-    }
-    
-    var notifyContactsViewModel: (() -> ())?
-    var notifyContactNodeViewModel: (() -> ())?
-    var notifyRecentsViewModel: (() -> ())?
-    
-    func with(notifyContactsViewModel: @escaping () -> ()) -> Self{
-        self.notifyContactsViewModel = notifyContactsViewModel
-        return self
-    }
-    func with(notifyRecentsViewModel: @escaping () -> ()) -> Self{
-        self.notifyRecentsViewModel = notifyRecentsViewModel
-        return self
-    }
-    func with(notifyContactNodeViewModel: @escaping () -> ()) -> Self{
-        self.notifyContactNodeViewModel = notifyContactNodeViewModel
-        return self
     }
     func addNew(contact: Contact){
         contactBook.addNew(contactToBook: contact)
@@ -101,15 +85,15 @@ class CallBookModel: CallBookModelProtocol {
     func getRecentBook() -> RecentBook {
         recentBook
     }
-    func getLocalContact() -> Contact? {
-        localContact
-    }
     func getContactBook() -> ContactBook {
         contactBook
     }
     func getRecents(by number: String) -> RecentBook {
         recentBook.findAllBy(number: number)
     }
-    
+    func saveData() {
+    }
+    func loadData(by method: Raspil) {
+    }
     
 }
