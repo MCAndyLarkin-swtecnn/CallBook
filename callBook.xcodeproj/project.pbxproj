@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE60F83E26199E9D003D6527 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE60F83D26199E9D003D6527 /* Settings.bundle */; };
 		CE69675F261060CC000F1BD0 /* MessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE69675E261060CC000F1BD0 /* MessageButton.swift */; };
 		CE86109E26034B3A000154FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86109D26034B3A000154FF /* AppDelegate.swift */; };
 		CE8610A026034B3A000154FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86109F26034B3A000154FF /* SceneDelegate.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE60F83D26199E9D003D6527 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		CE69675E261060CC000F1BD0 /* MessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageButton.swift; sourceTree = "<group>"; };
 		CE86109A26034B3A000154FF /* callBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = callBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE86109D26034B3A000154FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 		CE86109126034B39000154FF = {
 			isa = PBXGroup;
 			children = (
+				CE60F83D26199E9D003D6527 /* Settings.bundle */,
 				CE86109C26034B3A000154FF /* callBook */,
 				CE86109B26034B3A000154FF /* Products */,
 				CEEF700A261371E200F86739 /* Frameworks */,
@@ -219,6 +222,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE60F83E26199E9D003D6527 /* Settings.bundle in Resources */,
 				CE8610AA26034B3D000154FF /* LaunchScreen.storyboard in Resources */,
 				CE8610A726034B3D000154FF /* Assets.xcassets in Resources */,
 				CE8610A526034B3A000154FF /* Main.storyboard in Resources */,

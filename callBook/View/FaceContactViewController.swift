@@ -88,8 +88,8 @@ class FaceContactViewController: UIViewController{
 
         let formatter = DateFormatter()
         formatter.dateFormat = "dd MMMM yyyy"
-        if let date = theContact.birthday?.date{
-            birthday.setTitle(formatter.string(from: date), for: UIControl.State.normal)
+        if let date = theContact.birthday?.date{//birthday - это то, что возвращается из CNContact
+            birthday.setTitle( /*строчка даты->*/formatter.string(from: date)/* */, for: UIControl.State.normal)
         }
     }
 }

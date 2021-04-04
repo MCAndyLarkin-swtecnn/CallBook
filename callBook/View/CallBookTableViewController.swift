@@ -10,6 +10,12 @@ class CallBookTableViewController: UITableViewController{
     let rowHeigth: CGFloat = 70.0
     let headerHight: CGFloat = 40.0
     
+    let startOnSettingTag = "start_on"
+    let StartOnContactsSettingTitle = "StartOnContactsSettingTitle"
+    let StartOnRecentsSettingTitle = "StartOnRecentsSettingTitle"
+    let StartOnAddingSettingTitle = "StartOnAddingSettingTitle"
+    var protectFlag = false
+    
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .normal, title: "Delete"){
             [weak self] (action, view, completionHandler) in
@@ -99,7 +105,22 @@ class CallBookTableViewController: UITableViewController{
             }
         }
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    func processStartSettings(){
+        guard !protectFlag, let startSetting = UserDefaults.standard.string(forKey: startOnSettingTag)
+        else { return }
+        protectFlag = !protectFlag
+        switch startSetting {
+        case StartOnRecentsSettingTitle:
+            performSegue(withIdentifier: "ShareRecent", sender: self)
+        case StartOnAddingSettingTitle:
+            showAddingContactView()
+        default:
+            break
+        }
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let tableView = self.view as? UITableView{
@@ -108,11 +129,14 @@ class CallBookTableViewController: UITableViewController{
     }
     override func viewDidLoad(){
         super.viewDidLoad()
+        UserDefaults.standard.register(defaults: [String : Any]())
+        
         let viewModel = self.viewModel.with{ [weak self] in
             if let tableView = self?.view as? UITableView{
                 self?.contactBook = self?.viewModel.getViewContacts()
                 tableView.reloadData()
                 self?.stopWaitIndicator()
+                self?.processStartSettings()
             }
         }
         let alert = UIAlertController(title: "Choose raspil method", message: "", preferredStyle: .alert)

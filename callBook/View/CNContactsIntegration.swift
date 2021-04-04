@@ -4,6 +4,9 @@ import ContactsUI
 
 extension CallBookTableViewController: CNContactViewControllerDelegate {
     @IBAction func addView(_ sender: Any) {
+        showAddingContactView()
+    }
+    func showAddingContactView(){
         let controller = CNContactViewController(forNewContact: nil)
         controller.contactStore = CNContactStore()
         controller.delegate = self
@@ -12,7 +15,6 @@ extension CallBookTableViewController: CNContactViewControllerDelegate {
     }
     
     func contactViewController(_ viewController: CNContactViewController, didCompleteWith contact: CNContact?){
-        //MARK: How to send data to model?
         guard let contact = contact else {
             viewController.dismiss(animated: true, completion: nil)
             return
@@ -21,11 +23,6 @@ extension CallBookTableViewController: CNContactViewControllerDelegate {
         if let tableView = self.view as? UITableView{
             tableView.reloadData()
         }
-    }
-}
-extension Contact{
-    func getDataSet() -> ContactDataSet{
-        return (name: name, surname: surname, number: number, email: email, birthday: birthday, photo: photo ?? ContactView.avatarDefault)
     }
 }
 extension CNContact{

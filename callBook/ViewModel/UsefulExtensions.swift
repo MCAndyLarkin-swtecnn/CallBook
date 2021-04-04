@@ -2,8 +2,8 @@
 import Foundation
 
 typealias Dimension = (section: Int, row: Int)
-typealias ContactViewsBook = [[ContactView]]
 typealias RecentViewBook = [RecentView]
+typealias ContactViewsBook = [[ContactView]]
 typealias ContactDataSet = (name: String, surname: String?, number: String, email: String?, birthday: DateComponents?, photo: String)
 typealias ContactBook = [[Contact]]
 typealias RecentBook = [Recent]
@@ -50,13 +50,7 @@ extension Contact{
         ContactView(signature: getTitle(), number: number, photo: photo ?? ContactView.avatarDefault)
     }
     func getTitle() -> String{
-        let surname: String
-        if let sur = self.surname{
-            surname = "\(sur) "
-        }else{
-            surname = ""
-        }
-        return surname + name
+        FullName(name: name, surname: surname).getTitle()
     }
 }
 extension IndexPath{
@@ -94,8 +88,18 @@ struct FullName{
         }
         return surname + name
     }
+    init(name: String, surname: String?) {
+        self.name = name
+        self.surname = surname
+    }
     init(dataSet: ContactDataSet) {
         name = dataSet.name
         surname = dataSet.surname
+    }
+}
+
+extension Contact{
+    func getDataSet() -> ContactDataSet{
+        return (name: name, surname: surname, number: number, email: email, birthday: birthday, photo: photo ?? ContactView.avatarDefault)
     }
 }
