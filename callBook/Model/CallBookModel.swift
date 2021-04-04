@@ -17,6 +17,7 @@ protocol CallBookModelProtocol{
     func changeContact(in index: Dimension, with name: String, surname: String?, number: String) -> Contact
     
     func loadData(by method: Raspil)
+    func loadDataFromFileSystem()
     func saveData()
 }
 class ObservableModel {
@@ -95,5 +96,6 @@ class CallBookModel: ObservableModel, CallBookModelProtocol {
     }
     func loadData(by method: Raspil) {
     }
-    
+    func loadDataFromFileSystem() {
+    }
 }

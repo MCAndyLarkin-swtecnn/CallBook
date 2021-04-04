@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct Contact {
+struct Contact{
     var name: String
     var surname: String?
     var number: String

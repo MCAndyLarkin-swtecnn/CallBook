@@ -129,25 +129,37 @@ class CallBookTableViewController: UITableViewController{
     }
     override func viewDidLoad(){
         super.viewDidLoad()
-        UserDefaults.standard.register(defaults: [String : Any]())
-        
-        let viewModel = self.viewModel.with{ [weak self] in
+        viewModel.with{ [weak self] in
             if let tableView = self?.view as? UITableView{
                 self?.contactBook = self?.viewModel.getViewContacts()
                 tableView.reloadData()
-                self?.stopWaitIndicator()
-                self?.processStartSettings()
             }
+            self?.stopWaitIndicator()
+            self?.processStartSettings()
         }
+        askAboutDataSource()
+    }
+    func askAboutRaspilMethod(){
         let alert = UIAlertController(title: "Choose raspil method", message: "", preferredStyle: .alert)
 
         alert.addAction(UIAlertAction(title: "GCD", style: .default, handler: {_ in
-            self.showWaitIndicator()
-            viewModel.loadData(method: .gcd)
+            self.viewModel.loadData(source: .network(method: .gcd))
         }))
         alert.addAction(UIAlertAction(title: "Operations", style: .default, handler: {_ in
+            self.viewModel.loadData(source: .network(method: .operations))
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    func askAboutDataSource(){
+        let alert = UIAlertController(title: "Where from get data?", message: "", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Network", style: .default, handler: {_ in
             self.showWaitIndicator()
-            viewModel.loadData(method: .operations)
+            self.askAboutRaspilMethod()
+        }))
+        alert.addAction(UIAlertAction(title: "FileSystem", style: .default, handler: {_ in
+            self.showWaitIndicator()
+            self.viewModel.loadData(source: .fileSystem)
         }))
         self.present(alert, animated: true, completion: nil)
     }

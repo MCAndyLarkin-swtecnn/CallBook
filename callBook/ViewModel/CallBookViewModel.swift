@@ -12,7 +12,8 @@ protocol ContactsViewModelProtocol: CallBookViewModelProtocol {
     
     func deleteContact(by index: Dimension)
     func makeCall(forNumberby index: Dimension)
-    func loadData(method: Raspil)
+    func loadData(source: DataSource)
+    func saveData()
     func getViewContacts() -> ContactViewsBook
     func with(uploadContactView: @escaping ()->()) -> Self
     func addNew(call: Recent)
@@ -42,6 +43,10 @@ protocol LocalContactViewModel: CallBookViewModelProtocol {
 class ViewModelSingle {
     static var viewModel = CallBookViewModel()
     class CallBookViewModel: RecentsViewModelProtocol, ContactsViewModelProtocol, LocalContactViewModel {
+        func saveData() {
+            model.saveData()
+        }
+        
         
         internal lazy var model: CallBookModelProtocol = FileManagedModel()
             .subscribeOnContactBookChanges{ [weak self] in
@@ -140,8 +145,13 @@ class ViewModelSingle {
             }
         }
         
-        func loadData(method: Raspil) {
-            model.loadData(by: method)
+        func loadData(source: DataSource) {
+            switch source {
+            case .network(let method):
+                model.loadData(by: method)
+            case .fileSystem:
+                model.loadDataFromFileSystem()
+            }
         }
         func findContactBy(number: String) -> Contact? {
             model.getContact(by: number)

@@ -22,7 +22,7 @@ extension Int {
         return "\(Int(self/60)):\( { () -> String in var secs = String(self % 60); if secs.count == 1 { secs = "0\(secs)" }; return secs}())"
     }
 }
-extension Contact {
+extension Contact{
     struct CodingData: Codable {
         var firstname: String
         var lastname: String
@@ -38,6 +38,29 @@ extension Contact {
             )
         }
     }
+    func getCodable() -> CodableContact{
+        CodableContact(contact: self)
+    }
+    struct CodableContact:Codable{
+        var name: String
+        var surname: String?
+        var number: String
+        var email: String?
+        var birthday: DateComponents?
+        var photo: String?
+        init(contact: Contact) {
+            name = contact.name
+            surname = contact.surname
+            number = contact.number
+            email = contact.email
+            birthday = contact.birthday
+            photo = contact.photo
+        }
+        var contact: Contact{
+            Contact(name: name, surname: surname, number: number, email: email, birthday: birthday, photo: photo)
+        }
+    }
+
 }
 extension String: Error{ }
 extension RecentView{
