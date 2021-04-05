@@ -141,6 +141,7 @@ class CallBookTableViewController: UITableViewController{
             }
             self?.stopWaitIndicator()
             self?.processStartSettings()
+            self?.viewModel.saveData()
         }.with(selebrating: {
             birthday in
             let content = UNMutableNotificationContent()

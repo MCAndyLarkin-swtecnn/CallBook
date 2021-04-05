@@ -352,9 +352,6 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqT-oz-NBi">
                                 <rect key="frame" x="246" y="793" width="66" height="46"/>
                                 <color key="backgroundColor" red="1" green="0.80305084559999995" blue="0.79970218540000004" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="XRe-U5-O41"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <state key="normal" title="Email">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -364,11 +361,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="laK-2Y-pI2">
-                                <rect key="frame" x="0.0" y="714" width="339.5" height="50"/>
+                                <rect key="frame" x="0.0" y="692" width="339.5" height="50"/>
                                 <color key="backgroundColor" red="0.88935203679999997" green="1" blue="0.90972573369999998" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="f1L-ft-miI"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <state key="normal" title="Birthday">
                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -380,9 +374,6 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="afM-dG-Cyp">
                                 <rect key="frame" x="76" y="777" width="111" height="46"/>
                                 <color key="backgroundColor" red="0.76533907440000004" green="0.85012450819999996" blue="1" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="54" id="4ba-eA-whK"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <state key="normal" title="Telegram">
                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -394,9 +385,6 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7nQ-oe-Mqj">
                                 <rect key="frame" x="275" y="594" width="98" height="46"/>
                                 <color key="backgroundColor" red="0.78882086029999998" green="0.9661947219" blue="1" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="y3N-Xq-Ekw"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <state key="normal" title="Number">
                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -412,7 +400,10 @@
                         <constraints>
                             <constraint firstItem="yqT-oz-NBi" firstAttribute="width" secondItem="7nQ-oe-Mqj" secondAttribute="width" multiplier="1.1" id="0lo-vF-Z3E"/>
                             <constraint firstItem="7nQ-oe-Mqj" firstAttribute="width" secondItem="ohe-QZ-pde" secondAttribute="width" multiplier="0.81" id="5NH-B1-20Z"/>
+                            <constraint firstItem="laK-2Y-pI2" firstAttribute="height" secondItem="7nQ-oe-Mqj" secondAttribute="height" multiplier="1.08696" id="5aL-hS-oKu"/>
                             <constraint firstItem="laK-2Y-pI2" firstAttribute="leading" secondItem="Tag-nN-RBt" secondAttribute="leading" id="Ca0-hU-nfN"/>
+                            <constraint firstItem="afM-dG-Cyp" firstAttribute="height" secondItem="laK-2Y-pI2" secondAttribute="height" multiplier="0.92" id="CoN-rq-0VJ"/>
+                            <constraint firstItem="7nQ-oe-Mqj" firstAttribute="height" secondItem="Tag-nN-RBt" secondAttribute="height" multiplier="0.0683507" id="HSc-JU-ktt"/>
                             <constraint firstItem="afM-dG-Cyp" firstAttribute="top" secondItem="yqT-oz-NBi" secondAttribute="bottom" id="IkZ-eW-L00"/>
                             <constraint firstItem="ohe-QZ-pde" firstAttribute="leading" secondItem="Tag-nN-RBt" secondAttribute="leading" id="LaT-Vx-eeH"/>
                             <constraint firstItem="yqT-oz-NBi" firstAttribute="top" secondItem="7nQ-oe-Mqj" secondAttribute="bottom" id="S9G-Wl-bly"/>
@@ -422,6 +413,7 @@
                             <constraint firstItem="yqT-oz-NBi" firstAttribute="leading" secondItem="Tag-nN-RBt" secondAttribute="leading" id="fmA-mf-9t2"/>
                             <constraint firstItem="ohe-QZ-pde" firstAttribute="width" secondItem="fZ8-1C-zez" secondAttribute="width" id="iNG-yl-PKE"/>
                             <constraint firstItem="afM-dG-Cyp" firstAttribute="width" secondItem="yqT-oz-NBi" secondAttribute="width" multiplier="0.8" id="jwb-fs-qp3"/>
+                            <constraint firstItem="yqT-oz-NBi" firstAttribute="height" secondItem="laK-2Y-pI2" secondAttribute="height" multiplier="0.92" id="kPf-G1-Igv"/>
                             <constraint firstItem="Tag-nN-RBt" firstAttribute="trailing" secondItem="afM-dG-Cyp" secondAttribute="trailing" id="nev-aD-qUA"/>
                             <constraint firstItem="7nQ-oe-Mqj" firstAttribute="top" secondItem="ohe-QZ-pde" secondAttribute="bottom" id="qGW-iS-urL"/>
                             <constraint firstItem="ohe-QZ-pde" firstAttribute="top" secondItem="Tag-nN-RBt" secondAttribute="top" id="vCl-5p-aa5"/>
