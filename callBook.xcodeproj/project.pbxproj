@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CE60F83E26199E9D003D6527 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE60F83D26199E9D003D6527 /* Settings.bundle */; };
+		CE60F845261AC4FF003D6527 /* TitleCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE60F844261AC4FF003D6527 /* TitleCircle.swift */; };
 		CE69675F261060CC000F1BD0 /* MessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE69675E261060CC000F1BD0 /* MessageButton.swift */; };
 		CE86109E26034B3A000154FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86109D26034B3A000154FF /* AppDelegate.swift */; };
 		CE8610A026034B3A000154FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86109F26034B3A000154FF /* SceneDelegate.swift */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		CE60F83D26199E9D003D6527 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		CE60F844261AC4FF003D6527 /* TitleCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCircle.swift; sourceTree = "<group>"; };
 		CE69675E261060CC000F1BD0 /* MessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageButton.swift; sourceTree = "<group>"; };
 		CE86109A26034B3A000154FF /* callBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = callBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE86109D26034B3A000154FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				CE8610CD2604EF9B000154FF /* RecentCallsTableViewController.swift */,
 				CE8610DF26061A6A000154FF /* MessageContactViewController.swift */,
 				CE8610CA2604EF83000154FF /* FaceContactViewController.swift */,
+				CE60F844261AC4FF003D6527 /* TitleCircle.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 			files = (
 				CE8610B72604C74C000154FF /* ContactTableViewCell.swift in Sources */,
 				CE8610EB2607BBE2000154FF /* Recent.swift in Sources */,
+				CE60F845261AC4FF003D6527 /* TitleCircle.swift in Sources */,
 				CEEF70512616B98000F86739 /* CallBookModel.swift in Sources */,
 				CE86109E26034B3A000154FF /* AppDelegate.swift in Sources */,
 				CE8610C22604C81D000154FF /* Contact.swift in Sources */,

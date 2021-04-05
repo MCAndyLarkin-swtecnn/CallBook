@@ -80,6 +80,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Contacts" id="6Un-AP-H3r">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="zm3-SY-dNU">
+                            <connections>
+                                <segue destination="JVD-Vu-zsv" kind="show" id="lhi-JS-O8O"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="refresh" id="DSI-1U-ZOh">
                                 <connections>
@@ -488,6 +493,29 @@
             </objects>
             <point key="canvasLocation" x="-767" y="269"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="e1H-pK-Pmh">
+            <objects>
+                <viewController id="JVD-Vu-zsv" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NlA-RN-61P">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XTR-Wa-Cct" customClass="TitleCircle" customModule="callBook" customModuleProvider="target">
+                                <rect key="frame" x="87" y="384" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="KYc-px-E1V"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="t4h-iW-hK0"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T87-yz-SIj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1168" y="1162"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="ebj-At-99I"/>
@@ -498,6 +526,9 @@
         <image name="paperplane.fill" catalog="system" width="128" height="118"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="phone" catalog="system" width="128" height="115"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
