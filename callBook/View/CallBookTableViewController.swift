@@ -136,7 +136,23 @@ class CallBookTableViewController: UITableViewController{
             }
             self?.stopWaitIndicator()
             self?.processStartSettings()
-        }
+        }.with(selebrating: {
+            birthday in
+            let content = UNMutableNotificationContent()
+            content.body = "Today is Birthday of \(birthday.name) \(birthday.surname ?? "")!"
+            content.title = "Don't forget to congratulate!"
+            content.sound = .default
+            var date = Calendar.current.dateComponents([.minute, .day, .month,.hour,.second], from: Date())
+            if date.minute != nil{
+                date.second! += 20
+            }
+            UNUserNotificationCenter.current().add(
+                UNNotificationRequest(identifier: birthday.getTitle(), content: content,
+                                      trigger: UNCalendarNotificationTrigger(dateMatching: date, repeats: false))
+            ){  error in
+                if let err = error{ print("ErrorNotiaication - \(err)") }
+            }
+        })
         askAboutDataSource()
     }
     func askAboutRaspilMethod(){

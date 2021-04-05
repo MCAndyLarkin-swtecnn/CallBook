@@ -1,7 +1,11 @@
 
 import UIKit
+import UserNotifications
 
 let contactsDataDirectoryName = "contactsData"
+var contactsBookFileName = "contacts.json"
+var recentsBookFileName = "recents.json"
+var birthdaysFileName = "birthdays.json"
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("createDirectoryError")
             }
         }
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) {
+            didAllow,error in
+                if !didAllow{ print("User don't allow notifications")}
+                else if error != nil {
+                    print("Some other Error")
+                }
+        }
+        
         return true
     }
 
@@ -35,6 +47,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         ViewModelSingle.viewModel.saveData()
     }
-
 }
 

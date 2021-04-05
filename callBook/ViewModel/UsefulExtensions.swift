@@ -7,7 +7,30 @@ typealias ContactViewsBook = [[ContactView]]
 typealias ContactDataSet = (name: String, surname: String?, number: String, email: String?, birthday: DateComponents?, photo: String)
 typealias ContactBook = [[Contact]]
 typealias RecentBook = [Recent]
+typealias BirthdayLog = [DateComponents.CodableDate: [FullName]]
 
+extension DateComponents{
+    struct CodableDate: Codable, Hashable{
+        let day: Int
+        let month: Int
+        static func == (lhs: CodableDate, rhs: CodableDate) -> Bool {
+            return lhs.month == rhs.month && lhs.day == rhs.day
+        }
+        static func < (lhs: CodableDate, rhs: CodableDate) -> Bool {
+            if rhs.month == lhs.month {
+                return rhs.day > lhs.day
+            }else{
+                return rhs.month > lhs.month
+            }
+        }
+    }
+    func getCodable() -> CodableDate?{
+        if let day = self.day, let month = self.month{
+            return CodableDate(day: day, month: month)
+        }
+        return nil
+    }
+}
 extension String {
     func onlyDigits() -> String {
         let filtredUnicodeScalars = unicodeScalars.filter { CharacterSet.decimalDigits.contains($0) }
@@ -99,7 +122,7 @@ struct RecentView{
         "\(time)   -   \(abonent)"
     }
 }
-struct FullName{
+struct FullName: Codable{
     var name: String
     var surname: String?
     func getTitle() -> String{

@@ -1,11 +1,10 @@
 import Foundation
 
 var link = "https://gist.githubusercontent.com/artgoncharov/d257658423edd46a9ead5f721b837b8c/raw/c38ace33a7c871e4ad3b347fc4cd970bb45561a3/contacts_data.json"
-var fileName = "contacts.json"
 class FileManagedModel: CallBookModel {
     //MARK: JSON Maining
     override func saveData() {
-        if let fileURL = FileManager().urls(for: .applicationSupportDirectory, in: .userDomainMask).first?.appendingPathComponent(contactsDataDirectoryName).appendingPathComponent(fileName),
+        if let fileURL = FileManager().urls(for: .applicationSupportDirectory, in: .userDomainMask).first?.appendingPathComponent(contactsDataDirectoryName).appendingPathComponent(contactsBookFileName),
            let data = getDatabyContactBook(){
             do {
                 try data.write(to: fileURL)
@@ -24,9 +23,9 @@ class FileManagedModel: CallBookModel {
         return try? encoder.encode(codableContactBook)
     }
     override func loadDataFromFileSystem() {
-        if let fileURL = FileManager().urls(for: .applicationSupportDirectory, in: .userDomainMask).first?.appendingPathComponent(contactsDataDirectoryName).appendingPathComponent(fileName){
+        if let fileURL = FileManager().urls(for: .applicationSupportDirectory, in: .userDomainMask).first?.appendingPathComponent(contactsDataDirectoryName).appendingPathComponent(contactsBookFileName){
             do {
-                parseAndPutData(data: try Data(contentsOf: fileURL), sectioned: true)
+                parseAndPutContacts(data: try Data(contentsOf: fileURL), sectioned: true)
             } catch {
                 print("readingError")
             }
@@ -58,7 +57,7 @@ class FileManagedModel: CallBookModel {
     override func loadData(by method: Raspil){
         let processing = {
             do{
-                self.parseAndPutData(data: try self.downloadContacts(), sectioned: false)
+                self.parseAndPutContacts(data: try self.downloadContacts(), sectioned: false)
             }catch{
                 print(error)
             }
@@ -71,7 +70,7 @@ class FileManagedModel: CallBookModel {
             OperationQueue().addOperation(processing)
         }
     }
-    func parseAndPutData(data: Data, sectioned: Bool){
+    func parseAndPutContacts(data: Data, sectioned: Bool){
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         

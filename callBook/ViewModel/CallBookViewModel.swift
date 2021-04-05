@@ -1,5 +1,5 @@
 
-import UIKit.UIApplication
+import UIKit
 
 protocol CallBookViewModelProtocol{
     var model: CallBookModelProtocol { get }
@@ -8,7 +8,10 @@ protocol RecentsViewModelProtocol: CallBookViewModelProtocol {
     func getViewRecents() -> RecentViewBook
 }
 protocol ContactsViewModelProtocol: CallBookViewModelProtocol {
+    var birthdayLog: BirthdayLog {get}
+    
     var uploadContactView: (() -> ())? { get }
+    var selebratingFor: ((FullName) -> ())? { get }
     
     func deleteContact(by index: Dimension)
     func makeCall(forNumberby index: Dimension)
@@ -16,6 +19,8 @@ protocol ContactsViewModelProtocol: CallBookViewModelProtocol {
     func saveData()
     func getViewContacts() -> ContactViewsBook
     func with(uploadContactView: @escaping ()->()) -> Self
+    func with(selebrating: @escaping (FullName)->()) -> Self
+    func checkBirthdayLog() 
     func addNew(call: Recent)
     func addNewContactBy(_ dataSet: ContactDataSet?)
 }
@@ -43,10 +48,7 @@ protocol LocalContactViewModel: CallBookViewModelProtocol {
 class ViewModelSingle {
     static var viewModel = CallBookViewModel()
     class CallBookViewModel: RecentsViewModelProtocol, ContactsViewModelProtocol, LocalContactViewModel {
-        func saveData() {
-            model.saveData()
-        }
-        
+        var birthdayLog: BirthdayLog = [:]
         
         internal lazy var model: CallBookModelProtocol = FileManagedModel()
             .subscribeOnContactBookChanges{ [weak self] in
@@ -92,7 +94,8 @@ class ViewModelSingle {
         internal var uploadContactView: (() -> ())?
         internal var uploadRecent: (() -> ())?
         internal var uploadFace: (() -> ())?
-        
+        internal var selebratingFor: ((FullName) -> ())?
+            
         func with(uploadRecent: @escaping ()->()) -> Self{
             self.uploadRecent = uploadRecent
             return self
@@ -104,6 +107,22 @@ class ViewModelSingle {
         func with(uploadContactView: @escaping () -> ()) -> Self {
             self.uploadContactView = uploadContactView
             return self
+        }
+        func with(selebrating: @escaping (FullName) -> ()) -> Self {
+            selebratingFor = selebrating
+            return self
+        }
+        func checkBirthdayLog() {
+            let today = Calendar.current.dateComponents([.day, .month], from: Date())
+            birthdayLog
+                .first(where: {
+                date, _ in
+                date.day == today.day && date.month == today.month
+            })?.value
+                .forEach{
+                man in
+                selebratingFor?(man)
+            }
         }
 
         func getViewContacts() -> ContactViewsBook {
@@ -151,6 +170,8 @@ class ViewModelSingle {
                 model.loadData(by: method)
             case .fileSystem:
                 model.loadDataFromFileSystem()
+                loadBirthdayData()
+                checkBirthdayLog()
             }
         }
         func findContactBy(number: String) -> Contact? {
@@ -160,17 +181,47 @@ class ViewModelSingle {
             model.addNew(call: call)
         }
         
+        func saveData() {
+            model.saveData()
+            saveBirthdayData()
+        }
+        func saveBirthdayData(){
+            if let fileURL = FileManager().urls(for: .applicationSupportDirectory, in: .userDomainMask).first?.appendingPathComponent(contactsDataDirectoryName).appendingPathComponent(birthdaysFileName),
+               let data = try? JSONEncoder().encode(birthdayLog){
+                do {
+                    try data.write(to: fileURL)
+                } catch {
+                    print("creatingAndWriteError")
+                }
+            }
+        }
+        func loadBirthdayData(){
+            if let fileURL = FileManager().urls(for: .applicationSupportDirectory, in: .userDomainMask).first?.appendingPathComponent(contactsDataDirectoryName).appendingPathComponent(birthdaysFileName){
+                if let data = try? Data(contentsOf: fileURL),
+                   let decoded = try? JSONDecoder().decode(BirthdayLog.self, from: data){
+                    birthdayLog = decoded
+                }
+            }
+        }
+        
         func addNewContactBy(_ dataSet: ContactDataSet?) {
             //MARK: IT IS NECESSARY??
             if let dataSet = dataSet{
-                model.addNew(contact:
-                                        Contact(name: dataSet.name,
-                                                surname: dataSet.surname,
-                                                number: dataSet.number,
-                                                email: dataSet.email,
-                                                birthday: dataSet.birthday,
-                                                photo: dataSet.photo)
-                                            )
+                let contact = Contact(name: dataSet.name,
+                                      surname: dataSet.surname,
+                                      number: dataSet.number,
+                                      email: dataSet.email,
+                                      birthday: dataSet.birthday,
+                                      photo: dataSet.photo)
+                model.addNew(contact: contact)
+                
+                if let birthday = contact.birthday?.getCodable(){
+                    if birthdayLog[birthday] == nil{
+                        birthdayLog[birthday] = []
+                    }
+                    birthdayLog[birthday]?.append(FullName(dataSet:  contact.getDataSet()))
+                    checkBirthdayLog()
+                }
             }
             
         }
