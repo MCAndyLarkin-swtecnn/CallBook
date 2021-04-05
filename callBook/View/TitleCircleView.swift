@@ -12,7 +12,11 @@ class TitleCircleView: UIButton {
     var fillColor: UIColor = UIColor.green
     var strokeColor: UIColor = UIColor.darkGray
     var textColor: UIColor = UIColor.darkGray
-    var text: String = ""
+    var text: String = ""{
+        didSet{
+            setNeedsDisplay()
+        }
+    }
     override func draw(_ rect: CGRect) {
         fillColor = UIColor(hue: CGFloat(Float.random(in: 0...100)), saturation: 0.5, brightness: 1, alpha: 0.8)
         drawContactTitleView(text: self.text, mode: .tiny, rect: rect)
