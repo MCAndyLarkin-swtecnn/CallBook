@@ -29,6 +29,10 @@ class CallBookTableViewController: UITableViewController{
         return configuration
     }
     
+
+    @IBAction func tapToTitle(_ sender: TitleCircleView) {
+        //Animating will be here
+    }
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .normal, title: "Call"){ [weak self] (action, view, completionHandler) in
             self?.viewModel.makeCall(forNumberby: indexPath.onlyCoords())
