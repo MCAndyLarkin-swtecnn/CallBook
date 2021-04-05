@@ -23,7 +23,7 @@ class TitleCircleView: UIButton {
         let rad = width/2-def/2
         var spacerWidth: CGFloat = 0
         var text = text
-        
+        print("\(text)")
         if mode == .tiny{
             text = text.split(separator: " ").map{
                 word in
