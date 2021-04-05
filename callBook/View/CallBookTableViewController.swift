@@ -60,7 +60,8 @@ class CallBookTableViewController: UITableViewController{
             
             cell.signature?.text = contact.signature
             cell.number?.text = contact.number
-            cell.photo?.image = UIImage(named: contact.photo)
+            cell.titleView?.text = contact.signature
+            cell.titleView?.backgroundColor = UIColor.clear
             cell.messageButton?.index = indexPath
         }
         

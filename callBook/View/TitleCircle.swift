@@ -6,14 +6,16 @@
 //
 
 import UIKit
-var pathWidth = CGFloat( 1 )
-var def = CGFloat(20)
-var fillColor: UIColor = UIColor.green
-var strokeColor: UIColor = UIColor.black
-class TitleCircle: UIView {
+class TitleCircle: UIButton {
+    var pathWidth = CGFloat( 1 )
+    var def = CGFloat(10)
+    var fillColor: UIColor = UIColor.green
+    var strokeColor: UIColor = UIColor.darkGray
+    var textColor: UIColor = UIColor.darkGray
+    var text: String = ""
     override func draw(_ rect: CGRect) {
         fillColor = UIColor(hue: CGFloat(Float.random(in: 0...100)), saturation: 0.5, brightness: 1, alpha: 0.8)
-        drawContactTitleView(text: "Sokol", mode: .full, rect: rect)
+        drawContactTitleView(text: self.text, mode: .tiny, rect: rect)
     }
     func drawContactTitleView(text: String, mode: Mode, rect: CGRect){
         let width = min(rect.height, rect.width)
@@ -28,7 +30,8 @@ class TitleCircle: UIView {
                 word.prefix(1).uppercased()
             }.joined()
         }
-        let attr = [ NSAttributedString.Key.font: UIFont(name: "Chalkduster", size: 46.0) ]
+        let attr = [ NSAttributedString.Key.font: UIFont(name: "Chalkduster", size: 30.0),
+                     NSAttributedString.Key.foregroundColor: textColor]
         let nsText = NSAttributedString(string: text, attributes: attr)
         if mode == .full{
             spacerWidth = nsText.size().width - def
