@@ -11,7 +11,6 @@
 		CE60F83E26199E9D003D6527 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE60F83D26199E9D003D6527 /* Settings.bundle */; };
 		CE60F845261AC4FF003D6527 /* TitleCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE60F844261AC4FF003D6527 /* TitleCircleView.swift */; };
 		CE60F84B261D7321003D6527 /* SwiftGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE60F84A261D7321003D6527 /* SwiftGif.swift */; };
-		CE60F84F261D739E003D6527 /* GifViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE60F84E261D739E003D6527 /* GifViewController.swift */; };
 		CE69675F261060CC000F1BD0 /* MessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE69675E261060CC000F1BD0 /* MessageButton.swift */; };
 		CE86109E26034B3A000154FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86109D26034B3A000154FF /* AppDelegate.swift */; };
 		CE8610A026034B3A000154FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86109F26034B3A000154FF /* SceneDelegate.swift */; };
@@ -45,7 +44,6 @@
 		CE60F83D26199E9D003D6527 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		CE60F844261AC4FF003D6527 /* TitleCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCircleView.swift; sourceTree = "<group>"; };
 		CE60F84A261D7321003D6527 /* SwiftGif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftGif.swift; sourceTree = "<group>"; };
-		CE60F84E261D739E003D6527 /* GifViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifViewController.swift; sourceTree = "<group>"; };
 		CE69675E261060CC000F1BD0 /* MessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageButton.swift; sourceTree = "<group>"; };
 		CE86109A26034B3A000154FF /* callBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = callBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE86109D26034B3A000154FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -129,7 +127,6 @@
 				CE8610B62604C74C000154FF /* ContactTableViewCell.swift */,
 				CE69675E261060CC000F1BD0 /* MessageButton.swift */,
 				CE60F84A261D7321003D6527 /* SwiftGif.swift */,
-				CE60F84E261D739E003D6527 /* GifViewController.swift */,
 			);
 			path = UIElements;
 			sourceTree = "<group>";
@@ -325,7 +322,6 @@
 				CE8610CB2604EF83000154FF /* FaceContactViewController.swift in Sources */,
 				CEEF703E261685A900F86739 /* ContactBook.swift in Sources */,
 				CEEF703826164CFD00F86739 /* CNContactsIntegration.swift in Sources */,
-				CE60F84F261D739E003D6527 /* GifViewController.swift in Sources */,
 				CE8610E026061A6A000154FF /* MessageContactViewController.swift in Sources */,
 				CE69675F261060CC000F1BD0 /* MessageButton.swift in Sources */,
 			);

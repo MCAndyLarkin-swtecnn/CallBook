@@ -6,4 +6,5 @@ class ContactTableViewCell: UITableViewCell {
     @IBOutlet var signature: UILabel!
     @IBOutlet var number: UILabel!
     @IBOutlet var titleView: TitleCircleView!
+    @IBOutlet var photo: UIImageView!
 }

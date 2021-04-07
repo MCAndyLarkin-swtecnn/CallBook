@@ -31,15 +31,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ebK-Am-rBc" customClass="TitleCircleView" customModule="callBook" customModuleProvider="target">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AcL-XD-AvT">
                                             <rect key="frame" x="20" y="0.0" width="70" height="70"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                            <gestureRecognizers/>
-                                            <connections>
-                                                <action selector="tapToTitle:" destination="CaG-BQ-6cc" eventType="touchUpInside" id="5qZ-cs-N3t"/>
-                                            </connections>
-                                        </view>
+                                        </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Фамилия Имя" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RdX-HO-gjt">
                                             <rect key="frame" x="98" y="11" width="248" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -61,10 +55,24 @@
                                                 <segue destination="kjh-N8-dKO" kind="show" identifier="openMessage" id="NYo-6g-r0n"/>
                                             </connections>
                                         </button>
+                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ebK-Am-rBc" customClass="TitleCircleView" customModule="callBook" customModuleProvider="target">
+                                            <rect key="frame" x="20" y="0.0" width="70" height="70"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <gestureRecognizers/>
+                                            <connections>
+                                                <action selector="tapToTitle:" destination="CaG-BQ-6cc" eventType="touchUpInside" id="5qZ-cs-N3t"/>
+                                            </connections>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" red="0.98039215690000003" green="0.96470588239999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <constraints>
+                                        <constraint firstItem="AcL-XD-AvT" firstAttribute="width" secondItem="9YF-fZ-ll8" secondAttribute="height" id="1E0-K8-yIA"/>
+                                        <constraint firstItem="ebK-Am-rBc" firstAttribute="leading" secondItem="9YF-fZ-ll8" secondAttribute="leading" constant="20" id="1VS-Id-Zlc"/>
                                         <constraint firstItem="rQ8-hK-uBm" firstAttribute="centerY" secondItem="9YF-fZ-ll8" secondAttribute="centerY" id="Ing-Cm-FrX"/>
+                                        <constraint firstItem="AcL-XD-AvT" firstAttribute="height" secondItem="9YF-fZ-ll8" secondAttribute="height" id="PgE-fk-xF0"/>
+                                        <constraint firstItem="ebK-Am-rBc" firstAttribute="height" secondItem="9YF-fZ-ll8" secondAttribute="height" id="SFh-p4-fB8"/>
+                                        <constraint firstItem="AcL-XD-AvT" firstAttribute="leading" secondItem="9YF-fZ-ll8" secondAttribute="leading" constant="20" id="cLh-FS-Fta"/>
+                                        <constraint firstItem="ebK-Am-rBc" firstAttribute="width" secondItem="9YF-fZ-ll8" secondAttribute="height" id="nqU-pr-Dfb"/>
                                         <constraint firstAttribute="trailing" secondItem="rQ8-hK-uBm" secondAttribute="trailing" constant="20" symbolic="YES" id="xhd-C0-0VL"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -72,6 +80,7 @@
                                 <connections>
                                     <outlet property="messageButton" destination="rQ8-hK-uBm" id="wdr-sX-v4H"/>
                                     <outlet property="number" destination="t3H-ul-FCS" id="wRt-4f-NjQ"/>
+                                    <outlet property="photo" destination="AcL-XD-AvT" id="K2U-ie-olY"/>
                                     <outlet property="signature" destination="RdX-HO-gjt" id="jMY-cO-LfW"/>
                                     <outlet property="titleView" destination="ebK-Am-rBc" id="tsO-y8-65d"/>
                                     <segue destination="kjh-N8-dKO" kind="show" identifier="openFace" id="ebj-At-99I"/>
@@ -85,13 +94,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Title" id="gO1-8s-d4b">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="MSg-ym-nso">
-                            <connections>
-                                <segue destination="vhj-9d-woM" kind="show" id="y2N-nU-292"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Title" id="gO1-8s-d4b"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="WaitIndicator" destination="op9-mo-FtV" id="mSG-l4-VoI"/>
@@ -479,31 +482,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vsf-dp-4yi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-767" y="269"/>
-        </scene>
-        <!--Gif View Controller-->
-        <scene sceneID="Hia-Gf-mMk">
-            <objects>
-                <viewController id="vhj-9d-woM" customClass="GifViewController" customModule="callBook" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="riL-Jd-nhh">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gt6-aE-WqD">
-                                <rect key="frame" x="20" y="273" width="374" height="239"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="YJZ-mo-YQv"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="tOE-UJ-TbV"/>
-                    <connections>
-                        <outlet property="gifView" destination="Gt6-aE-WqD" id="cWk-2X-Lbf"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vCV-Ad-Pox" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5.7971014492753632" y="-410.49107142857139"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

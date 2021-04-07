@@ -63,8 +63,16 @@ class CallBookTableViewController: UITableViewController{
         if let contact = contactBook?[indexPath.section][indexPath.row]{
             cell.signature?.text = contact.signature
             cell.number?.text = contact.number
-            cell.titleView?.text = contact.signature
-            cell.titleView?.backgroundColor = UIColor.clear
+            if contact.photo == "avatar"{
+                cell.titleView.isHidden = false
+                cell.titleView?.text = contact.signature
+                cell.titleView?.backgroundColor = UIColor.clear
+                cell.photo.isHidden = true
+            }else{
+                cell.photo.isHidden = false
+                cell.photo.loadGif(url: contact.photo)
+                cell.titleView.isHidden = true
+            }
             cell.messageButton?.index = indexPath
         }
         
