@@ -1,6 +1,7 @@
 import Foundation
 
-var link = "https://gist.githubusercontent.com/artgoncharov/d257658423edd46a9ead5f721b837b8c/raw/c38ace33a7c871e4ad3b347fc4cd970bb45561a3/contacts_data.json"
+var link = "https://gist.githubusercontent.com/artgoncharov/61c471db550238f469ad746a0c3102a7/raw/590dcd89a6aa10662c9667138c99e4b0a8f43c67/contacts_data2.json"
+
 class FileManagedModel: CallBookModel {
     //MARK: JSON Maining
     override func saveData() {
@@ -45,7 +46,7 @@ class FileManagedModel: CallBookModel {
                 dataToOut = data
             }.resume()
         }
-        guard sem.wait(timeout: .now() + .seconds(7)) == .success else{
+        guard sem.wait(timeout: .now() + .seconds(30)) == .success else{
             throw "Failed waiting"
         }
         guard let data = dataToOut else {

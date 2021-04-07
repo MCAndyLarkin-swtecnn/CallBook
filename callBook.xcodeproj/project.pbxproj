@@ -3,12 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		343616C71B55B8E2F99F0AC3 /* Pods_callBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A52FE058D0F38C5FB4814E10 /* Pods_callBook.framework */; };
 		CE60F83E26199E9D003D6527 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE60F83D26199E9D003D6527 /* Settings.bundle */; };
 		CE60F845261AC4FF003D6527 /* TitleCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE60F844261AC4FF003D6527 /* TitleCircleView.swift */; };
+		CE60F84B261D7321003D6527 /* SwiftGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE60F84A261D7321003D6527 /* SwiftGif.swift */; };
+		CE60F84F261D739E003D6527 /* GifViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE60F84E261D739E003D6527 /* GifViewController.swift */; };
 		CE69675F261060CC000F1BD0 /* MessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE69675E261060CC000F1BD0 /* MessageButton.swift */; };
 		CE86109E26034B3A000154FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86109D26034B3A000154FF /* AppDelegate.swift */; };
 		CE8610A026034B3A000154FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86109F26034B3A000154FF /* SceneDelegate.swift */; };
@@ -36,8 +39,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		618BC657FF25EEA3165FC039 /* Pods-callBook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-callBook.release.xcconfig"; path = "Target Support Files/Pods-callBook/Pods-callBook.release.xcconfig"; sourceTree = "<group>"; };
+		6A56C65C85AC15959CE76F76 /* Pods-callBook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-callBook.debug.xcconfig"; path = "Target Support Files/Pods-callBook/Pods-callBook.debug.xcconfig"; sourceTree = "<group>"; };
+		A52FE058D0F38C5FB4814E10 /* Pods_callBook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_callBook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE60F83D26199E9D003D6527 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		CE60F844261AC4FF003D6527 /* TitleCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCircleView.swift; sourceTree = "<group>"; };
+		CE60F84A261D7321003D6527 /* SwiftGif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftGif.swift; sourceTree = "<group>"; };
+		CE60F84E261D739E003D6527 /* GifViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifViewController.swift; sourceTree = "<group>"; };
 		CE69675E261060CC000F1BD0 /* MessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageButton.swift; sourceTree = "<group>"; };
 		CE86109A26034B3A000154FF /* callBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = callBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE86109D26034B3A000154FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +80,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEEF700C261371E200F86739 /* ContactsUI.framework in Frameworks */,
+				343616C71B55B8E2F99F0AC3 /* Pods_callBook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +94,7 @@
 				CE86109C26034B3A000154FF /* callBook */,
 				CE86109B26034B3A000154FF /* Products */,
 				CEEF700A261371E200F86739 /* Frameworks */,
+				F328C775AA6C1DCCED883547 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -102,7 +112,6 @@
 				CEEF701D2615ADD700F86739 /* Model */,
 				CEEF701F2615ADEC00F86739 /* ViewModel */,
 				CEEF701E2615ADE200F86739 /* View */,
-				CE861126260A83D7000154FF /* UIElements */,
 				CE86109D26034B3A000154FF /* AppDelegate.swift */,
 				CE86109F26034B3A000154FF /* SceneDelegate.swift */,
 				CE8610A326034B3A000154FF /* Main.storyboard */,
@@ -116,8 +125,11 @@
 		CE861126260A83D7000154FF /* UIElements */ = {
 			isa = PBXGroup;
 			children = (
+				CE60F844261AC4FF003D6527 /* TitleCircleView.swift */,
 				CE8610B62604C74C000154FF /* ContactTableViewCell.swift */,
 				CE69675E261060CC000F1BD0 /* MessageButton.swift */,
+				CE60F84A261D7321003D6527 /* SwiftGif.swift */,
+				CE60F84E261D739E003D6527 /* GifViewController.swift */,
 			);
 			path = UIElements;
 			sourceTree = "<group>";
@@ -126,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				CEEF700B261371E200F86739 /* ContactsUI.framework */,
+				A52FE058D0F38C5FB4814E10 /* Pods_callBook.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -147,6 +160,7 @@
 		CEEF701E2615ADE200F86739 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CE861126260A83D7000154FF /* UIElements */,
 				CE8610D12604F186000154FF /* ContactNodeTabBarController.swift */,
 				CEEF703726164CFD00F86739 /* CNContactsIntegration.swift */,
 				CE8610B226046B10000154FF /* CallBookTableViewController.swift */,
@@ -154,7 +168,6 @@
 				CE8610CD2604EF9B000154FF /* RecentCallsTableViewController.swift */,
 				CE8610DF26061A6A000154FF /* MessageContactViewController.swift */,
 				CE8610CA2604EF83000154FF /* FaceContactViewController.swift */,
-				CE60F844261AC4FF003D6527 /* TitleCircleView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -168,6 +181,15 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		F328C775AA6C1DCCED883547 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6A56C65C85AC15959CE76F76 /* Pods-callBook.debug.xcconfig */,
+				618BC657FF25EEA3165FC039 /* Pods-callBook.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -175,9 +197,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE8610AE26034B3D000154FF /* Build configuration list for PBXNativeTarget "callBook" */;
 			buildPhases = (
+				39DD922D8F71376C5387881B /* [CP] Check Pods Manifest.lock */,
 				CE86109626034B3A000154FF /* Sources */,
 				CE86109726034B3A000154FF /* Frameworks */,
 				CE86109826034B3A000154FF /* Resources */,
+				EF0AE21C90E7B1D4AFAC450C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -234,6 +258,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		39DD922D8F71376C5387881B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-callBook-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF0AE21C90E7B1D4AFAC450C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-callBook/Pods-callBook-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-callBook/Pods-callBook-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-callBook/Pods-callBook-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CE86109626034B3A000154FF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -255,9 +321,11 @@
 				CE8610D22604F186000154FF /* ContactNodeTabBarController.swift in Sources */,
 				CE8610F626089C5A000154FF /* ShareRecentTableViewController.swift in Sources */,
 				CEEF704E2616AEC200F86739 /* JSONDownloading.swift in Sources */,
+				CE60F84B261D7321003D6527 /* SwiftGif.swift in Sources */,
 				CE8610CB2604EF83000154FF /* FaceContactViewController.swift in Sources */,
 				CEEF703E261685A900F86739 /* ContactBook.swift in Sources */,
 				CEEF703826164CFD00F86739 /* CNContactsIntegration.swift in Sources */,
+				CE60F84F261D739E003D6527 /* GifViewController.swift in Sources */,
 				CE8610E026061A6A000154FF /* MessageContactViewController.swift in Sources */,
 				CE69675F261060CC000F1BD0 /* MessageButton.swift in Sources */,
 			);
@@ -403,6 +471,7 @@
 		};
 		CE8610AF26034B3D000154FF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6A56C65C85AC15959CE76F76 /* Pods-callBook.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -421,6 +490,7 @@
 		};
 		CE8610B026034B3D000154FF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 618BC657FF25EEA3165FC039 /* Pods-callBook.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

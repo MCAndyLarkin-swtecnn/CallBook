@@ -51,13 +51,15 @@ extension Contact{
         var lastname: String
         var phone: String
         var email: String
+        var photoUrl: String?
         var contact: Contact {
             return Contact(
                 name: firstname,
                 surname: lastname,
                 number: phone,
                 email: email,
-                birthday: nil
+                birthday: nil,
+                photo: photoUrl
             )
         }
     }

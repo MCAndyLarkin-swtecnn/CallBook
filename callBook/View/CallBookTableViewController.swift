@@ -61,7 +61,6 @@ class CallBookTableViewController: UITableViewController{
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath) as! ContactTableViewCell
         
         if let contact = contactBook?[indexPath.section][indexPath.row]{
-            
             cell.signature?.text = contact.signature
             cell.number?.text = contact.number
             cell.titleView?.text = contact.signature
@@ -141,9 +140,7 @@ class CallBookTableViewController: UITableViewController{
             }
             self?.stopWaitIndicator()
             self?.processStartSettings()
-            self?.viewModel.saveData()
-        }.with(selebrating: {
-            birthday in
+        }.with(selebrating: { birthday in
             let content = UNMutableNotificationContent()
             content.body = "Today is Birthday of \(birthday.name) \(birthday.surname ?? "")!"
             content.title = "Don't forget to congratulate!"
@@ -154,7 +151,7 @@ class CallBookTableViewController: UITableViewController{
             }
             UNUserNotificationCenter.current().add(
                 UNNotificationRequest(identifier: birthday.getTitle(), content: content,
-                                      trigger: UNCalendarNotificationTrigger(dateMatching: date, repeats: false))
+                                      trigger: UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false))
             ){  error in
                 if let err = error{ print("ErrorNotiaication - \(err)") }
             }

@@ -48,7 +48,11 @@ protocol LocalContactViewModel: CallBookViewModelProtocol {
 class ViewModelSingle {
     static var viewModel = CallBookViewModel()
     class CallBookViewModel: RecentsViewModelProtocol, ContactsViewModelProtocol, LocalContactViewModel {
-        var birthdayLog: BirthdayLog = [:]
+        var birthdayLog: BirthdayLog = [:]{
+            didSet{
+                saveData()
+            }
+        }
         
         internal lazy var model: CallBookModelProtocol = FileManagedModel()
             .subscribeOnContactBookChanges{ [weak self] in

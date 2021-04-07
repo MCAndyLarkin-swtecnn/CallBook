@@ -54,12 +54,11 @@ class FaceContactViewController: UIViewController{
                 if surname == "" { surname = nil }
 
                 let newContact = self.viewModel.changeContact(name: name, surname: surname, number: number)
-//
+                
                 if let tabBar = self.tabBarController as? ContactNodeTabBarController,
                    let contact = newContact{
                     tabBar.title = FullName(dataSet: contact).getTitle()
                 }
-//                self.number.setTitle(number, for: UIControl.State.normal)
             }
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { _ in  }))
@@ -83,7 +82,11 @@ class FaceContactViewController: UIViewController{
             return
         }
         number.setTitle(theContact.number, for: UIControl.State.normal)
-        avatar.image = UIImage(named: theContact.photo)
+        if theContact.photo == "avatar" {
+            avatar.image = UIImage(named: theContact.photo)
+        }else{
+            avatar.loadGif(url: theContact.photo)
+        }
         email.setTitle(theContact.email ?? "Email", for: UIControl.State.normal)
 
         let formatter = DateFormatter()
