@@ -11,7 +11,7 @@ class TitleCircleView: UIButton {
     var strokeColor: UIColor = UIColor.darkGray
     var textColor: UIColor = UIColor.darkGray
     
-    lazy var localCenter = CGPoint(x: frame.width/2, y: frame.height/2)
+    private lazy var localCenter = CGPoint(x: frame.width/2, y: frame.height/2)
     
     func collapsed() -> Bool{
         spacerWidth <= 0
@@ -31,15 +31,15 @@ class TitleCircleView: UIButton {
             }
         }
     }
-    var d_max: CGFloat?
+    private var d_max: CGFloat?
     
-    var textSize: CGFloat?
-    var proportion: CGFloat?
+    private var textSize: CGFloat?
+    private var proportion: CGFloat?
     
-    var pathWidth = CGFloat( 1 )
-    var def = CGFloat(10)
+    private var pathWidth = CGFloat( 1 )
+    private var def = CGFloat(10)
     
-    var rad: CGFloat!
+    private var rad: CGFloat!
     
     static let textProportion = pow(CGFloat(1.618), 1.618)
     
