@@ -7,49 +7,63 @@
 
 import UIKit
 class TitleCircleView: UIButton {
-    var pathWidth = CGFloat( 1 )
-    var def = CGFloat(10)
     var fillColor: UIColor = UIColor.green
     var strokeColor: UIColor = UIColor.darkGray
     var textColor: UIColor = UIColor.darkGray
-    var text: String = ""{
+    
+    lazy var localCenter = CGPoint(x: frame.width/2, y: frame.height/2)
+    
+    func collapsed() -> Bool{
+        spacerWidth <= 0
+    }
+    var spacerWidth: CGFloat = 0{
         didSet{
             setNeedsDisplay()
         }
     }
+    
+    var text: String?{
+        didSet{
+            textSize = frame.height/TitleCircleView.textProportion
+            rad = min(frame.height, frame.width)/2 - def/2
+            if let text = text{
+                d_max = getNsString(text: text).size().width - getNsString(text: prepare(text: text, in: 0)).size().width
+            }
+        }
+    }
+    var d_max: CGFloat?
+    
+    var textSize: CGFloat?
+    var proportion: CGFloat?
+    
+    var pathWidth = CGFloat( 1 )
+    var def = CGFloat(10)
+    
+    var rad: CGFloat!
+    
+    static let textProportion = pow(CGFloat(1.618), 1.618)
+    
     override func draw(_ rect: CGRect) {
         fillColor = UIColor(hue: CGFloat(Float.random(in: 0...100)), saturation: 0.5, brightness: 1, alpha: 0.8)
-        drawContactTitleView(text: self.text, mode: .tiny, rect: rect)
-    }
-    func drawContactTitleView(text: String, mode: Mode, rect: CGRect){
-        let width = min(rect.height, rect.width)
-        let (centerX, centerY) = (rect.width/2, rect.height/2)
-        let rad = width/2-def/2
-        var spacerWidth: CGFloat = 0
-        var text = text
-        if mode == .tiny{
-            text = text.split(separator: " ").map{
-                word in
-                word.prefix(1).uppercased()
-            }.joined()
-        }
-        let attr = [ NSAttributedString.Key.font: UIFont(name: "Chalkduster", size: 30.0),
-                     NSAttributedString.Key.foregroundColor: textColor]
-        let nsText = NSAttributedString(string: text, attributes: attr)
-        if mode == .full{
-            spacerWidth = nsText.size().width - def
-            drawSpacier(center: CGPoint(x: centerX, y: centerY), width: spacerWidth, height: rad*2)
-        }
         
-        drawArc(center: CGPoint(x: centerX-spacerWidth/2, y: centerY), rad: rad, direct: .letf)
-        drawArc(center: CGPoint(x: centerX+spacerWidth/2, y: centerY), rad: rad, direct: .right)
-        
-        drawText(text: nsText, center: CGPoint(x: centerX, y: centerY))
+        if let d_max = d_max{
+            proportion = min( d_max, spacerWidth ) / d_max
+            if spacerWidth != 0{
+                drawSpacier(width: spacerWidth, height: rad*2)
+            }
+        }
+        if let rad = rad{
+            drawArc(center: CGPoint(x: localCenter.x-spacerWidth/2, y: localCenter.y), rad: rad, direct: .letf)
+            drawArc(center: CGPoint(x: localCenter.x+spacerWidth/2, y: localCenter.y), rad: rad, direct: .right)
+        }
+        if let proportion = proportion, let text = text{
+            drawText(text: getNsString(text: prepare(text: text, in: proportion)))
+        }
     }
-    func drawText(text: NSAttributedString, center: CGPoint){
-        text.draw(at: CGPoint(x: center.x-text.size().width/2, y: center.y-text.size().height/2))
+    private func drawText(text: NSAttributedString){
+        text.draw(at: CGPoint(x: localCenter.x-text.size().width/2, y: localCenter.y-text.size().height/2))
     }
-    func drawArc(center: CGPoint, rad: CGFloat,direct: Direction){
+    private func drawArc(center: CGPoint, rad: CGFloat,direct: Direction){
         var (startAng, endAng) = (CGFloat.pi/2, -CGFloat.pi/2)
         if direct == .right{
             (startAng, endAng) = (endAng, startAng)
@@ -62,12 +76,30 @@ class TitleCircleView: UIButton {
         strokeColor.setStroke()
         path.stroke()
     }
-    func drawSpacier(center: CGPoint, width: CGFloat, height: CGFloat){
+    private func prepare(text: String, in proportion: CGFloat) -> String{
+        var newText = text.capitalized
+        if proportion < 1{
+            let textArray = newText.split(separator: " ").prefix(2)
+            if proportion > 0{
+                newText = textArray
+                    .map{ word in
+                        word.prefix( Int(proportion * CGFloat(word.count)  ) + 1)
+                    }.joined(separator: " ")
+            }else{
+                newText = textArray
+                    .map{ word in
+                        word.prefix(1)
+                    }.joined()
+            }
+        }
+        return newText
+    }
+    private func drawSpacier(width: CGFloat, height: CGFloat){
         let (leftTop, rightTop, rightBot, leftBot) = (
-            CGPoint(x: center.x-width/2, y: center.y+height/2),
-            CGPoint(x: center.x+width/2, y: center.y+height/2),
-            CGPoint(x: center.x-width/2, y: center.y-height/2),
-            CGPoint(x: center.x+width/2, y: center.y-height/2))
+            CGPoint(x: localCenter.x-width/2, y: localCenter.y+height/2),
+            CGPoint(x: localCenter.x+width/2, y: localCenter.y+height/2),
+            CGPoint(x: localCenter.x-width/2, y: localCenter.y-height/2),
+            CGPoint(x: localCenter.x+width/2, y: localCenter.y-height/2))
         
         let redPath = UIBezierPath()
         redPath.move(to: leftTop)
@@ -91,14 +123,14 @@ class TitleCircleView: UIButton {
         fillColor.setFill()
         greenPath.fill()
     }
+    private func getNsString(text: String) -> NSAttributedString{
+        return NSAttributedString(string: text,
+                                  attributes: [
+                                    NSAttributedString.Key.font: UIFont(name: "Chalkduster", size: textSize!),
+                                    NSAttributedString.Key.foregroundColor: textColor])
+    }
 }
 enum Direction{
     case letf
     case right
 }
-
-enum Mode{
-    case tiny
-    case full
-}
-
